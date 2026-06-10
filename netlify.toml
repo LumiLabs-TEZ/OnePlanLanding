@@ -1,0 +1,6 @@
+# Static site — no build step. Publish the repo root as-is.
+[build]
+  publish = "."
+
+# Pretty URLs (/termandconditions, /privacy-policy) come from the
+# termandconditions/index.html and privacy-policy/index.html directories.
