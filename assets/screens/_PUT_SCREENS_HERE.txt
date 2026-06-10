@@ -1,0 +1,13 @@
+Export app screens from Figma (PNG, 2x or 3x) and drop them here.
+Suggested filenames (mỗi screen 1 file) — đặt đúng tên để mình ghép tự động:
+
+  video-pins.png   -> screen "tìm địa điểm trong video" (danh sách pin tìm được)
+  boards.png       -> screen Boards / 1 Board có nhiều pin
+  itinerary.png    -> screen lịch trình theo ngày (Day 1, 2, 3...)
+  expenses.png     -> screen chia tiền nhóm
+  plans.png        -> screen khám phá plan có sẵn
+  pin-detail.png   -> (tùy chọn) chi tiết 1 địa điểm / map
+
+Tên khác cũng được — chỉ cần nhắn mình biết file nào ứng với screen nào.
+Export gợi ý: chọn FRAME (artboard) -> Export -> PNG, 2x. Lấy phần nội dung screen
+(có hoặc không có khung điện thoại đều được, mình tự lồng khung được).
