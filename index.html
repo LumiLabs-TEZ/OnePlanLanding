@@ -168,6 +168,30 @@ footer{ background:var(--parchment); color:var(--ink-80); padding:60px 0 40px }
 .foot-col a{ display:block; color:var(--ink-80); font-size:12px; line-height:2.1; transition:color .15s } .foot-col a:hover{ color:var(--primary); text-decoration:underline }
 .foot-bottom{ border-top:1px solid var(--hairline); margin-top:30px; padding-top:18px; display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--ink-48) }
 
+/* ========================== FLOATING APP PROMO ========================== */
+.promo{ position:fixed; right:22px; bottom:22px; z-index:90; width:312px; max-width:calc(100vw - 28px); font-family:var(--f-text) }
+.promo-card{ position:relative; background:var(--canvas); border:1px solid var(--hairline); border-radius:22px; box-shadow:0 18px 50px rgba(0,0,0,.18); overflow:hidden; animation:promoIn .6s var(--stagger-ease) 1.1s both }
+@keyframes promoIn{ from{ opacity:0; transform:translateY(16px) scale(.98) } to{ opacity:1; transform:none } }
+.promo-min{ position:absolute; top:10px; right:10px; z-index:3; width:28px; height:28px; border-radius:50%; border:0; background:rgba(255,255,255,.82); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); color:var(--ink-48); font-size:18px; line-height:0; cursor:pointer; display:grid; place-items:center; box-shadow:0 1px 5px rgba(0,0,0,.14); transition:color .15s }
+.promo-min:hover{ color:var(--ink) }
+.promo-media{ display:block; height:166px; background:var(--parchment) }
+.promo-media img{ width:100%; height:100%; object-fit:cover; object-position:center; display:block }
+.promo-body{ padding:13px 16px 16px }
+.promo-head{ display:flex; align-items:center; gap:8px; margin-bottom:6px }
+.promo-name{ font-family:var(--f-display); font-weight:600; font-size:16px; letter-spacing:-.01em; color:var(--ink) }
+.promo-new{ font-size:10px; font-weight:700; letter-spacing:.04em; color:#fff; background:var(--primary); border-radius:6px; padding:2px 7px; line-height:1.5 }
+.promo-desc{ font-size:13.5px; line-height:1.45; color:var(--ink-48); margin:0 0 14px }
+.promo-btn{ display:flex; align-items:center; justify-content:center; gap:8px; width:100%; background:var(--ink); color:#fff; border-radius:13px; padding:11px; font-family:var(--f-display); font-size:14px; font-weight:500; transition:transform .12s, background .2s }
+.promo-btn:hover{ background:#000 } .promo-btn:active{ transform:scale(.98) }
+.promo-btn .apple-glyph{ width:15px; height:18px }
+.promo-fab{ display:none; margin-left:auto; width:58px; height:58px; padding:0; border:1px solid var(--hairline); border-radius:18px; background:var(--canvas); box-shadow:0 14px 36px rgba(0,0,0,.22); cursor:pointer; animation:promoIn .45s var(--stagger-ease) both }
+.promo-fab img{ width:100%; height:100%; border-radius:17px; display:block }
+.promo.is-min{ width:auto }
+.promo.is-min .promo-card{ display:none }
+.promo.is-min .promo-fab{ display:block }
+@media (max-width:560px){ .promo{ right:12px; bottom:12px; width:84vw; max-width:300px } }
+@media (prefers-reduced-motion: reduce){ .promo-card, .promo-fab{ animation:none } }
+
 /* ========================== MOTION ========================== */
 /* transitions.dev texts-reveal: staggered blurred rise (stagger via JS sibling delay) */
 .reveal{ opacity:0; transform:translateY(14px); filter:blur(4px); transition:opacity .7s var(--stagger-ease), transform .7s var(--stagger-ease), filter .7s var(--stagger-ease); will-change:transform, opacity, filter }
@@ -349,6 +373,20 @@ footer{ background:var(--parchment); color:var(--ink-80); padding:60px 0 40px }
   </div>
 </footer>
 
+<!-- FLOATING APP PROMO -->
+<div class="promo" id="promo" role="complementary" aria-label="OnePlan Travel app">
+  <div class="promo-card">
+    <button class="promo-min" id="promoMin" type="button" aria-label="Minimize">−</button>
+    <a class="promo-media" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165" target="_blank" rel="noopener" aria-label="OnePlan Travel on the App Store"><img src="assets/Thumbnail.jpg" alt="OnePlan Travel" loading="lazy"></a>
+    <div class="promo-body">
+      <div class="promo-head"><span class="promo-name">OnePlan Travel</span><span class="promo-new" data-i18n="promo-new">NEW</span></div>
+      <p class="promo-desc" data-i18n="promo-desc">Turn the videos you save into real trips — plans, places &amp; split bills.</p>
+      <a class="promo-btn" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165" target="_blank" rel="noopener"><span class="apple-glyph" aria-hidden="true"></span><span data-i18n="promo-btn">Download on App Store</span></a>
+    </div>
+  </div>
+  <button class="promo-fab" id="promoFab" type="button" aria-label="Open OnePlan Travel"><img src="assets/logo-icon.png" alt=""></button>
+</div>
+
 <script>
 (function(){
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -436,7 +474,10 @@ footer{ background:var(--parchment); color:var(--ink-80); padding:60px 0 40px }
     "fc-connect": "Kết nối",
     "fl-contact": "Liên hệ",
     "fb-copy": "Bản quyền © 2026 OnePlan Travel. Bảo lưu mọi quyền.",
-    "fb-tag": "Lên kế hoạch ít hơn. Đi nhiều hơn."
+    "fb-tag": "Lên kế hoạch ít hơn. Đi nhiều hơn.",
+    "promo-new": "MỚI",
+    "promo-desc": "Biến video bạn lưu thành chuyến đi thật — kế hoạch, địa điểm &amp; chia tiền.",
+    "promo-btn": "Tải trên App Store"
 };
   var i18nNodes = [].slice.call(document.querySelectorAll('[data-i18n]'));
   var EN = i18nNodes.map(function(n){ return n.innerHTML; });
@@ -454,6 +495,16 @@ footer{ background:var(--parchment); color:var(--ink-80); padding:60px 0 40px }
   if(lang!=='vi' && lang!=='en') lang='en';
   langBtns.forEach(function(b){ b.addEventListener('click', function(){ lang=b.getAttribute('data-l'); localStorage.setItem('oneplan-lang', lang); applyLang(lang); }); });
   applyLang(lang);
+
+  /* ---- floating app promo: minimize / reopen (remembers choice) ---- */
+  var promo=document.getElementById('promo');
+  if(promo){
+    var PK='oneplan-promo';
+    try{ if(localStorage.getItem(PK)==='min') promo.classList.add('is-min'); }catch(e){}
+    var pmin=document.getElementById('promoMin'), pfab=document.getElementById('promoFab');
+    if(pmin) pmin.addEventListener('click',function(){ promo.classList.add('is-min'); try{localStorage.setItem(PK,'min');}catch(e){} });
+    if(pfab) pfab.addEventListener('click',function(){ promo.classList.remove('is-min'); try{localStorage.setItem(PK,'open');}catch(e){} });
+  }
 })();
 </script>
 </body>
