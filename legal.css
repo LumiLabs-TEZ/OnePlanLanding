@@ -21,8 +21,8 @@ a{ color:inherit; text-decoration:none }
 .lback img{ height:22px; width:auto; display:block }
 .lback .chev{ font-size:19px; line-height:0; color:var(--ink-48); transition:transform .15s } .lback:hover .chev{ transform:translateX(-2px) }
 .langtog{ display:inline-flex; align-items:center; background:var(--parchment); border:1px solid var(--hairline); border-radius:9999px; padding:3px; gap:2px }
-.langtog button{ font-family:var(--f-text); font-size:13px; font-weight:500; color:var(--ink-48); background:transparent; border:0; border-radius:9999px; padding:5px 14px; cursor:pointer; transition:color .2s, background .2s, box-shadow .2s }
-.langtog button.on{ background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,.10) }
+.langtog button, .langtog a{ font-family:var(--f-text); font-size:13px; font-weight:500; color:var(--ink-48); background:transparent; border:0; border-radius:9999px; padding:5px 14px; cursor:pointer; text-decoration:none; transition:color .2s, background .2s, box-shadow .2s }
+.langtog button.on, .langtog a.on{ background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,.10) }
 
 /* ---- reading progress ---- */
 .lprog{ position:fixed; top:52px; left:0; height:2px; width:0; background:var(--primary); z-index:49; transition:width .08s linear }

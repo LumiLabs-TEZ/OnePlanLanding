@@ -1,21 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.oneplan.space/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/"/>
+    <lastmod>2026-06-11</lastmod>
   </url>
   <url>
     <loc>https://www.oneplan.space/privacy-policy</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/privacy-policy"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/privacy-policy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/privacy-policy"/>
+    <lastmod>2026-06-11</lastmod>
   </url>
   <url>
     <loc>https://www.oneplan.space/termandconditions</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/termandconditions"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/termandconditions"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/termandconditions"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/termandconditions</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/termandconditions"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/termandconditions"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/termandconditions"/>
+    <lastmod>2026-06-11</lastmod>
   </url>
 </urlset>
