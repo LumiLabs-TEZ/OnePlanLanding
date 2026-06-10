@@ -174,7 +174,7 @@ footer{ background:var(--parchment); color:var(--ink-80); padding:60px 0 40px }
 @keyframes promoIn{ from{ opacity:0; transform:translateY(16px) scale(.98) } to{ opacity:1; transform:none } }
 .promo-min{ position:absolute; top:10px; right:10px; z-index:3; width:28px; height:28px; border-radius:50%; border:0; background:rgba(255,255,255,.82); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); color:var(--ink-48); font-size:18px; line-height:0; cursor:pointer; display:grid; place-items:center; box-shadow:0 1px 5px rgba(0,0,0,.14); transition:color .15s }
 .promo-min:hover{ color:var(--ink) }
-.promo-media{ display:block; height:166px; background:var(--parchment) }
+.promo-media{ display:block; aspect-ratio:3096 / 1984; background:var(--parchment) }
 .promo-media img{ width:100%; height:100%; object-fit:cover; object-position:center; display:block }
 .promo-body{ padding:13px 16px 16px }
 .promo-head{ display:flex; align-items:center; gap:8px; margin-bottom:6px }
@@ -377,12 +377,7 @@ footer{ background:var(--parchment); color:var(--ink-80); padding:60px 0 40px }
 <div class="promo" id="promo" role="complementary" aria-label="OnePlan Travel app">
   <div class="promo-card">
     <button class="promo-min" id="promoMin" type="button" aria-label="Minimize">−</button>
-    <a class="promo-media" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165" target="_blank" rel="noopener" aria-label="OnePlan Travel on the App Store"><img src="assets/Thumbnail.jpg" alt="OnePlan Travel" loading="lazy"></a>
-    <div class="promo-body">
-      <div class="promo-head"><span class="promo-name">OnePlan Travel</span><span class="promo-new" data-i18n="promo-new">NEW</span></div>
-      <p class="promo-desc" data-i18n="promo-desc">Turn the videos you save into real trips — plans, places &amp; split bills.</p>
-      <a class="promo-btn" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165" target="_blank" rel="noopener"><span class="apple-glyph" aria-hidden="true"></span><span data-i18n="promo-btn">Download on App Store</span></a>
-    </div>
+    <a class="promo-media" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165" target="_blank" rel="noopener" aria-label="Download OnePlan Travel on the App Store"><img src="assets/download-banner.png" alt="Download OnePlan Travel on the App Store" loading="lazy"></a>
   </div>
   <button class="promo-fab" id="promoFab" type="button" aria-label="Open OnePlan Travel"><img src="assets/logo-icon.png" alt=""></button>
 </div>
@@ -474,10 +469,7 @@ footer{ background:var(--parchment); color:var(--ink-80); padding:60px 0 40px }
     "fc-connect": "Kết nối",
     "fl-contact": "Liên hệ",
     "fb-copy": "Bản quyền © 2026 OnePlan Travel. Bảo lưu mọi quyền.",
-    "fb-tag": "Lên kế hoạch ít hơn. Đi nhiều hơn.",
-    "promo-new": "MỚI",
-    "promo-desc": "Biến video bạn lưu thành chuyến đi thật — kế hoạch, địa điểm &amp; chia tiền.",
-    "promo-btn": "Tải trên App Store"
+    "fb-tag": "Lên kế hoạch ít hơn. Đi nhiều hơn."
 };
   var i18nNodes = [].slice.call(document.querySelectorAll('[data-i18n]'));
   var EN = i18nNodes.map(function(n){ return n.innerHTML; });
