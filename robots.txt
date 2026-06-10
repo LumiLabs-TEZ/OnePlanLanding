@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://oneplan.space/sitemap.xml
+Sitemap: https://www.oneplan.space/sitemap.xml
