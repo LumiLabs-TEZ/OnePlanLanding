@@ -200,17 +200,19 @@ button{ font-family:inherit }
 /* scroll-pinned: advance tabs by scrolling (desktop) */
 .scpin{ position:relative; height:340vh; padding:0 }
 .scpin-inner{ position:sticky; top:0; height:100vh; display:flex; align-items:center; padding:2vh 0 }
+.scpin .wrap{ width:100% }
+.scpin .center .sub{ display:none }
 .scpin .showcase{ margin-top:clamp(18px,2.6vh,34px); width:100% }
-.scpin .sc-stage{ height:44vh; max-height:480px }
+.scpin .sc-stage{ height:clamp(340px,calc(100vh - 380px),560px); max-height:none }
 .scpin .sc-descs{ font-size:clamp(17px,1.7vw,20px); height:3.6em; min-height:0; margin-top:clamp(14px,2vh,26px); display:flex; align-items:center; justify-content:center }
 @media (max-width:900px){
   /* stays pinned full-screen on mobile; scroll advances each tab */
   .scpin{ height:300vh; padding:0 }
   .scpin-inner{ position:sticky; top:0; height:100vh; display:flex; align-items:center; padding:0 }
   .scpin .h2{ font-size:clamp(24px,6.2vw,32px) }
-  .scpin .center .sub{ display:none }
   .scpin .showcase{ margin-top:clamp(12px,2vh,22px) }
-  .scpin .sc-stage{ height:clamp(220px,36vh,400px); max-height:none }
+  .scpin .sc-stage{ height:clamp(300px,calc(100vh - 300px),480px) }
+  .scpin .sc-shot{ height:88%; max-width:90% }
   .scpin .sc-tabs{ margin-top:clamp(10px,1.8vh,20px) }
   .scpin .sc-descs{ font-size:clamp(15px,3.9vw,18px); height:3.6em; min-height:0; margin-top:clamp(8px,1.4vh,18px); display:flex; align-items:center; justify-content:center }
 }
