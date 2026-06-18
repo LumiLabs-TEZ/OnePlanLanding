@@ -5,13 +5,209 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/"/>
     <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/"/>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-06-18</lastmod>
   </url>
   <url>
     <loc>https://www.oneplan.space/vi</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/"/>
     <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/"/>
+    <lastmod>2026-06-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal"/>
+    <lastmod>2026-06-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal"/>
+    <lastmod>2026-06-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/dalat-3-days</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/dalat-3-days"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/dalat-3-days"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/dalat-3-days"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/dalat-3-days</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/dalat-3-days"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/dalat-3-days"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/dalat-3-days"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/linh-group-trips</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/linh-group-trips"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/linh-group-trips"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/linh-group-trips"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/linh-group-trips</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/linh-group-trips"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/linh-group-trips"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/linh-group-trips"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/khoa-solo-seoul</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/khoa-solo-seoul"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/khoa-solo-seoul"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/khoa-solo-seoul"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/khoa-solo-seoul</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/khoa-solo-seoul"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/khoa-solo-seoul"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/khoa-solo-seoul"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/trang-slow-travel</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/trang-slow-travel"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/trang-slow-travel"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/trang-slow-travel"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/trang-slow-travel</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/trang-slow-travel"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/trang-slow-travel"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/trang-slow-travel"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/minh-saved-videos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/minh-saved-videos"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/minh-saved-videos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/minh-saved-videos"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/minh-saved-videos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/minh-saved-videos"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/minh-saved-videos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/minh-saved-videos"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/split-costs-stay-friends</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/split-costs-stay-friends"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/split-costs-stay-friends"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/split-costs-stay-friends"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/split-costs-stay-friends</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/split-costs-stay-friends"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/split-costs-stay-friends"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/split-costs-stay-friends"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/steal-these-itineraries</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/steal-these-itineraries"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/steal-these-itineraries"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/steal-these-itineraries"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/steal-these-itineraries</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/steal-these-itineraries"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/steal-these-itineraries"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/steal-these-itineraries"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/bangkok-4-days</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/bangkok-4-days"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/bangkok-4-days"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/bangkok-4-days"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/bangkok-4-days</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/bangkok-4-days"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/bangkok-4-days"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/bangkok-4-days"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/save-videos-into-trips</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/save-videos-into-trips"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/save-videos-into-trips"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/save-videos-into-trips"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/save-videos-into-trips</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/save-videos-into-trips"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/save-videos-into-trips"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/save-videos-into-trips"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/art-of-the-slow-trip</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/art-of-the-slow-trip"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/art-of-the-slow-trip"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/art-of-the-slow-trip"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/art-of-the-slow-trip</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/art-of-the-slow-trip"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/art-of-the-slow-trip"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/art-of-the-slow-trip"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/group-trip-without-chaos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/group-trip-without-chaos"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/group-trip-without-chaos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/group-trip-without-chaos"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/group-trip-without-chaos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/group-trip-without-chaos"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/group-trip-without-chaos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/group-trip-without-chaos"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/hoi-an-da-nang-4-days</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/hoi-an-da-nang-4-days"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/hoi-an-da-nang-4-days"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/hoi-an-da-nang-4-days"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/hoi-an-da-nang-4-days</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/hoi-an-da-nang-4-days"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/hoi-an-da-nang-4-days"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/hoi-an-da-nang-4-days"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/seoul-4-days</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/seoul-4-days"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/seoul-4-days"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/seoul-4-days"/>
+    <lastmod>2026-06-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/seoul-4-days</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/seoul-4-days"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/seoul-4-days"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/seoul-4-days"/>
     <lastmod>2026-06-11</lastmod>
   </url>
   <url>
