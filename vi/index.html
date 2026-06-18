@@ -146,12 +146,12 @@ button{ font-family:inherit }
   .canlist li{ color:#fff; opacity:1; font-size:clamp(24px,6vw,34px) }
 }
 @media (max-width:900px){
-  .canscroll{ height:auto } .canstick{ position:static; height:auto; padding:clamp(56px,11vw,92px) 0; display:block }
-  .canbg::after{ background:rgba(24,22,18,.55) }
-  .canrow{ flex-direction:column; align-items:flex-start; gap:12px }
-  .canfix{ font-size:clamp(26px,6vw,38px) }
-  .canlist-wrap{ height:auto; overflow:visible; -webkit-mask:none; mask:none } .canlist{ position:static }
-  .canlist li{ color:#fff; opacity:1; white-space:normal; font-size:clamp(21px,5vw,28px); line-height:1.3 }
+  /* stays pinned full-screen on mobile; scroll advances each line */
+  .canbg::after{ background:linear-gradient(180deg,rgba(24,22,18,.52) 0%,rgba(24,22,18,.32) 50%,rgba(24,22,18,.58) 100%) }
+  .canrow{ flex-direction:column; align-items:center; text-align:center; gap:clamp(14px,3vh,28px); padding:0 20px }
+  .canfix{ font-size:clamp(26px,6.6vw,40px) }
+  .canlist-wrap{ width:100%; height:46vh }
+  .canlist li{ font-size:clamp(19px,5.4vw,30px) }
 }
 
 /* feature splits */
@@ -204,10 +204,15 @@ button{ font-family:inherit }
 .scpin .sc-stage{ height:44vh; max-height:480px }
 .scpin .sc-descs{ font-size:clamp(17px,1.7vw,20px); height:3.6em; min-height:0; margin-top:clamp(14px,2vh,26px); display:flex; align-items:center; justify-content:center }
 @media (max-width:900px){
-  .scpin{ height:auto; padding:var(--section) 0 }
-  .scpin-inner{ position:static; height:auto; display:block; padding:0 }
-  .scpin .sc-stage{ height:clamp(340px,78vw,460px); max-height:none }
-  .scpin .sc-descs{ height:auto; min-height:3.4em; display:block }
+  /* stays pinned full-screen on mobile; scroll advances each tab */
+  .scpin{ height:300vh; padding:0 }
+  .scpin-inner{ position:sticky; top:0; height:100vh; display:flex; align-items:center; padding:0 }
+  .scpin .h2{ font-size:clamp(24px,6.2vw,32px) }
+  .scpin .center .sub{ display:none }
+  .scpin .showcase{ margin-top:clamp(12px,2vh,22px) }
+  .scpin .sc-stage{ height:clamp(220px,36vh,400px); max-height:none }
+  .scpin .sc-tabs{ margin-top:clamp(10px,1.8vh,20px) }
+  .scpin .sc-descs{ font-size:clamp(15px,3.9vw,18px); height:3.6em; min-height:0; margin-top:clamp(8px,1.4vh,18px); display:flex; align-items:center; justify-content:center }
 }
 
 /* journal preview */
@@ -583,13 +588,18 @@ button{ font-family:inherit }
     var ritems = rlist.children, rn = ritems.length;
     var rbgs = reel.querySelectorAll('.canbg img');
     var rupdate = function(){
-      if (reduce || window.innerWidth <= 900){ rlist.style.transform=''; return; }
+      if (reduce){ rlist.style.transform=''; return; }
       var dist = reel.offsetHeight - window.innerHeight;
       if (dist <= 0) return;
       var p = Math.min(Math.max(-reel.getBoundingClientRect().top / dist, 0), 1);
       var idxF = p * (rn - 1), idx = Math.round(idxF);
-      var lineH = ritems[0].offsetHeight;
-      rlist.style.transform = 'translateY(' + (rwrap.clientHeight / 2 - (idxF + 0.5) * lineH) + 'px)';
+      // Centre the active line on its real position so lines that wrap to two
+      // rows (longer phrases on mobile) still align; equals the uniform-height
+      // formula on desktop where every line is one row.
+      var i0 = Math.floor(idxF), i1 = Math.min(i0 + 1, rn - 1), frac = idxF - i0;
+      var c0 = ritems[i0].offsetTop + ritems[i0].offsetHeight / 2;
+      var c1 = ritems[i1].offsetTop + ritems[i1].offsetHeight / 2;
+      rlist.style.transform = 'translateY(' + (rwrap.clientHeight / 2 - (c0 + (c1 - c0) * frac)) + 'px)';
       for (var i = 0; i < rn; i++){ ritems[i].classList.toggle('on', i === idx); }
       for (var b = 0; b < rbgs.length; b++){ rbgs[b].classList.toggle('is-active', b === idx); }
     };
@@ -604,33 +614,40 @@ button{ font-family:inherit }
     var sctabs = [].slice.call(sc.querySelectorAll('.sc-tab'));
     var scshots = [].slice.call(sc.querySelectorAll('.sc-shot'));
     var scdescs = [].slice.call(sc.querySelectorAll('.sc-desc'));
-    sctabs.forEach(function(t){
-      t.addEventListener('click', function(){
-        var i = t.getAttribute('data-i');
-        sctabs.forEach(function(x){ x.classList.toggle('is-active', x === t); });
-        scshots.forEach(function(s){ s.classList.toggle('is-active', s.getAttribute('data-i') === i); });
-        scdescs.forEach(function(d){ d.classList.toggle('is-active', d.getAttribute('data-i') === i); });
-      });
-    });
-  }
-
-  // scroll-pinned tab advance (desktop): scrolling through the pinned section
-  // focuses each feature in turn
-  var scsec = document.getElementById('features');
-  if (sc && scsec){
-    var scupdate = function(){
-      if (reduce || window.innerWidth <= 900) return;
-      var dist = scsec.offsetHeight - window.innerHeight;
-      if (dist <= 0) return;
-      var p = Math.min(Math.max(-scsec.getBoundingClientRect().top / dist, 0), 1);
-      var key = String(Math.round(p * (sctabs.length - 1)));
+    var scstrip = sc.querySelector('.sc-tabs');
+    var sccur = -1;
+    var scsetActive = function(i){
+      if (i === sccur) return;
+      sccur = i;
+      var key = String(i);
       sctabs.forEach(function(x){ x.classList.toggle('is-active', x.getAttribute('data-i') === key); });
       scshots.forEach(function(s){ s.classList.toggle('is-active', s.getAttribute('data-i') === key); });
       scdescs.forEach(function(d){ d.classList.toggle('is-active', d.getAttribute('data-i') === key); });
+      // keep the active tab in view when the strip overflows (mobile)
+      if (scstrip && sctabs[i]){
+        var at = sctabs[i];
+        scstrip.scrollTo({ left: at.offsetLeft - (scstrip.clientWidth - at.clientWidth) / 2, behavior: 'smooth' });
+      }
     };
-    scupdate();
-    window.addEventListener('scroll', scupdate, {passive:true});
-    window.addEventListener('resize', scupdate);
+    sctabs.forEach(function(t){
+      t.addEventListener('click', function(){ scsetActive(parseInt(t.getAttribute('data-i'), 10)); });
+    });
+
+    // scroll-pinned tab advance: scrolling through the pinned section focuses
+    // each feature in turn (desktop and mobile)
+    var scsec = document.getElementById('features');
+    if (scsec){
+      var scupdate = function(){
+        if (reduce) return;
+        var dist = scsec.offsetHeight - window.innerHeight;
+        if (dist <= 0) return;
+        var p = Math.min(Math.max(-scsec.getBoundingClientRect().top / dist, 0), 1);
+        scsetActive(Math.round(p * (sctabs.length - 1)));
+      };
+      scupdate();
+      window.addEventListener('scroll', scupdate, {passive:true});
+      window.addEventListener('resize', scupdate);
+    }
   }
 })();
 </script>
