@@ -136,7 +136,7 @@ button{ font-family:inherit }
 .canrow{ position:relative; z-index:1; width:100%; max-width:1280px; margin:0 auto; padding:0 clamp(24px,4vw,56px); display:flex; align-items:center; gap:clamp(16px,2vw,32px); color:#fff }
 .canfix{ flex:none; font-family:var(--f-display); font-weight:400; font-size:clamp(22px,3vw,40px); line-height:1.12; letter-spacing:-.02em }
 .canlist-wrap{ position:relative; flex:1 1 auto; height:62vh; overflow:hidden; -webkit-mask:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent); mask:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent) }
-.canlist{ position:absolute; left:0; top:0; margin:0; padding:0; list-style:none; width:100%; will-change:transform; transition:transform .35s cubic-bezier(.22,.61,.36,1) }
+.canlist{ position:absolute; left:0; top:0; margin:0; padding:0; list-style:none; width:100%; will-change:transform }
 .canlist li{ font-family:var(--f-display); font-weight:400; font-size:clamp(22px,3vw,40px); line-height:1.2; letter-spacing:-.02em; white-space:nowrap; color:rgba(255,255,255,.32); opacity:.6; transition:color .35s, opacity .35s }
 .canlist li.on{ color:#fff; opacity:1 }
 @media (prefers-reduced-motion: reduce){
@@ -603,30 +603,50 @@ button{ font-family:inherit }
 
   // casa-style scroll word reel
   var reel = document.getElementById('reel');
-  if (reel){
+  if (reel && !reduce){
     var rlist = reel.querySelector('.canlist');
     var rwrap = reel.querySelector('.canlist-wrap');
+    var rstick = reel.querySelector('.canstick');
     var ritems = rlist.children, rn = ritems.length;
     var rbgs = reel.querySelectorAll('.canbg img');
-    var rupdate = function(){
-      if (reduce){ rlist.style.transform=''; return; }
-      var dist = reel.offsetHeight - window.innerHeight;
-      if (dist <= 0) return;
-      var p = Math.min(Math.max(-reel.getBoundingClientRect().top / dist, 0), 1);
-      var idxF = p * (rn - 1), idx = Math.round(idxF);
-      // Centre the active line on its real position so lines that wrap to two
-      // rows (longer phrases on mobile) still align; equals the uniform-height
-      // formula on desktop where every line is one row.
-      var i0 = Math.floor(idxF), i1 = Math.min(i0 + 1, rn - 1), frac = idxF - i0;
-      var c0 = ritems[i0].offsetTop + ritems[i0].offsetHeight / 2;
-      var c1 = ritems[i1].offsetTop + ritems[i1].offsetHeight / 2;
-      rlist.style.transform = 'translateY(' + (rwrap.clientHeight / 2 - (c0 + (c1 - c0) * frac)) + 'px)';
-      for (var i = 0; i < rn; i++){ ritems[i].classList.toggle('on', i === idx); }
-      for (var b = 0; b < rbgs.length; b++){ rbgs[b].classList.toggle('is-active', b === idx); }
+    var rTop = 0, rDist = 1, rWrapH = 0, rCenters = [];
+    var rTargetY = 0, rCurY = 0, rRaf = null, rIdx = -1;
+    // Measure layout once (and on resize/load), never inside the scroll handler,
+    // so scrolling does no layout reads and cannot thrash.
+    var rmeasure = function(){
+      rTop = reel.getBoundingClientRect().top + window.scrollY;
+      rDist = Math.max(reel.offsetHeight - rstick.offsetHeight, 1);
+      rWrapH = rwrap.clientHeight;
+      rCenters = [];
+      for (var i = 0; i < rn; i++){ rCenters.push(ritems[i].offsetTop + ritems[i].offsetHeight / 2); }
     };
-    rupdate();
-    window.addEventListener('scroll', rupdate, {passive:true});
-    window.addEventListener('resize', rupdate);
+    // Progress is driven by scrollY (document space), so the mobile address bar
+    // showing/hiding does not shift it. Interpolating between line centres keeps
+    // wrapped (two-row) lines aligned.
+    var rcompute = function(){
+      var p = Math.min(Math.max((window.scrollY - rTop) / rDist, 0), 1);
+      var idxF = p * (rn - 1), idx = Math.round(idxF);
+      var i0 = Math.floor(idxF), i1 = Math.min(i0 + 1, rn - 1), frac = idxF - i0;
+      rTargetY = rWrapH / 2 - (rCenters[i0] + (rCenters[i1] - rCenters[i0]) * frac);
+      if (idx !== rIdx){
+        rIdx = idx;
+        for (var i = 0; i < rn; i++){ ritems[i].classList.toggle('on', i === idx); }
+        for (var b = 0; b < rbgs.length; b++){ rbgs[b].classList.toggle('is-active', b === idx); }
+      }
+    };
+    // Ease the list toward the target each frame (gentle delay, GPU transform).
+    var rtick = function(){
+      rCurY += (rTargetY - rCurY) * 0.18;
+      if (Math.abs(rTargetY - rCurY) < 0.4){ rCurY = rTargetY; rRaf = null; }
+      else { rRaf = requestAnimationFrame(rtick); }
+      rlist.style.transform = 'translate3d(0,' + rCurY + 'px,0)';
+    };
+    var ronscroll = function(){ rcompute(); if (rRaf === null){ rRaf = requestAnimationFrame(rtick); } };
+    rmeasure(); rcompute(); rCurY = rTargetY;
+    rlist.style.transform = 'translate3d(0,' + rCurY + 'px,0)';
+    window.addEventListener('scroll', ronscroll, {passive:true});
+    window.addEventListener('resize', function(){ rmeasure(); ronscroll(); });
+    window.addEventListener('load', function(){ rmeasure(); ronscroll(); });
   }
 
   // tabbed feature showcase
