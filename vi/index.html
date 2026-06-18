@@ -130,7 +130,8 @@ button{ font-family:inherit }
 .canscroll{ position:relative; height:300vh }
 .canstick{ position:sticky; top:0; height:100vh; overflow:hidden; display:flex; align-items:center }
 .canbg{ position:absolute; inset:0 }
-.canbg img{ width:100%; height:100%; object-fit:cover }
+.canbg img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .7s ease }
+.canbg img.is-active{ opacity:1 }
 .canbg::after{ content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(24,22,18,.64) 0%,rgba(24,22,18,.36) 55%,rgba(24,22,18,.5) 100%) }
 .canrow{ position:relative; z-index:1; width:100%; max-width:1280px; margin:0 auto; padding:0 clamp(24px,4vw,56px); display:flex; align-items:center; gap:clamp(16px,2vw,32px); color:#fff }
 .canfix{ flex:none; font-family:var(--f-display); font-weight:400; font-size:clamp(22px,3vw,40px); line-height:1.12; letter-spacing:-.02em }
@@ -196,6 +197,17 @@ button{ font-family:inherit }
   .sc-tab{ min-width:78px } .sc-tab img{ width:38px; height:38px } .sc-tab span{ font-size:12.5px }
   .sc-shot{ height:80%; max-width:82% }
 }
+/* scroll-pinned: advance tabs by scrolling (desktop) */
+.scpin{ position:relative; height:340vh; padding:0 }
+.scpin-inner{ position:sticky; top:0; height:100vh; display:flex; align-items:center; padding:2vh 0 }
+.scpin .showcase{ margin-top:clamp(18px,2.6vh,34px); width:100% }
+.scpin .sc-stage{ height:44vh; max-height:480px }
+.scpin .sc-descs{ min-height:3em; margin-top:clamp(14px,2vh,26px) }
+@media (max-width:900px){
+  .scpin{ height:auto; padding:var(--section) 0 }
+  .scpin-inner{ position:static; height:auto; display:block; padding:0 }
+  .scpin .sc-stage{ height:clamp(340px,78vw,460px); max-height:none }
+}
 
 /* journal preview */
 .jp-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap }
@@ -212,8 +224,13 @@ button{ font-family:inherit }
 @media (max-width:880px){ .jp-grid{ grid-template-columns:1fr } .jp-head{ align-items:flex-start } }
 
 /* cta */
-.cta-panel{ display:flex; flex-direction:column; align-items:center; gap:20px; text-align:center; padding:clamp(48px,7vw,96px) 24px }
-.cta-panel .badge{ margin-top:4px }
+.cta-panel{ position:relative; overflow:hidden; display:flex; flex-direction:column; align-items:center; gap:20px; text-align:center; padding:clamp(64px,10vw,128px) 24px; background:linear-gradient(rgba(24,22,18,.6),rgba(24,22,18,.66)), url(/assets/promote.jpg) center/cover no-repeat }
+.cta-panel .h-statement{ color:#fff }
+.cta-panel .sub{ color:rgba(255,255,255,.9) }
+.cta-panel .chip{ background:rgba(255,255,255,.18); color:#fff }
+.cta-panel .hero-note{ color:rgba(255,255,255,.72) }
+.cta-panel .badge{ margin-top:4px; background:#fff; color:var(--ink) }
+.cta-panel .badge:hover{ background:#f1f1ea }
 
 /* faq */
 .faq{ display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(22px,3vw,44px); margin-top:clamp(34px,4vw,52px) }
@@ -330,7 +347,16 @@ button{ font-family:inherit }
   <!-- SCROLL WORD REEL (casa-style) -->
   <section class="canscroll" id="reel">
     <div class="canstick">
-      <div class="canbg"><img src="/assets/band.jpg" alt="" /></div>
+      <div class="canbg">
+        <img class="is-active" data-i="0" src="/assets/cafe.jpg" alt="" />
+        <img data-i="1" src="/assets/sunset.jpg" alt="" />
+        <img data-i="2" src="/assets/rooftop.jpg" alt="" />
+        <img data-i="3" src="/assets/beach.jpg" alt="" />
+        <img data-i="4" src="/assets/whole-day.jpg" alt="" />
+        <img data-i="5" src="/assets/paid.jpg" alt="" />
+        <img data-i="6" src="/assets/every-place.jpg" alt="" />
+        <img data-i="7" src="/assets/everyone-wants-to-go.jpg" alt="" />
+      </div>
       <div class="canrow">
         <span class="canfix">OnePlan nhớ</span>
         <div class="canlist-wrap">
@@ -410,7 +436,8 @@ button{ font-family:inherit }
   </section>
 
   <!-- EVERYTHING -->
-  <section class="sec">
+  <section class="sec scpin" id="features">
+    <div class="scpin-inner">
     <div class="wrap">
       <div class="center reveal">
         <h2 class="h2">Một nơi cho mọi thứ về chuyến đi.</h2>
@@ -419,11 +446,11 @@ button{ font-family:inherit }
       <div class="showcase reveal">
         <div class="sc-stage">
           <img class="sc-shot is-active" data-i="0" src="/assets/screens/Map-places.png" alt="Bản đồ địa điểm đã lưu trong OnePlan" />
-          <img class="sc-shot" data-i="1" src="/assets/screens/Boards.png" alt="Bộ sưu tập trong OnePlan" loading="lazy" />
-          <img class="sc-shot" data-i="2" src="/assets/screens/Group-Plan.png" alt="Lịch trình từng ngày trong OnePlan" loading="lazy" />
-          <img class="sc-shot" data-i="3" src="/assets/screens/Group.png" alt="Chuyến đi nhóm trong OnePlan" loading="lazy" />
-          <img class="sc-shot" data-i="4" src="/assets/screens/Group-tnx.png" alt="Ngân sách chung trong OnePlan" loading="lazy" />
-          <img class="sc-shot" data-i="5" src="/assets/screens/Passport.png" alt="Hộ chiếu chuyến đi trong OnePlan" loading="lazy" />
+          <img class="sc-shot" data-i="1" src="/assets/screens/Boards.png" alt="Bộ sưu tập trong OnePlan" />
+          <img class="sc-shot" data-i="2" src="/assets/screens/Group-Plan.png" alt="Lịch trình từng ngày trong OnePlan" />
+          <img class="sc-shot" data-i="3" src="/assets/screens/Group.png" alt="Chuyến đi nhóm trong OnePlan" />
+          <img class="sc-shot" data-i="4" src="/assets/screens/Group-tnx.png" alt="Ngân sách chung trong OnePlan" />
+          <img class="sc-shot" data-i="5" src="/assets/screens/Passport.png" alt="Hộ chiếu chuyến đi trong OnePlan" />
         </div>
         <div class="sc-tabs" role="tablist">
           <button class="sc-tab is-active" type="button" data-i="0"><img src="https://lftz25oez4aqbxpq.public.blob.vercel-storage.com/image-SsfjxCJh43Hr1dqzkbFWUGH3ICZQbH.png" alt="" /><span>Bản đồ</span></button>
@@ -442,6 +469,7 @@ button{ font-family:inherit }
           <p class="sc-desc" data-i="5">Lưu giữ <strong>những nơi và chuyến đi bạn đã qua</strong>, một cuốn sổ lặng lẽ ghi lại mọi hành trình.</p>
         </div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -483,7 +511,7 @@ button{ font-family:inherit }
         <h2 class="h-statement">Chuyến đi tiếp theo<br />bắt đầu từ đây.</h2>
         <p class="sub center">Tải OnePlan và lên kế hoạch chuyến đầu tiên miễn phí. Nâng cấp chỉ khi bạn cần thêm.</p>
         <a class="badge" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165" target="_blank" rel="noopener" aria-label="Tải OnePlan Travel trên App Store"><span class="apple-glyph" aria-hidden="true"></span><span><span class="b1">Tải về trên</span><span class="b2">App Store</span></span></a>
-        <p class="hero-note" style="color:var(--ink-3)">Miễn phí trên iOS · Android sắp ra mắt</p>
+        <p class="hero-note">Miễn phí trên iOS · Android sắp ra mắt</p>
       </div>
     </div>
   </section>
@@ -552,6 +580,7 @@ button{ font-family:inherit }
     var rlist = reel.querySelector('.canlist');
     var rwrap = reel.querySelector('.canlist-wrap');
     var ritems = rlist.children, rn = ritems.length;
+    var rbgs = reel.querySelectorAll('.canbg img');
     var rupdate = function(){
       if (reduce || window.innerWidth <= 900){ rlist.style.transform=''; return; }
       var dist = reel.offsetHeight - window.innerHeight;
@@ -561,6 +590,7 @@ button{ font-family:inherit }
       var lineH = ritems[0].offsetHeight;
       rlist.style.transform = 'translateY(' + (rwrap.clientHeight / 2 - (idxF + 0.5) * lineH) + 'px)';
       for (var i = 0; i < rn; i++){ ritems[i].classList.toggle('on', i === idx); }
+      for (var b = 0; b < rbgs.length; b++){ rbgs[b].classList.toggle('is-active', b === idx); }
     };
     rupdate();
     window.addEventListener('scroll', rupdate, {passive:true});
@@ -581,6 +611,25 @@ button{ font-family:inherit }
         scdescs.forEach(function(d){ d.classList.toggle('is-active', d.getAttribute('data-i') === i); });
       });
     });
+  }
+
+  // scroll-pinned tab advance (desktop): scrolling through the pinned section
+  // focuses each feature in turn
+  var scsec = document.getElementById('features');
+  if (sc && scsec){
+    var scupdate = function(){
+      if (reduce || window.innerWidth <= 900) return;
+      var dist = scsec.offsetHeight - window.innerHeight;
+      if (dist <= 0) return;
+      var p = Math.min(Math.max(-scsec.getBoundingClientRect().top / dist, 0), 1);
+      var key = String(Math.round(p * (sctabs.length - 1)));
+      sctabs.forEach(function(x){ x.classList.toggle('is-active', x.getAttribute('data-i') === key); });
+      scshots.forEach(function(s){ s.classList.toggle('is-active', s.getAttribute('data-i') === key); });
+      scdescs.forEach(function(d){ d.classList.toggle('is-active', d.getAttribute('data-i') === key); });
+    };
+    scupdate();
+    window.addEventListener('scroll', scupdate, {passive:true});
+    window.addEventListener('resize', scupdate);
   }
 })();
 </script>
