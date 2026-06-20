@@ -147,3 +147,7 @@ a{ color:inherit; text-decoration:none }
   .trip-doc{ margin:0; max-width:none; padding:28px 22px 54px }
   .trip-stop:not(.is-active){ opacity:1 }
 }
+
+/* photo thumbnails (editorial cards) */
+.jthumb.is-photo img{ width:100%; height:100%; object-fit:cover; filter:none }
+.jcard:hover .jthumb.is-photo img{ transform:scale(1.05) rotate(0) }
