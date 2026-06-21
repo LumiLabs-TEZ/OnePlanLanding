@@ -14,6 +14,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png" />
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<meta name="apple-itunes-app" content="app-id=6761648165" />
 <meta property="og:title" content="OnePlan Travel · Plan less. Trip more." />
 <meta property="og:description" content="Save places from videos, build Boards, plan with friends, and split expenses. All in one app." />
 <meta property="og:type" content="website" />
@@ -286,6 +287,21 @@ button{ font-family:inherit }
   .foot-top{ flex-direction:column; gap:32px }
   .foot-right{ align-items:flex-start }
 }
+
+/* trust strip + download QR/Android (CRO) */
+.trust{ text-align:center; display:flex; flex-direction:column; gap:9px }
+.trust-quote{ font-family:var(--f-display); font-weight:400; font-size:clamp(20px,2.4vw,27px); line-height:1.3; letter-spacing:-.02em; color:var(--ink); margin:0 }
+.trust-by{ font-size:14px; color:var(--ink-3); margin:0 } .trust-by a{ color:var(--primary) }
+.trust-meta{ font-size:13px; color:var(--ink-3); margin:5px 0 0 } .trust-meta a{ color:var(--ink-2); text-decoration:underline; text-underline-offset:2px }
+.dl-qr{ display:none; flex-direction:column; align-items:center; gap:8px; margin-top:8px }
+html.is-desktop .dl-qr{ display:flex }
+@media (pointer:coarse){ .dl-qr{ display:none !important } }
+.dl-qr img{ width:132px; height:132px; background:#fff; border-radius:14px; padding:9px }
+.dl-qr span{ font-size:13px; color:rgba(255,255,255,.82) }
+.dl-android{ display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:6px }
+.dl-android-h{ font-family:var(--f-display); font-weight:400; font-size:clamp(20px,2.4vw,26px); color:#fff; margin:0 }
+.dl-android-sub{ font-size:14px; color:rgba(255,255,255,.82); margin:0; max-width:36ch }
+.hero-note a{ color:#fff; text-decoration:underline; text-underline-offset:2px }
 </style>
 <script type="application/ld+json">
 {
@@ -321,7 +337,16 @@ button{ font-family:inherit }
       <h1 class="h-hero hero-h1">Every trip, in one plan.</h1>
       <p class="hero-sub">The group travel app to save the places you find, build the itinerary together, and split expenses, without the screenshots, spreadsheets, and group-chat chaos.</p>
       <a class="btn btn-light btn-lg" href="#download">Get the app <span class="ar">→</span></a>
-      <p class="hero-note">Free on iOS · Android coming soon</p>
+      <p class="hero-note">Free on iOS. <span class="no-zalo">Android coming soon.</span><a class="needs-zalo" data-zalo data-loc="zalo" href="#" target="_blank" rel="noopener" hidden>On Android? Get notified on Zalo →</a></p>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="sec tight">
+    <div class="wrap narrow trust reveal">
+      <p class="trust-quote">"I planned every trip. Now I actually enjoy them."</p>
+      <p class="trust-by">A OnePlan traveler, <a href="/journal/linh-group-trips">read the story</a></p>
+      <p class="trust-meta">Free to start · Featured on <a href="https://www.producthunt.com/products/oneplan-travel" target="_blank" rel="noopener">Product Hunt</a> &amp; <a href="https://unikorn.vn/p/oneplan-travel" target="_blank" rel="noopener">Unikorn.vn</a></p>
     </div>
   </section>
 
@@ -527,7 +552,13 @@ button{ font-family:inherit }
         <h2 class="h-statement">Your next trip<br />starts here.</h2>
         <p class="sub center">Download OnePlan and plan your first trip free. Upgrade only when you want more.</p>
         <a class="badge" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165" target="_blank" rel="noopener" aria-label="Download OnePlan Travel on the App Store"><span class="apple-glyph" aria-hidden="true"></span><span><span class="b1">Download on the</span><span class="b2">App Store</span></span></a>
-        <p class="hero-note">Free on iOS · Android coming soon</p>
+        <div class="dl-qr"><img src="/assets/appstore-qr.png" width="132" height="132" alt="QR code to install OnePlan from the App Store" loading="lazy" /><span>On a computer? Scan to install on your phone.</span></div>
+        <div class="dl-android needs-zalo" hidden>
+          <p class="dl-android-h">Android is on the way.</p>
+          <p class="dl-android-sub">Follow us on Zalo and we will ping you the moment it lands.</p>
+          <a class="op-zalo-btn" data-zalo data-loc="zalo" href="#" target="_blank" rel="noopener">Get notified on Zalo</a>
+        </div>
+        <p class="hero-note no-zalo">Free on iOS · Android coming soon</p>
       </div>
     </div>
   </section>
@@ -707,6 +738,7 @@ button{ font-family:inherit }
   }
 })();
 </script>
+<script defer src="/cta.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

@@ -14,6 +14,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png" />
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<meta name="apple-itunes-app" content="app-id=6761648165" />
 <meta property="og:title" content="OnePlan Travel · Bớt lo. Đi nhiều hơn." />
 <meta property="og:description" content="Lưu địa điểm từ video, tạo bộ sưu tập, lên kế hoạch với bạn bè và chia chi phí. Tất cả trong một app." />
 <meta property="og:type" content="website" />
@@ -286,6 +287,21 @@ button{ font-family:inherit }
   .foot-top{ flex-direction:column; gap:32px }
   .foot-right{ align-items:flex-start }
 }
+
+/* trust strip + download QR/Android (CRO) */
+.trust{ text-align:center; display:flex; flex-direction:column; gap:9px }
+.trust-quote{ font-family:var(--f-display); font-weight:400; font-size:clamp(20px,2.4vw,27px); line-height:1.3; letter-spacing:-.02em; color:var(--ink); margin:0 }
+.trust-by{ font-size:14px; color:var(--ink-3); margin:0 } .trust-by a{ color:var(--primary) }
+.trust-meta{ font-size:13px; color:var(--ink-3); margin:5px 0 0 } .trust-meta a{ color:var(--ink-2); text-decoration:underline; text-underline-offset:2px }
+.dl-qr{ display:none; flex-direction:column; align-items:center; gap:8px; margin-top:8px }
+html.is-desktop .dl-qr{ display:flex }
+@media (pointer:coarse){ .dl-qr{ display:none !important } }
+.dl-qr img{ width:132px; height:132px; background:#fff; border-radius:14px; padding:9px }
+.dl-qr span{ font-size:13px; color:rgba(255,255,255,.82) }
+.dl-android{ display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:6px }
+.dl-android-h{ font-family:var(--f-display); font-weight:400; font-size:clamp(20px,2.4vw,26px); color:#fff; margin:0 }
+.dl-android-sub{ font-size:14px; color:rgba(255,255,255,.82); margin:0; max-width:36ch }
+.hero-note a{ color:#fff; text-decoration:underline; text-underline-offset:2px }
 </style>
 <script type="application/ld+json">
 {
@@ -321,7 +337,16 @@ button{ font-family:inherit }
       <h1 class="h-hero hero-h1">Cả chuyến đi, trong một kế hoạch.</h1>
       <p class="hero-sub">App du lịch nhóm để bạn lưu những nơi tìm thấy, cùng nhau lên lịch trình và chia tiền, không còn ảnh chụp màn hình, bảng tính hay loạn nhóm chat.</p>
       <a class="btn btn-light btn-lg" href="#download">Tải ứng dụng <span class="ar">→</span></a>
-      <p class="hero-note">Miễn phí trên iOS · Android sắp ra mắt</p>
+      <p class="hero-note">Miễn phí trên iOS. <span class="no-zalo">Android sắp ra mắt.</span><a class="needs-zalo" data-zalo data-loc="zalo" href="#" target="_blank" rel="noopener" hidden>Dùng Android? Nhận thông báo qua Zalo →</a></p>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="sec tight">
+    <div class="wrap narrow trust reveal">
+      <p class="trust-quote">"Tôi lo hết mọi chuyến đi. Giờ tôi mới thật sự tận hưởng."</p>
+      <p class="trust-by">Một người dùng OnePlan, <a href="/vi/journal/linh-group-trips">đọc câu chuyện</a></p>
+      <p class="trust-meta">Miễn phí để bắt đầu · Được giới thiệu trên <a href="https://www.producthunt.com/products/oneplan-travel" target="_blank" rel="noopener">Product Hunt</a> &amp; <a href="https://unikorn.vn/p/oneplan-travel" target="_blank" rel="noopener">Unikorn.vn</a></p>
     </div>
   </section>
 
@@ -527,7 +552,13 @@ button{ font-family:inherit }
         <h2 class="h-statement">Chuyến đi tiếp theo<br />bắt đầu từ đây.</h2>
         <p class="sub center">Tải OnePlan và lên kế hoạch chuyến đầu tiên miễn phí. Nâng cấp chỉ khi bạn cần thêm.</p>
         <a class="badge" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165" target="_blank" rel="noopener" aria-label="Tải OnePlan Travel trên App Store"><span class="apple-glyph" aria-hidden="true"></span><span><span class="b1">Tải về trên</span><span class="b2">App Store</span></span></a>
-        <p class="hero-note">Miễn phí trên iOS · Android sắp ra mắt</p>
+        <div class="dl-qr"><img src="/assets/appstore-qr.png" width="132" height="132" alt="Mã QR để cài OnePlan từ App Store" loading="lazy" /><span>Đang dùng máy tính? Quét mã để cài trên điện thoại.</span></div>
+        <div class="dl-android needs-zalo" hidden>
+          <p class="dl-android-h">Android sắp ra mắt.</p>
+          <p class="dl-android-sub">Theo dõi Zalo, có bản Android là chúng tôi báo bạn ngay.</p>
+          <a class="op-zalo-btn" data-zalo data-loc="zalo" href="#" target="_blank" rel="noopener">Nhận thông báo qua Zalo</a>
+        </div>
+        <p class="hero-note no-zalo">Miễn phí trên iOS · Android sắp ra mắt</p>
       </div>
     </div>
   </section>
@@ -705,6 +736,7 @@ button{ font-family:inherit }
   }
 })();
 </script>
+<script defer src="/cta.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
