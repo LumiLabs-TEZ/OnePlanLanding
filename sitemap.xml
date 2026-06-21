@@ -462,4 +462,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/gen-z-mental-health"/>
     <lastmod>2026-06-20</lastmod>
   </url>
+  <url>
+    <loc>https://www.oneplan.space/journal/du-lich-phu-quoc-nhom</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/du-lich-phu-quoc-nhom"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/du-lich-phu-quoc-nhom"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/du-lich-phu-quoc-nhom"/>
+    <lastmod>2026-06-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.oneplan.space/vi/journal/du-lich-phu-quoc-nhom</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/journal/du-lich-phu-quoc-nhom"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/vi/journal/du-lich-phu-quoc-nhom"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/du-lich-phu-quoc-nhom"/>
+    <lastmod>2026-06-21</lastmod>
+  </url>
 </urlset>
