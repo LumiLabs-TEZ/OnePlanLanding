@@ -4,7 +4,7 @@
    To activate the Android (Zalo) capture, set ZALO_URL below. */
 (function () {
   var STORE = "https://apps.apple.com/us/app/oneplan-travel/id6761648165";
-  var ZALO_URL = ""; // TODO set the Zalo OA/group URL to turn on Android capture
+  var ZALO_URL = "https://zalo.me/2536416723160720206"; // OnePlan Travel Zalo OA
 
   var de = document.documentElement;
   var lang = (de.lang || "en").toLowerCase().indexOf("vi") === 0 ? "vi" : "en";
