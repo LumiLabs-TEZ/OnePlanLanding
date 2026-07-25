@@ -81,7 +81,7 @@ button,input,select{ font-family:inherit }
 .hero{ background:linear-gradient(175deg, #0a6fd8 0%, var(--primary) 55%, #0b5cb8 100%); padding:130px 18px 150px; color:#fff }
 .hero-in{ max-width:980px; margin:0 auto; text-align:center }
 .hero h1{ font-family:var(--f-display); font-weight:400; font-size:clamp(36px,5.6vw,62px); line-height:1.05; letter-spacing:-.02em; margin:0 0 10px; color:#fff }
-.hero .hsub{ font-size:clamp(15px,1.8vw,18px); color:rgba(255,255,255,.85); margin:0 0 26px }
+.hero .hsub{ font-size:clamp(15px,1.8vw,18px); color:rgba(255,255,255,.85); margin:0 0 40px }
 .hero .beta{ display:inline-block; font-size:10px; font-weight:700; letter-spacing:.08em; color:var(--primary); background:#fff; border-radius:var(--pill); padding:3px 9px; vertical-align:middle; margin-left:10px; transform:translateY(-10px) }
 /* toggle Flights/Hotels */
 .htabs{ display:inline-flex; background:rgba(255,255,255,.18); border-radius:16px; padding:5px; gap:5px; margin-bottom:22px }
@@ -162,8 +162,8 @@ button,input,select{ font-family:inherit }
 .dest .dt span b{ display:inline; font-size:13.5px }
 
 /* ===== khu ket qua: 2 cot ===== */
-.boardwrap{ max-width:var(--wrap); margin:26px auto 0; padding:0 24px }
-.tabsrow{ display:flex; gap:8px; flex-wrap:wrap; margin:6px 0 14px }
+.boardwrap{ max-width:var(--wrap); margin:clamp(44px,6vw,72px) auto 0; padding:0 24px }
+.tabsrow{ display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px }
 .tb{ display:inline-flex; align-items:center; gap:7px; font-size:13.5px; font-weight:600; border-radius:var(--pill); padding:9px 16px; border:1px solid var(--line); background:#fff; color:var(--ink-2); cursor:default }
 .tb.on{ background:var(--ink); color:#fff; border-color:var(--ink) }
 .tb.soon{ opacity:.55 }
@@ -245,7 +245,7 @@ button,input,select{ font-family:inherit }
 .otp-demo b{ color:var(--ink) }
 
 /* FAQ + CTA */
-.sec{ padding:clamp(44px,6vw,72px) 0 0 }
+.sec{ padding:clamp(64px,9vw,110px) 0 0 }
 .faq{ display:grid; grid-template-columns:1fr 1fr; gap:16px 28px; margin-top:clamp(22px,3vw,36px) }
 .qa{ border-top:1px solid var(--line); padding-top:16px }
 .qa h4{ font-size:16px; font-weight:600; margin:0 0 6px }
@@ -313,10 +313,6 @@ button,input,select{ font-family:inherit }
     <h1>Vé rẻ tự tìm đến bạn.<span class="beta">BETA</span></h1>
     <p class="hsub">Đặt lệnh với mức giá bạn muốn, Radar canh 24/7 và nhắn Zalo ngay khi vé chạm giá. Miễn phí, không cần tài khoản.</p>
 
-    <div class="htabs">
-      <span class="htab on">✈️ Vé máy bay</span>
-      <span class="htab">🏨 Khách sạn <em>SẮP CÓ</em></span>
-    </div>
 
     <form class="searchcard" id="radarForm" novalidate>
       <div class="sbar">
@@ -393,8 +389,6 @@ button,input,select{ font-family:inherit }
 <div class="boardwrap" id="board">
   <div class="tabsrow">
     <span class="tb on">✈️ Kèo giá tốt</span>
-    <span class="tb soon">🏨 Khách sạn <em>SẮP CÓ</em></span>
-    <span class="tb soon">🛵 Di chuyển <em>SẮP CÓ</em></span>
     <a class="tb link" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">🤖 Lịch trình AI</a>
   </div>
   <div class="cols">
