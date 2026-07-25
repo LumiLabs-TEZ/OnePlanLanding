@@ -117,44 +117,24 @@ button,input,select{ font-family:inherit }
 .prob[hidden]{ display:none }
 /* ghi chu tab khach san */
 .hnote{ font-size:12.5px; color:var(--ink-2); margin:12px 2px 0; text-align:left }
-/* trust row + hang hang khong */
-.trust{ display:flex; align-items:center; justify-content:center; gap:8px 24px; flex-wrap:wrap; margin:22px 0 0; font-size:13.5px; color:var(--ink-2) }
-.trust .tk{ display:inline-flex; align-items:center; gap:7px }
-.trust .tk::before{ content:"✓"; font-weight:800; color:var(--primary) }
-.airrow{ display:flex; align-items:center; justify-content:center; gap:8px; margin-top:14px; flex-wrap:wrap }
-.airrow .al{ width:32px; height:32px; border-radius:10px; background:#fff; border:1px solid var(--line); object-fit:contain; padding:4px }
-.airrow .txt{ font-size:12.5px; color:var(--ink-3); margin-left:4px }
+/* mot dong trust im lang */
+.trustline{ margin:18px 0 0; font-size:13px; color:var(--ink-3); text-align:center }
 
-/* ===== BENTO insight (ref: the diem tin dung — card pastel, so to, gauge/bar/spark) ===== */
-.bento{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:26px; text-align:left }
+/* ===== INSIGHT: MOT card trang, MOT con so thong tri + chart (taste: gradient-hero + 1 so khong lo) ===== */
+.bento{ display:block; margin-top:24px; text-align:left }
 .bento[hidden]{ display:none }
-.bcard{ border-radius:22px; padding:18px 20px 16px; border:1px solid rgba(23,53,102,.07); box-shadow:0 18px 44px -30px rgba(23,53,102,.3); background:#fff }
-.bcard h5{ margin:0 0 8px; font-size:14px; font-weight:600; color:var(--ink); letter-spacing:-.01em }
-.bcard .bnote{ font-size:11.5px; color:var(--ink-3); margin:8px 0 0 }
-.bc-blue{ background:#e9f1fd; border-color:rgba(0,102,204,.1) }
-.bc-warm{ background:#fdf3e8; border-color:rgba(214,138,58,.14) }
-.bc-off{ background:var(--off) }
+.insight{ background:#fff; border:1px solid var(--line); border-radius:22px; padding:20px 22px 12px; box-shadow:0 18px 44px -30px rgba(23,53,102,.3); display:grid; grid-template-columns:210px 1fr; gap:6px 30px; align-items:center }
+.ins-cap{ font-size:11.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3) }
+.ins-l{ display:flex; flex-direction:column; align-items:flex-start; gap:7px }
+.ins-num{ margin:0; font-size:58px; font-weight:700; letter-spacing:-.03em; line-height:1; color:var(--primary); font-variant-numeric:tabular-nums }
+.ins-num span{ font-size:22px; font-weight:600; color:var(--ink-3) }
+.gpill{ display:inline-flex; align-items:center; font-size:12px; font-weight:500; background:var(--off); border-radius:var(--pill); padding:5px 12px; color:var(--ink-2) }
 .cb-head{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px }
 .cb-v{ font-size:12.5px; color:var(--ink-2) } .cb-v b{ color:var(--ink) }
-.chart-card svg{ width:100%; height:110px; cursor:crosshair; display:block; touch-action:none }
+.ins-r svg{ width:100%; height:110px; cursor:crosshair; display:block; touch-action:none }
 .cb-x{ display:flex; justify-content:space-between; font-size:11px; color:var(--ink-3); margin-top:2px }
-/* gauge % khop */
-.gwrap{ position:relative; display:flex; justify-content:center; margin-top:2px }
-.gwrap svg{ width:180px; height:104px; display:block }
-.gnum{ position:absolute; left:0; right:0; top:52px; text-align:center }
-.gnum b{ font-size:31px; font-weight:700; letter-spacing:-.02em; color:var(--ink) }
-.gnum span{ font-size:14px; color:var(--ink-2) }
-.gcap{ text-align:center; margin-top:6px }
-.gpill{ display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; background:#fff; border-radius:var(--pill); padding:5px 12px; color:var(--ink-2); box-shadow:0 4px 14px -8px rgba(23,53,102,.3) }
-/* thanh vi tri gia (ref: utilization) */
-.zhead{ display:flex; justify-content:space-between; font-size:12px; color:var(--ink-2); margin-top:2px }
-.zhead b{ color:var(--ink); font-weight:600 }
-.zbar{ position:relative; height:12px; border-radius:var(--pill); background:#f0e2cf; overflow:visible; margin:10px 0 6px }
-.zbar i{ position:absolute; left:0; top:0; bottom:0; width:0; border-radius:var(--pill); background:linear-gradient(90deg,#f7a54c,#ef8a3c); transition:width .35s var(--spring) }
-.zbar .zdot{ position:absolute; top:50%; width:18px; height:18px; border-radius:50%; background:#fff; border:4px solid #ef8a3c; transform:translate(-50%,-50%); transition:left .35s var(--spring); box-shadow:0 2px 8px rgba(0,0,0,.15) }
-.zlabels{ display:flex; justify-content:space-between; font-size:10.5px; color:var(--ink-3) }
-.zbig{ text-align:center; font-size:20px; font-weight:700; letter-spacing:-.01em; margin:12px 0 0; color:var(--ink) }
-.spark-svg{ width:100%; height:60px; margin-top:6px }
+.ins-stats{ grid-column:1 / -1; margin:8px 0 0; padding-top:10px; border-top:1px solid var(--line); font-size:12.5px; color:var(--ink-3) }
+.ins-stats b{ color:var(--ink); font-weight:600 }
 
 /* dropdown san bay: floating panel */
 .acx{ position:relative }
@@ -312,7 +292,8 @@ button,input,select{ font-family:inherit }
   .d-times,.d-dur{ display:none }
   .mini-f input{ width:120px }
   .hero{ padding-bottom:130px }
-  .bento{ grid-template-columns:1fr }
+  .insight{ grid-template-columns:1fr }
+  .ins-l{ align-items:center; text-align:center }
   .htab{ padding:9px 13px; font-size:13px }
 }
 </style>
@@ -341,9 +322,9 @@ button,input,select{ font-family:inherit }
     <p class="hsub">Đặt lệnh với mức giá bạn muốn, Radar canh 24/7 và nhắn Zalo ngay khi vé chạm giá. Miễn phí, không cần tài khoản.</p>
 
     <div class="htabs" role="tablist" aria-label="Dịch vụ Radar">
-      <button type="button" class="htab on" id="tabFlight" role="tab" aria-selected="true">✈️ Vé máy bay</button>
-      <button type="button" class="htab" id="tabHotel" role="tab" aria-selected="false">🏨 Khách sạn</button>
-      <a class="htab" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">🤖 Lịch trình AI</a>
+      <button type="button" class="htab on" id="tabFlight" role="tab" aria-selected="true">Vé máy bay</button>
+      <button type="button" class="htab" id="tabHotel" role="tab" aria-selected="false">Khách sạn</button>
+      <a class="htab" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Lịch trình AI</a>
     </div>
 
     <form class="searchcard" id="radarForm" novalidate>
@@ -372,8 +353,8 @@ button,input,select{ font-family:inherit }
         <button class="sbtn" type="submit" id="submitBtn">Đặt lệnh săn vé</button>
       </div>
       <div class="subrow">
-        <div class="mini-f"><label>🎯 Giá mục tiêu</label><input id="price" type="text" inputmode="numeric" placeholder="899.000" required /><span style="font-size:13px;color:var(--ink-3)">đ</span></div>
-        <div class="mini-f"><label>💬 Zalo</label><input id="phone" type="tel" inputmode="tel" placeholder="09xx xxx xxx" required /></div>
+        <div class="mini-f"><label>Giá mục tiêu</label><input id="price" type="text" inputmode="numeric" placeholder="899.000" required /><span style="font-size:13px;color:var(--ink-3)">đ</span></div>
+        <div class="mini-f"><label>Zalo</label><input id="phone" type="tel" inputmode="tel" placeholder="09xx xxx xxx" required /></div>
         <span class="hint" id="goodPriceHint"></span>
         <div class="prob" id="prob" hidden>
           <div class="prob-bar"><i id="probFill"></i></div>
@@ -410,52 +391,26 @@ button,input,select{ font-family:inherit }
       <p class="hnote">So sánh giá phòng từ Agoda, Booking.com và 50+ trang đặt phòng, tự đồng bộ với tuyến bay và ngày bạn đang xem. Canh giá phòng qua Zalo sẽ có sau.</p>
     </form>
 
-    <div class="trust">
-      <span class="tk">Miễn phí, không cần tài khoản</span>
-      <span class="tk">Zalo báo ngay khi giá chạm mục tiêu</span>
-      <span class="tk">Đặt vé trực tiếp trên nền tảng bán vé</span>
-    </div>
-    <div class="airrow">
-      <img class="al" src="https://pics.avs.io/al_square/64/64/VJ@2x.png" alt="Vietjet Air" loading="lazy" />
-      <img class="al" src="https://pics.avs.io/al_square/64/64/VN@2x.png" alt="Vietnam Airlines" loading="lazy" />
-      <img class="al" src="https://pics.avs.io/al_square/64/64/QH@2x.png" alt="Bamboo Airways" loading="lazy" />
-      <img class="al" src="https://pics.avs.io/al_square/64/64/VU@2x.png" alt="Vietravel Airlines" loading="lazy" />
-      <span class="txt">Canh Vietjet, Vietnam Airlines, Bamboo, Vietravel và 300+ hãng toàn cầu</span>
+    <div class="bento" id="bento">
+      <div class="insight">
+        <div class="ins-l">
+          <span class="ins-cap">Khả năng khớp lệnh</span>
+          <p class="ins-num"><b id="gaugePct">–</b><span>%</span></p>
+          <span class="gpill" id="gaugeNote">Nhập giá mục tiêu để xem</span>
+        </div>
+        <div class="ins-r">
+          <div class="cb-head">
+            <span class="ins-cap">Chọn giá mục tiêu · <span id="insRoute">SGN → HAN</span></span>
+            <span class="cb-v" id="cbVal"></span>
+          </div>
+          <svg id="probChart" viewBox="0 0 640 110" preserveAspectRatio="none" aria-label="Bấm để chọn giá mục tiêu"></svg>
+          <div class="cb-x"><span id="cbLo"></span><span>← rẻ hơn · bấm vào biểu đồ để chọn giá · dễ khớp hơn →</span><span id="cbHi"></span></div>
+        </div>
+        <p class="ins-stats">90 ngày qua (ước tính theo mùa): thấp nhất <b id="statLow"></b> · hôm nay <b id="statNow"></b> · giá tốt <b id="statGood"></b>. Kèo bên dưới là giá thật.</p>
+      </div>
     </div>
 
-    <div class="bento" id="bento">
-      <div class="bcard bc-blue">
-        <h5>Khả năng khớp lệnh</h5>
-        <div class="gwrap">
-          <svg id="gauge" viewBox="0 0 180 104" aria-hidden="true"></svg>
-          <div class="gnum"><b id="gaugePct">–</b><span>%</span></div>
-        </div>
-        <div class="gcap"><span class="gpill" id="gaugeNote">Nhập giá mục tiêu để xem</span></div>
-      </div>
-      <div class="bcard chart-card">
-        <div class="cb-head">
-          <h5 style="margin:0">Chọn giá mục tiêu</h5>
-          <span class="cb-v" id="cbVal"></span>
-        </div>
-        <svg id="probChart" viewBox="0 0 640 110" preserveAspectRatio="none" aria-label="Bấm để chọn giá mục tiêu"></svg>
-        <div class="cb-x"><span id="cbLo"></span><span>← rẻ hơn · bấm vào biểu đồ để chọn giá · dễ khớp hơn →</span><span id="cbHi"></span></div>
-      </div>
-      <div class="bcard bc-warm">
-        <h5>Vị trí giá của bạn</h5>
-        <div class="zhead"><span>Thấp nhất <b id="zLow"></b></span><span>Cao nhất <b id="zHigh"></b></span></div>
-        <div class="zbar"><i id="zFill"></i><span class="zdot" id="zDot"></span></div>
-        <div class="zlabels"><span>Rẻ hiếm</span><span>Giá tốt</span><span>Trung bình</span><span>Cao</span></div>
-        <p class="zbig" id="zBig">–</p>
-      </div>
-      <div class="bcard bc-off">
-        <div class="cb-head">
-          <h5 style="margin:0" id="sparkTitle">Giá 90 ngày · SGN → HAN</h5>
-          <span class="cb-v">Thấp nhất <b id="statLow"></b> · Nay <b id="statNow"></b></span>
-        </div>
-        <svg class="spark-svg" id="spark" viewBox="0 0 600 56" preserveAspectRatio="none" aria-hidden="true"></svg>
-        <p class="bnote">Ước tính theo mùa để bạn đặt mục tiêu; kèo bên dưới là giá thật.</p>
-      </div>
-    </div>
+    <p class="trustline">Miễn phí · Không cần tài khoản · Canh Vietjet, Vietnam Airlines, Bamboo, Vietravel và 300+ hãng toàn cầu</p>
   </div>
 </section>
 
@@ -468,7 +423,7 @@ button,input,select{ font-family:inherit }
   <p class="form-note" style="margin:12px auto 16px">Giá chạm mục tiêu là Zalo của bạn reng. Trong lúc chờ, lo luôn chỗ ở và lịch trình nhé?</p>
   <a class="btn btn-ghost" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Lên lịch trình trên OnePlan <span class="ar">→</span></a>
   <button class="btn btn-primary" id="newOrder" type="button" style="margin-left:10px">Đặt lệnh khác</button>
-  <p style="margin:14px 0 0"><a id="hotelCta" href="#" target="_blank" rel="noopener" style="font-size:14px;font-weight:600;color:var(--primary)">🏨 Tìm luôn khách sạn cho chuyến này →</a></p>
+  <p style="margin:14px 0 0"><a id="hotelCta" href="#" target="_blank" rel="noopener" style="font-size:14px;font-weight:600;color:var(--primary)">Tìm luôn khách sạn cho chuyến này →</a></p>
 </div>
 
 <!-- DIEM DEN HOT (de len hero) -->
@@ -488,8 +443,8 @@ button,input,select{ font-family:inherit }
 <!-- KET QUA: kèo + radar truc tiep -->
 <div class="boardwrap" id="board">
   <div class="tabsrow">
-    <span class="tb on">✈️ Kèo giá tốt</span>
-    <a class="tb link" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">🤖 Lịch trình AI</a>
+    <span class="tb on">Kèo giá tốt</span>
+    <a class="tb link" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Lịch trình AI</a>
   </div>
   <div class="cols">
     <div class="deals"><p class="d-src" id="dealsNote"></p><div id="deals" style="display:flex;flex-direction:column;gap:10px"></div></div>
@@ -750,35 +705,19 @@ button,input,select{ font-family:inherit }
     renderBento(target);
   }
 
-  // ---- bento: gauge % khop + thanh vi tri gia ----
-  function drawGauge(pct){
-    var svg=$("gauge"); if(!svg) return;
-    var cx=90, cy=96, R=74, sw=13;
-    function P(a){ var r=a*Math.PI/180; return (cx+R*Math.cos(r)).toFixed(1)+" "+(cy-R*Math.sin(r)).toFixed(1) }
-    var a=180-180*Math.max(0,Math.min(100,pct))/100;
-    svg.innerHTML=
-      '<path d="M '+P(180)+' A '+R+' '+R+' 0 0 1 '+P(0)+'" fill="none" stroke="#cfdff5" stroke-width="'+sw+'" stroke-linecap="round"/>'+
-      (pct>0 ? '<path d="M '+P(180)+' A '+R+' '+R+' 0 0 1 '+P(a)+'" fill="none" stroke="#0066cc" stroke-width="'+sw+'" stroke-linecap="round"/>' : '');
-  }
+  // ---- insight: MOT con so thong tri (theo gia muc tieu dang chon) ----
   function renderBento(target){
-    if(!$("gauge")) return;
+    if(!$("gaugePct")) return;
     var data=series(sel.from+"-"+sel.to);
-    var lo=Math.min.apply(null,data), hi=Math.max.apply(null,data);
     var good=quantile(data,0.25);
     var isDefault=(target==null);
     if(isDefault) target=good;
     var pct=hitChance(Math.round(target));
     $("gaugePct").textContent=pct;
-    drawGauge(pct);
     $("gaugeNote").textContent = isDefault
-      ? "Theo giá tốt "+fmt(good)+" · nhập giá của bạn để cá nhân hoá"
+      ? "Theo giá tốt "+fmt(good)+" · nhập giá của bạn"
       : (pct>=70 ? "Dễ khớp · giữ mức giá này" : pct>=30 ? "Tạm ổn · nới ngày để tăng cơ hội" : "Khó khớp · nâng giá hoặc nới ngày");
-    var pDay=data.filter(function(v){return v<=target}).length/data.length;
-    var pos=Math.max(0,Math.min(1,(target-lo)/((hi-lo)||1)));
-    $("zLow").textContent=fmt(lo); $("zHigh").textContent=fmt(hi);
-    $("zFill").style.width=(pos*100).toFixed(1)+"%";
-    $("zDot").style.left=(pos*100).toFixed(1)+"%";
-    $("zBig").textContent = "Mục tiêu "+fmt(Math.round(target))+" · "+Math.round(pDay*100)+"% số ngày có giá dưới mức này";
+    $("statGood").textContent=fmt(good);
   }
 
   // ---- bieu do duong cong % khop theo gia: bam/keo tren bieu do de chon gia ----
@@ -808,8 +747,8 @@ button,input,select{ font-family:inherit }
     svg.innerHTML =
       '<polygon points="'+PL+','+(H-PB)+' '+pts.join(" ")+' '+(W-PR)+','+(H-PB)+'" fill="rgba(0,102,204,.09)"/>'+
       '<polyline points="'+pts.join(" ")+'" fill="none" stroke="#0066cc" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'+
-      '<line x1="'+gx+'" y1="'+PT+'" x2="'+gx+'" y2="'+(H-PB)+'" stroke="rgba(28,158,90,.8)" stroke-width="1.5" stroke-dasharray="4 4"/>'+
-      '<text x="'+Math.min(gx+5,W-90)+'" y="'+(PT+10)+'" fill="#1c7c4b" font-size="10.5" font-weight="700">giá tốt</text>'+
+      '<line x1="'+gx+'" y1="'+PT+'" x2="'+gx+'" y2="'+(H-PB)+'" stroke="rgba(0,102,204,.35)" stroke-width="1.5" stroke-dasharray="4 4"/>'+
+      '<text x="'+Math.min(gx+5,W-90)+'" y="'+(PT+10)+'" fill="rgba(0,102,204,.75)" font-size="10.5" font-weight="700">giá tốt</text>'+
       '<line x1="'+tx+'" y1="'+ty+'" x2="'+tx+'" y2="'+(H-PB)+'" stroke="rgba(0,102,204,.4)" stroke-width="1.2"/>'+
       '<circle cx="'+tx+'" cy="'+ty+'" r="7" fill="#0066cc" opacity=".2"/>'+
       '<circle cx="'+tx+'" cy="'+ty+'" r="4" fill="#0066cc"/>';
@@ -949,20 +888,11 @@ button,input,select{ font-family:inherit }
     }
     var route=sel.from+"-"+sel.to, data=series(route);
     var low=Math.min.apply(null,data), nowP=data[data.length-1], good=quantile(data,0.25);
-    $("sparkTitle").textContent="Giá 90 ngày · "+sel.from+" → "+sel.to;
+    $("insRoute").textContent=sel.from+" → "+sel.to;
     $("statLow").textContent=fmt(low); $("statNow").textContent=fmt(nowP);
     $("goodPriceHint").innerHTML='Giá tốt cho tuyến này: <b id="applyGood">'+fmt(good)+"</b>";
     $("applyGood").onclick=function(){ $("price").value=good.toLocaleString("vi-VN"); renderProb() };
     renderProb();
-    var W=600,H=56,P=5, min=Math.min.apply(null,data), max=Math.max.apply(null,data);
-    var pts=data.map(function(v,i){
-      var x=P+i*(W-2*P)/(data.length-1);
-      var y=H-P-(v-min)*(H-2*P)/((max-min)||1);
-      return x.toFixed(1)+","+y.toFixed(1);
-    });
-    $("spark").innerHTML =
-      '<polyline points="'+pts.join(" ")+'" fill="none" stroke="#0066cc" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
-      '<polygon points="'+P+','+(H-P)+' '+pts.join(" ")+' '+(W-P)+','+(H-P)+'" fill="rgba(0,102,204,.08)" stroke="none"/>';
     renderDeals();
     renderDests();
     renderChart(parseInt(($("price").value||"").replace(/[^\d]/g,""),10)||null);
@@ -1093,7 +1023,7 @@ button,input,select{ font-family:inherit }
     $("successSum").textContent=pending.from+" → "+pending.to+" · "+pending.dateFrom+" đến "+pending.dateTo+
       " · báo khi giá ≤ "+fmt(pending.price);
     $("hotelCta").href=hotellookUrl(labelOf(pending.to), pending.dateFrom, pending.dateTo, 2);
-    $("hotelCta").textContent="🏨 Tìm luôn khách sạn ở "+labelOf(pending.to)+" →";
+    $("hotelCta").textContent="Tìm luôn khách sạn ở "+labelOf(pending.to)+" →";
     $("success").classList.add("show");
     $("success").scrollIntoView({block:"center"});
     pending=null;
