@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OnePlan Radar · Đặt lệnh săn vé máy bay, rẻ là báo qua Zalo</title>
+<meta name="description" content="Chọn tuyến, chọn khoảng ngày, đặt giá mục tiêu. OnePlan Radar canh giá vé máy bay 24/7 và nhắn Zalo cho bạn ngay khi giá chạm mức mong muốn." />
+<meta name="theme-color" content="#ffffff" />
+<link rel="canonical" href="https://www.oneplan.space/radar" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<meta name="apple-itunes-app" content="app-id=6761648165" />
+<meta property="og:title" content="OnePlan Radar · Đặt lệnh săn vé. Rẻ là báo." />
+<meta property="og:description" content="Radar canh giá vé máy bay 24/7. Giá chạm mục tiêu là nhắn Zalo cho bạn liền." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.oneplan.space/radar" />
+<meta property="og:image" content="https://www.oneplan.space/assets/Thumbnail.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ===== OnePlan design system (đồng bộ index.html) ===== */
+:root{
+  --f-display:"Averia Serif Libre", Georgia, "Times New Roman", serif;
+  --f-text:"Inter", "SF Pro Text", Helvetica, Arial, sans-serif;
+  --ink:#282828; --ink-2:#5f5f57; --ink-3:#8d8d84;
+  --off:#f8f8f1; --line:#ece9dd; --canvas:#fff;
+  --primary:#0066cc; --primary-2:#005ab3; --primary-tint:#eef4fc;
+  --foot:#2a2a26; --foot-line:rgba(255,255,255,.16);
+  --pill:9999px; --r-panel:40px; --r-card:26px;
+  --section:clamp(72px,9vw,128px);
+  --wrap:1200px;
+}
+*,*::before,*::after{ box-sizing:border-box }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; scrollbar-width:none }
+::-webkit-scrollbar{ width:0; height:0; background:transparent }
+body{ margin:0; background:var(--canvas); color:var(--ink); font-family:var(--f-text); font-size:17px; line-height:1.6; letter-spacing:-.006em; -webkit-font-smoothing:antialiased; overflow-x:hidden }
+img{ max-width:100%; display:block }
+a{ color:inherit; text-decoration:none }
+button,input,select{ font-family:inherit }
+:focus-visible{ outline:2px solid var(--primary); outline-offset:3px; border-radius:8px }
+.wrap{ max-width:var(--wrap); margin:0 auto; padding:0 24px }
+.h2{ font-family:var(--f-display); font-weight:400; font-size:clamp(29px,3.7vw,44px); line-height:1.12; letter-spacing:-.022em; margin:0; color:var(--ink) }
+.sub{ font-weight:400; font-size:clamp(17px,1.55vw,20px); line-height:1.55; color:var(--ink-2); margin:0 }
+.center{ text-align:center } .center .sub{ margin-left:auto; margin-right:auto }
+.chip{ display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.09em; color:var(--primary); background:var(--primary-tint); border-radius:var(--pill); padding:7px 14px }
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:500; font-size:15px; line-height:1; border-radius:var(--pill); padding:13px 22px; border:1px solid transparent; cursor:pointer; transition:transform .12s, background .2s, color .2s, border-color .2s, box-shadow .2s; white-space:nowrap }
+.btn .ar{ font-size:16px; transition:transform .18s }
+.btn:hover .ar{ transform:translateX(3px) }
+.btn-primary{ background:var(--primary); color:#fff }
+.btn-primary:hover{ background:var(--primary-2); box-shadow:0 10px 24px rgba(0,102,204,.26) }
+.btn-primary:active{ transform:scale(.97) }
+.btn-ghost{ background:transparent; color:var(--ink); border-color:rgba(40,40,40,.18) }
+.btn-ghost:hover{ border-color:var(--ink); background:rgba(40,40,40,.04) }
+.btn-lg{ font-size:16px; padding:16px 28px }
+
+/* nav (bản solid cố định vì trang nền sáng) */
+.nav{ position:fixed; top:0; left:0; right:0; z-index:60; background:rgba(255,255,255,.85); -webkit-backdrop-filter:saturate(180%) blur(20px); backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid var(--line) }
+.nav-in{ position:relative; max-width:1320px; margin:0 auto; padding:16px 26px; display:flex; align-items:center; justify-content:space-between; gap:16px }
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--f-display); font-size:22px; color:var(--ink) }
+.brand img{ width:34px; height:34px; border-radius:9px }
+.nav-center{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; align-items:center; gap:26px }
+.nav-right{ display:flex; align-items:center; gap:14px }
+.navlink{ font-size:15px; font-weight:500; color:var(--ink); opacity:.78; transition:color .2s, opacity .2s }
+.navlink:hover{ opacity:1; color:var(--primary) }
+.navlink.on{ opacity:1; color:var(--primary) }
+.langtog{ display:inline-flex; align-items:center; background:rgba(40,40,40,.05); border:1px solid var(--line); border-radius:var(--pill); padding:2px; gap:2px }
+.langtog a{ font-size:11px; font-weight:600; color:var(--ink-3); border-radius:var(--pill); padding:4px 10px }
+.langtog a.on{ background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,.12) }
+
+/* hero */
+.rhero{ padding:clamp(130px,16vw,180px) 0 clamp(28px,4vw,44px); text-align:center }
+.rhero .h1{ font-family:var(--f-display); font-weight:400; font-size:clamp(40px,6vw,68px); line-height:1.04; letter-spacing:-.03em; margin:14px 0 16px }
+.rhero .sub{ max-width:52ch; margin:0 auto }
+.beta{ display:inline-block; font-size:11px; font-weight:700; letter-spacing:.08em; color:#fff; background:var(--ink); border-radius:var(--pill); padding:4px 10px; vertical-align:middle; margin-left:10px; transform:translateY(-6px) }
+
+/* form panel */
+.sec{ padding:clamp(28px,4vw,52px) 0 }
+.panel{ background:var(--off); border-radius:var(--r-panel); padding:clamp(26px,4vw,52px) }
+.formgrid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px 20px }
+.field{ display:flex; flex-direction:column; gap:7px; text-align:left }
+.field.full{ grid-column:1 / -1 }
+.field label{ font-size:13px; font-weight:600; color:var(--ink-2); letter-spacing:.01em }
+.field .hint{ font-size:12.5px; color:var(--ink-3) }
+.field .hint b{ color:var(--primary); font-weight:600; cursor:pointer }
+.in{ width:100%; appearance:none; background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px 16px; font-size:16px; color:var(--ink); transition:border-color .2s, box-shadow .2s }
+.in:focus{ outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(0,102,204,.12) }
+select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238d8d84' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 16px center; padding-right:38px }
+.daterow{ display:grid; grid-template-columns:1fr 1fr; gap:10px }
+.swap{ align-self:end; height:50px; width:50px; flex:none; border-radius:50%; border:1px solid var(--line); background:#fff; cursor:pointer; font-size:17px; color:var(--ink-2); transition:transform .2s, color .2s }
+.swap:hover{ color:var(--primary); transform:rotate(180deg) }
+.route-row{ display:grid; grid-template-columns:1fr 50px 1fr; gap:10px; align-items:end; grid-column:1 / -1 }
+.form-cta{ grid-column:1 / -1; display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:4px; flex-wrap:wrap }
+.form-note{ font-size:13px; color:var(--ink-3); max-width:46ch }
+
+/* probability meter */
+.prob{ display:flex; align-items:center; gap:12px; margin-top:4px }
+.prob-bar{ flex:1; height:8px; border-radius:var(--pill); background:#e8e5d8; overflow:hidden }
+.prob-bar i{ display:block; height:100%; width:0; border-radius:var(--pill); background:var(--primary); transition:width .35s cubic-bezier(.16,1,.3,1), background .35s }
+.prob-label{ font-size:13px; font-weight:600; white-space:nowrap }
+.prob.hi .prob-bar i{ background:#1c9e5a } .prob.hi .prob-label{ color:#1c7c4b }
+.prob.mid .prob-bar i{ background:var(--primary) } .prob.mid .prob-label{ color:var(--primary) }
+.prob.lo .prob-bar i{ background:#d98324 } .prob.lo .prob-label{ color:#b06a1a }
+
+/* spark line card */
+.spark-card{ background:#fff; border:1px solid var(--line); border-radius:var(--r-card); padding:20px 22px 14px; margin-top:22px }
+.spark-head{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap }
+.spark-title{ font-size:14px; font-weight:600; color:var(--ink-2) }
+.spark-stats{ font-size:13px; color:var(--ink-3) } .spark-stats b{ color:var(--ink); font-weight:600 }
+.spark-svg{ width:100%; height:88px; margin-top:6px }
+
+/* orders */
+.orders{ margin-top:26px; display:none }
+.orders.show{ display:block }
+.orders h3{ font-family:var(--f-text); font-size:15px; font-weight:600; color:var(--ink-2); margin:0 0 10px }
+.order{ display:flex; align-items:center; justify-content:space-between; gap:14px; background:#fff; border:1px solid var(--line); border-radius:18px; padding:14px 18px; margin-bottom:10px; flex-wrap:wrap }
+.order .o-main{ display:flex; flex-direction:column; gap:2px }
+.order .o-route{ font-weight:600; font-size:16px }
+.order .o-meta{ font-size:13px; color:var(--ink-3) }
+.order .o-x{ font-size:13px; font-weight:500; color:#b4443c; background:none; border:none; cursor:pointer; padding:6px 10px; border-radius:10px }
+.order .o-x:hover{ background:rgba(180,68,60,.08) }
+.o-status{ font-size:11px; font-weight:700; letter-spacing:.06em; color:#1c7c4b; background:rgba(57,180,199,.12); border-radius:var(--pill); padding:4px 10px }
+
+/* steps */
+.steps-head{ text-align:center; margin-bottom:clamp(32px,4vw,52px) }
+.steps-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(26px,3vw,44px) }
+.step{ text-align:center; display:flex; flex-direction:column; align-items:center; gap:10px }
+.step .num{ width:52px; height:52px; border-radius:50%; background:var(--primary-tint); color:var(--primary); font-family:var(--f-display); font-size:24px; display:flex; align-items:center; justify-content:center; margin-bottom:6px }
+.step h3{ font-weight:600; font-size:18px; color:var(--ink); margin:0 }
+.step p{ font-size:15.5px; line-height:1.5; color:var(--ink-2); margin:0; max-width:30ch }
+
+/* faq */
+.faq{ display:grid; grid-template-columns:1fr 1fr; gap:16px 28px; margin-top:clamp(26px,3vw,40px) }
+.qa{ border-top:1px solid var(--line); padding-top:16px }
+.qa h4{ font-size:16.5px; font-weight:600; margin:0 0 6px }
+.qa p{ font-size:15px; line-height:1.55; color:var(--ink-2); margin:0 }
+
+/* modal OTP */
+.modal{ position:fixed; inset:0; z-index:90; display:none; align-items:center; justify-content:center; padding:20px; background:rgba(28,26,22,.5); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px) }
+.modal.show{ display:flex }
+.modal-card{ background:#fff; border-radius:28px; padding:34px 30px; max-width:400px; width:100%; text-align:center; box-shadow:0 30px 80px rgba(0,0,0,.3) }
+.modal-card h3{ font-family:var(--f-display); font-weight:400; font-size:26px; margin:0 0 8px }
+.modal-card p{ font-size:14.5px; color:var(--ink-2); margin:0 0 18px }
+.otp-in{ width:100%; text-align:center; letter-spacing:.5em; font-size:24px; font-weight:600; background:var(--off); border:1px solid var(--line); border-radius:16px; padding:14px 10px 14px 22px }
+.otp-in:focus{ outline:none; border-color:var(--primary) }
+.modal-card .btn{ width:100%; margin-top:14px }
+.otp-demo{ font-size:12.5px; color:var(--ink-3); margin-top:12px }
+.otp-demo b{ color:var(--ink) }
+
+/* success */
+.success{ display:none; text-align:center; padding:clamp(10px,2vw,20px) 0 0 }
+.success.show{ display:block }
+.success .big{ font-family:var(--f-display); font-size:clamp(26px,3.4vw,36px); margin:12px 0 8px }
+.ordercode{ display:inline-block; font-weight:700; font-size:15px; letter-spacing:.05em; color:var(--primary); background:var(--primary-tint); border-radius:var(--pill); padding:8px 18px; margin:6px 0 10px }
+
+/* footer mini */
+.foot{ background:var(--foot); color:#fff; margin-top:var(--section) }
+.foot-in{ max-width:var(--wrap); margin:0 auto; padding:40px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap }
+.foot a{ color:rgba(255,255,255,.78); font-size:14px } .foot a:hover{ color:#fff }
+.foot .fbrand{ font-family:var(--f-display); font-size:20px; color:#fff }
+.foot-links{ display:flex; gap:22px; flex-wrap:wrap }
+
+/* grid con không được phình quá cột (min-width:auto của grid item) */
+.formgrid *, .daterow *, .route-row *{ min-width:0 }
+@media (max-width:880px){
+  .formgrid{ grid-template-columns:1fr }
+  .route-row{ grid-template-columns:1fr 50px 1fr }
+  .steps-grid{ grid-template-columns:1fr; gap:34px }
+  .faq{ grid-template-columns:1fr }
+}
+@media (max-width:560px){
+  .nav-center{ position:static; transform:none }
+  .nav-in{ flex-wrap:wrap }
+  .langtog{ display:none }
+  .route-row{ grid-template-columns:1fr; gap:12px }
+  .swap{ display:none }
+  .daterow{ grid-template-columns:1fr 1fr }
+  .in{ font-size:15px; padding:13px 14px }
+  .form-cta{ flex-direction:column; align-items:stretch }
+  .form-cta .btn{ width:100% }
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="/"><img src="/assets/logo-icon.png" width="34" height="34" alt="" />OnePlan</a>
+    <nav class="nav-center" aria-label="Chính">
+      <a class="navlink on" href="/radar">Radar</a>
+      <a class="navlink" href="/journal">Journal</a>
+    </nav>
+    <div class="nav-right">
+      <div class="langtog" role="group" aria-label="Ngôn ngữ"><a href="/">EN</a><a class="on" href="/radar">VI</a></div>
+      <a class="btn btn-primary" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Tải app <span class="ar">→</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="rhero wrap">
+    <span class="chip">OnePlan Radar</span>
+    <h1 class="h1">Đặt lệnh săn vé.<br />Rẻ là báo.<span class="beta">BETA</span></h1>
+    <p class="sub">Chọn tuyến, chọn khoảng ngày đi được, đặt giá mong muốn. Radar canh giá 24/7 trên các nền tảng và nhắn Zalo cho bạn ngay khi giá chạm mục tiêu. Không cần mở 7 tab so giá mỗi đêm nữa.</p>
+  </section>
+
+  <!-- FORM -->
+  <section class="sec wrap" id="dat-lenh">
+    <div class="panel">
+      <form class="formgrid" id="radarForm" novalidate>
+        <div class="route-row">
+          <div class="field">
+            <label for="from">Bay từ</label>
+            <select class="in" id="from" required></select>
+          </div>
+          <button class="swap" type="button" id="swap" aria-label="Đảo chiều tuyến">⇅</button>
+          <div class="field">
+            <label for="to">Bay đến</label>
+            <select class="in" id="to" required></select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Khoảng ngày đi được</label>
+          <div class="daterow">
+            <input class="in" type="date" id="dateFrom" required aria-label="Từ ngày" />
+            <input class="in" type="date" id="dateTo" required aria-label="Đến ngày" />
+          </div>
+          <span class="hint">Khoảng càng rộng, cơ hội trúng vé rẻ càng cao</span>
+        </div>
+
+        <div class="field">
+          <label for="price">Giá mục tiêu (đ/khách, một chiều)</label>
+          <input class="in" type="text" id="price" inputmode="numeric" placeholder="VD: 899.000" required />
+          <span class="hint" id="goodPriceHint"></span>
+          <div class="prob" id="prob" hidden>
+            <div class="prob-bar"><i id="probFill"></i></div>
+            <span class="prob-label" id="probLabel"></span>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label for="phone">Số điện thoại nhận báo giá (Zalo)</label>
+          <input class="in" type="tel" id="phone" inputmode="tel" placeholder="09xx xxx xxx" required />
+        </div>
+
+        <div class="form-cta">
+          <p class="form-note">Radar chỉ nhắn khi giá chạm mục tiêu, tối đa 2 tin/ngày. Dừng lệnh bất cứ lúc nào, miễn phí.</p>
+          <button class="btn btn-primary btn-lg" type="submit">Đặt lệnh săn vé <span class="ar">→</span></button>
+        </div>
+      </form>
+
+      <!-- SUCCESS -->
+      <div class="success" id="success">
+        <span class="chip">Lệnh đã kích hoạt</span>
+        <p class="big">Radar bắt đầu canh giá cho bạn 🛫</p>
+        <div class="ordercode" id="orderCode"></div>
+        <p class="sub" id="successSum" style="font-size:16px"></p>
+        <p class="form-note" style="margin:14px auto 18px">Giá chạm mục tiêu là Zalo của bạn reng liền. Trong lúc chờ, lên lịch trình cho chuyến này luôn nhé?</p>
+        <a class="btn btn-ghost" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Lên lịch trình trên OnePlan <span class="ar">→</span></a>
+        <button class="btn btn-primary" id="newOrder" type="button" style="margin-left:10px">Đặt lệnh khác</button>
+      </div>
+
+      <!-- SPARK -->
+      <div class="spark-card" id="sparkCard">
+        <div class="spark-head">
+          <span class="spark-title" id="sparkTitle">Giá 90 ngày · SGN → HAN</span>
+          <span class="spark-stats">Thấp nhất: <b id="statLow"></b> · Hiện tại: <b id="statNow"></b></span>
+        </div>
+        <svg class="spark-svg" id="spark" viewBox="0 0 600 88" preserveAspectRatio="none" aria-hidden="true"></svg>
+      </div>
+
+      <!-- ORDERS -->
+      <div class="orders" id="orders">
+        <h3>Lệnh của bạn trên máy này</h3>
+        <div id="orderList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="sec wrap">
+    <div class="steps-head">
+      <h2 class="h2">Săn vé kiểu cũ mệt lắm rồi</h2>
+      <p class="sub" style="margin-top:10px">Ba bước, xong. Việc canh giá lúc 1h sáng để Radar lo.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step"><span class="num">1</span><h3>Đặt lệnh</h3><p>Tuyến + khoảng ngày linh hoạt + giá bạn chịu chi. 30 giây.</p></div>
+      <div class="step"><span class="num">2</span><h3>Radar quét 24/7</h3><p>So giá liên tục trên các nền tảng bán vé, kể cả khung giờ flash sale.</p></div>
+      <div class="step"><span class="num">3</span><h3>Zalo reng là chốt</h3><p>Giá chạm mục tiêu, tin nhắn tới kèm link đặt thẳng. Chậm tay là hết kèo.</p></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sec wrap">
+    <h2 class="h2 center">Hỏi nhanh đáp gọn</h2>
+    <div class="faq">
+      <div class="qa"><h4>Radar có bán vé không?</h4><p>Không. Radar chỉ canh giá và báo cho bạn kèm link đặt trực tiếp trên nền tảng bán vé. Tiền của bạn không bao giờ đi qua Radar.</p></div>
+      <div class="qa"><h4>Miễn phí thật không?</h4><p>Thật. Bạn đặt tối đa 5 lệnh cùng lúc, không mất phí. Radar sống nhờ hoa hồng giới thiệu từ nền tảng bán vé khi bạn đặt được vé rẻ.</p></div>
+      <div class="qa"><h4>Vì sao cần số điện thoại?</h4><p>Để nhắn Zalo khi giá chạm mục tiêu, và chỉ để làm việc đó. Không spam, tối đa 2 tin mỗi ngày cho một lệnh, dừng lệnh là hết tin.</p></div>
+      <div class="qa"><h4>Giá báo có chính xác không?</h4><p>Trước khi nhắn, Radar kiểm tra lại giá theo thời gian thực. Lệch quá 10% so với giá công bố là tin đó không được gửi.</p></div>
+    </div>
+  </section>
+
+  <!-- CTA APP -->
+  <section class="sec wrap">
+    <div class="panel center">
+      <h2 class="h2">Săn được vé rồi thì đi đâu, ăn gì?</h2>
+      <p class="sub" style="max-width:52ch; margin:12px auto 22px">OnePlan lo nốt phần còn lại: thả link TikTok ra lịch trình, rủ hội bạn vào cùng plan, đi về chia tiền không sứt mẻ tình cảm.</p>
+      <a class="btn btn-primary btn-lg" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Tải OnePlan miễn phí <span class="ar">→</span></a>
+    </div>
+  </section>
+</main>
+
+<!-- OTP MODAL -->
+<div class="modal" id="otpModal" role="dialog" aria-modal="true" aria-labelledby="otpTitle">
+  <div class="modal-card">
+    <h3 id="otpTitle">Xác nhận số điện thoại</h3>
+    <p>Nhập mã 4 số vừa gửi tới Zalo <b id="otpPhone"></b></p>
+    <input class="otp-in" id="otpInput" inputmode="numeric" maxlength="4" placeholder="••••" />
+    <button class="btn btn-primary" id="otpConfirm" type="button">Kích hoạt lệnh</button>
+    <p class="otp-demo">Bản beta: nhập mã demo <b>2468</b></p>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="foot-in">
+    <span class="fbrand">OnePlan</span>
+    <nav class="foot-links">
+      <a href="/radar">Radar</a>
+      <a href="/journal">Journal</a>
+      <a href="/privacy-policy">Privacy</a>
+      <a href="/termandconditions">Terms</a>
+    </nav>
+    <a href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Tải app iOS →</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var AIRPORTS = [
+    ["SGN","TP. Hồ Chí Minh (SGN)"], ["HAN","Hà Nội (HAN)"], ["DAD","Đà Nẵng (DAD)"],
+    ["PQC","Phú Quốc (PQC)"], ["CXR","Nha Trang (CXR)"], ["DLI","Đà Lạt (DLI)"],
+    ["HPH","Hải Phòng (HPH)"], ["HUI","Huế (HUI)"], ["VII","Vinh (VII)"], ["UIH","Quy Nhơn (UIH)"]
+  ];
+  // Giá nền tham chiếu một chiều theo tuyến (đ) cho mock spark line + gợi ý "giá tốt".
+  var BASE = { "SGN-HAN":1250000,"SGN-DAD":850000,"HAN-DAD":800000,"SGN-PQC":790000,"HAN-CXR":1150000,
+               "SGN-CXR":690000,"SGN-DLI":650000,"HAN-PQC":1450000,"HAN-DLI":1200000,"SGN-HPH":1180000 };
+  var fmt = function(n){ return n.toLocaleString("vi-VN") + "đ" };
+
+  var $ = function(id){ return document.getElementById(id) };
+  var from=$("from"), to=$("to");
+  AIRPORTS.forEach(function(a){ from.add(new Option(a[1],a[0])); to.add(new Option(a[1],a[0])); });
+  from.value="SGN"; to.value="HAN";
+  $("swap").onclick=function(){ var t=from.value; from.value=to.value; to.value=t; refresh(); };
+
+  // ngày mặc định: 2 tuần tới, khoảng 5 ngày
+  function iso(d){ return d.toISOString().slice(0,10) }
+  var d1=new Date(Date.now()+14*864e5), d2=new Date(Date.now()+19*864e5);
+  $("dateFrom").value=iso(d1); $("dateTo").value=iso(d2);
+  $("dateFrom").min=iso(new Date()); $("dateTo").min=iso(new Date());
+
+  // ---- spark line mock: sinh chuỗi giá 90 ngày ổn định theo tuyến (seed) ----
+  function seedRand(seed){ return function(){ seed=(seed*9301+49297)%233280; return seed/233280 } }
+  function series(route){
+    var base = BASE[route] || BASE[[route.split("-")[1],route.split("-")[0]].join("-")] || 950000;
+    var r = seedRand(route.split("").reduce(function(a,c){return a+c.charCodeAt(0)},0));
+    var out=[], p=base;
+    for(var i=0;i<90;i++){
+      p += (r()-0.5)*base*0.09;
+      var floor=base*0.62, ceil=base*1.5;
+      if(p<floor)p=floor; if(p>ceil)p=ceil;
+      if(r()<0.05) p = base*(0.62+r()*0.1); // flash sale dip
+      out.push(Math.round(p/1000)*1000);
+    }
+    return out;
+  }
+  function quantile(arr,q){ var s=arr.slice().sort(function(a,b){return a-b}); return s[Math.floor(q*(s.length-1))] }
+
+  // % khả năng khớp giá: p(1 ngày chạm) = tỉ lệ ngày giá <= mục tiêu trong 90 ngày qua;
+  // Radar canh N ngày (hôm nay -> hết khoảng ngày) => p(khớp) = 1-(1-p_ngày)^N.
+  // Dữ liệu hiện là mock; khi backend live sẽ thay bằng lịch sử giá thật, công thức giữ nguyên.
+  function hitChance(target){
+    var data=series(from.value+"-"+to.value);
+    var pDay=data.filter(function(v){return v<=target}).length/data.length;
+    var end=new Date($("dateTo").value||Date.now());
+    var days=Math.max(1, Math.min(60, Math.round((end-Date.now())/864e5)));
+    if(pDay<=0){ // chưa từng chạm trong 90 ngày: gần 0 nhưng không tuyệt đối
+      return Math.max(1, Math.round(3*days/60));
+    }
+    // trần 95%: không bao giờ hứa chắc chắn, giá vé là thứ không ai chắc được
+    return Math.min(95, Math.round((1-Math.pow(1-pDay,days))*100));
+  }
+  function renderProb(){
+    var target=parseInt(($("price").value||"").replace(/[^\d]/g,""),10);
+    var box=$("prob");
+    if(!target || target<200000){ box.hidden=true; return }
+    var pct=hitChance(target);
+    box.hidden=false;
+    box.className="prob "+(pct>=70?"hi":pct>=30?"mid":"lo");
+    $("probFill").style.width=pct+"%";
+    $("probLabel").textContent="~"+pct+"% khả năng khớp"+(pct<30?" · thử nới ngày hoặc nâng giá":"");
+  }
+  $("price").addEventListener("input", renderProb);
+  $("dateTo").addEventListener("change", renderProb);
+
+  function refresh(){
+    if(from.value===to.value){ to.value = (from.value==="HAN")?"SGN":"HAN"; }
+    var route=from.value+"-"+to.value, data=series(route);
+    var low=Math.min.apply(null,data), now=data[data.length-1], good=quantile(data,0.25);
+    $("sparkTitle").textContent="Giá 90 ngày · "+from.value+" → "+to.value;
+    $("statLow").textContent=fmt(low); $("statNow").textContent=fmt(now);
+    $("goodPriceHint").innerHTML='Giá tốt cho tuyến này: <b id="applyGood">'+fmt(good)+"</b> (bấm để dùng)";
+    $("applyGood").onclick=function(){ $("price").value=good.toLocaleString("vi-VN"); renderProb() };
+    renderProb();
+    // vẽ svg
+    var W=600,H=88,P=6, min=Math.min.apply(null,data), max=Math.max.apply(null,data);
+    var pts=data.map(function(v,i){
+      var x=P+i*(W-2*P)/(data.length-1);
+      var y=H-P-(v-min)*(H-2*P)/((max-min)||1);
+      return x.toFixed(1)+","+y.toFixed(1);
+    });
+    $("spark").innerHTML =
+      '<polyline points="'+pts.join(" ")+'" fill="none" stroke="#0066cc" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<polygon points="'+P+','+(H-P)+' '+pts.join(" ")+' '+(W-P)+','+(H-P)+'" fill="rgba(0,102,204,.08)" stroke="none"/>';
+  }
+  from.onchange=refresh; to.onchange=refresh; refresh();
+
+  // ---- orders (localStorage, flow beta chưa nối backend) ----
+  var KEY="oneplan_radar_orders";
+  function loadOrders(){ try{ return JSON.parse(localStorage.getItem(KEY))||[] }catch(e){ return [] } }
+  function saveOrders(o){ localStorage.setItem(KEY, JSON.stringify(o)) }
+  function renderOrders(){
+    var os=loadOrders(), box=$("orders"), list=$("orderList");
+    box.classList.toggle("show", os.length>0);
+    list.innerHTML="";
+    os.forEach(function(o){
+      var el=document.createElement("div"); el.className="order";
+      el.innerHTML='<div class="o-main"><span class="o-route">'+o.from+" → "+o.to+
+        ' <span class="o-status">ĐANG CANH</span></span><span class="o-meta">'+o.code+" · "+o.dateFrom+" đến "+o.dateTo+
+        " · mục tiêu "+fmt(o.price)+"</span></div>"+
+        '<button class="o-x" data-code="'+o.code+'" type="button">Huỷ lệnh</button>';
+      list.appendChild(el);
+    });
+    list.querySelectorAll(".o-x").forEach(function(b){
+      b.onclick=function(){ saveOrders(loadOrders().filter(function(o){return o.code!==b.dataset.code})); renderOrders(); };
+    });
+  }
+  renderOrders();
+
+  // ---- submit flow: validate -> OTP (ZNS qua backend, fallback demo) -> success ----
+  // Backend: module fare-watch trên api.oneplan.space (gửi OTP + alert bằng Zalo ZNS
+  // của OA OnePlan). Khi API chưa deploy, trang tự chạy chế độ demo với mã 2468 để
+  // flow vẫn test được; deploy backend xong là live, không cần sửa trang.
+  var API="https://api.oneplan.space/fare-watch";
+  var live=null; // null = chưa dò, true/false = kết quả
+  function apiPost(path, body){
+    return fetch(API+path, { method:"POST", headers:{ "Content-Type":"application/json" },
+      body:JSON.stringify(body) }).then(function(r){
+        if(!r.ok) throw new Error("api "+r.status);
+        return r.json();
+      });
+  }
+
+  var pending=null;
+  $("radarForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var price=parseInt(($("price").value||"").replace(/[^\d]/g,""),10);
+    var phone=($("phone").value||"").replace(/[^\d]/g,"");
+    var df=$("dateFrom").value, dt=$("dateTo").value;
+    if(!price || price<200000){ alert("Nhập giá mục tiêu hợp lệ (từ 200.000đ)."); return }
+    if(!/^(0|84)\d{8,10}$/.test(phone)){ alert("Số điện thoại chưa đúng định dạng Việt Nam."); return }
+    if(!df || !dt || df>dt){ alert("Khoảng ngày chưa hợp lệ."); return }
+    if(loadOrders().length>=5){ alert("Bạn đang có 5 lệnh hoạt động, huỷ bớt một lệnh trước nhé."); return }
+    pending={ from:from.value, to:to.value, dateFrom:df, dateTo:dt, price:price, phone:phone };
+    apiPost("/orders", { origin:from.value, destination:to.value, dateFrom:df, dateTo:dt,
+                         targetPrice:price, phone:phone })
+      .then(function(res){ live=true; pending.publicId=res.publicId; openOtp(phone, false); })
+      .catch(function(){ live=false; pending.publicId=null; openOtp(phone, true); });
+  });
+
+  function openOtp(phone, demo){
+    $("otpPhone").textContent=phone.replace(/^84/,"0").replace(/(\d{3})(\d{3})(\d+)/,"$1 $2 $3");
+    $("otpInput").value="";
+    document.querySelector(".otp-demo").style.display = demo ? "block" : "none";
+    $("otpModal").classList.add("show");
+    setTimeout(function(){ $("otpInput").focus() },80);
+  }
+
+  function finishSuccess(code){
+    $("otpModal").classList.remove("show");
+    pending.code=code;
+    var os=loadOrders(); os.unshift(pending); saveOrders(os); renderOrders();
+    $("orderCode").textContent=code;
+    $("successSum").textContent=pending.from+" → "+pending.to+" · "+pending.dateFrom+" đến "+pending.dateTo+
+      " · báo khi giá ≤ "+fmt(pending.price);
+    $("radarForm").style.display="none";
+    $("success").classList.add("show");
+    pending=null;
+  }
+
+  $("otpConfirm").onclick=function(){
+    var v=$("otpInput").value.trim();
+    if(!/^\d{4}$/.test(v)){ $("otpInput").value=""; $("otpInput").placeholder="Nhập đủ 4 số"; return }
+    if(live && pending.publicId){
+      apiPost("/orders/verify", { publicId:pending.publicId, otp:v })
+        .then(function(res){ finishSuccess(res.code || ("RD-"+pending.publicId.slice(-5).toUpperCase())) })
+        .catch(function(){ $("otpInput").value=""; $("otpInput").placeholder="Sai mã, thử lại" });
+      return;
+    }
+    if(v!=="2468"){ $("otpInput").value=""; $("otpInput").placeholder="Sai mã, thử lại"; return }
+    finishSuccess("RD-"+Math.random().toString(36).slice(2,7).toUpperCase());
+  };
+  $("otpModal").addEventListener("click", function(e){ if(e.target===this) this.classList.remove("show") });
+  $("newOrder").onclick=function(){ $("success").classList.remove("show"); $("radarForm").style.display="grid" };
+})();
+</script>
+</body>
+</html>
