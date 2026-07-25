@@ -122,7 +122,7 @@ button,input,select{ font-family:inherit }
 .trust .tk{ display:inline-flex; align-items:center; gap:7px }
 .trust .tk::before{ content:"✓"; font-weight:800; color:var(--primary) }
 .airrow{ display:flex; align-items:center; justify-content:center; gap:8px; margin-top:14px; flex-wrap:wrap }
-.airrow .al{ width:28px; height:28px; border-radius:9px; color:#fff; font-size:10.5px; font-weight:800; display:inline-flex; align-items:center; justify-content:center }
+.airrow .al{ height:32px; width:auto; max-width:92px; border-radius:10px; background:#fff; border:1px solid var(--line); object-fit:contain; padding:5px 9px }
 .airrow .txt{ font-size:12.5px; color:var(--ink-3); margin-left:4px }
 
 /* ===== BENTO insight (ref: the diem tin dung — card pastel, so to, gauge/bar/spark) ===== */
@@ -205,7 +205,9 @@ button,input,select{ font-family:inherit }
 .deal{ display:grid; grid-template-columns:auto 1fr auto auto; gap:14px; align-items:center; background:#fff; border:1px solid var(--line); border-radius:18px; padding:14px 16px; transition:transform .2s var(--spring), box-shadow .2s }
 .deal:hover{ transform:translateY(-2px); box-shadow:0 14px 34px -16px rgba(23,53,102,.25) }
 .d-air{ display:flex; align-items:center; gap:10px; min-width:0 }
-.d-logo{ width:38px; height:38px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; color:#fff; flex:none }
+.d-logo{ position:relative; width:38px; height:38px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; color:#fff; flex:none }
+/* logo that (pics.avs.io) phu len chip ma hang; 404 -> an img, chip chu hien ra */
+.d-logo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#fff; border:1px solid var(--line); border-radius:inherit; padding:4px; box-sizing:border-box }
 .d-air .nm{ display:flex; flex-direction:column; min-width:0 }
 .d-air .nm b{ font-size:14.5px; font-weight:600; white-space:nowrap }
 .d-air .nm span{ font-size:12px; color:var(--ink-3) }
@@ -413,11 +415,11 @@ button,input,select{ font-family:inherit }
       <span class="tk">Zalo báo ngay khi giá chạm mục tiêu</span>
       <span class="tk">Đặt vé trực tiếp trên nền tảng bán vé</span>
     </div>
-    <div class="airrow" aria-hidden="true">
-      <span class="al" style="background:#e0342c">VJ</span>
-      <span class="al" style="background:#0b3d91">VN</span>
-      <span class="al" style="background:#1c9e5a">QH</span>
-      <span class="al" style="background:#f2a01e">VU</span>
+    <div class="airrow">
+      <img class="al" src="https://pics.avs.io/160/60/VJ@2x.png" alt="Vietjet Air" loading="lazy" />
+      <img class="al" src="https://pics.avs.io/160/60/VN@2x.png" alt="Vietnam Airlines" loading="lazy" />
+      <img class="al" src="https://pics.avs.io/160/60/QH@2x.png" alt="Bamboo Airways" loading="lazy" />
+      <img class="al" src="https://pics.avs.io/160/60/VU@2x.png" alt="Vietravel Airlines" loading="lazy" />
       <span class="txt">Canh Vietjet, Vietnam Airlines, Bamboo, Vietravel và 300+ hãng toàn cầu</span>
     </div>
 
@@ -888,7 +890,8 @@ button,input,select{ font-family:inherit }
         var link=x.link || avUrl(sel.from, sel.to, d);
         return '<p class="d-date">'+DOW[d.getDay()]+", "+pad(d.getDate())+"/"+pad(d.getMonth()+1)+'</p>'+
           '<div class="deal">'+
-            '<div class="d-air"><span class="d-logo" style="background:'+al[1]+'">'+x.airline+'</span>'+
+            '<div class="d-air"><span class="d-logo" style="background:'+al[1]+'">'+x.airline+
+              '<img src="https://pics.avs.io/al_square/76/76/'+x.airline+'@2x.png" alt="" loading="lazy" onerror="this.style.display=\'none\'" /></span>'+
               '<span class="nm"><b>'+al[0]+'</b><span>'+sel.from+' → '+sel.to+'</span></span></div>'+
             '<div class="d-times">'+(dep?'<b>'+dep+'</b>':'')+(dur?'<span class="d-dur"><span>'+dur+'</span><span class="ln"></span><span>bay thẳng</span></span>':'<span class="d-dur"><span class="ln"></span></span>')+'</div>'+
             '<div class="d-price"><b>'+fmt(x.price)+'</b><span>giá thật, gồm thuế phí</span></div>'+
