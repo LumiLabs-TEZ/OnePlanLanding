@@ -104,7 +104,8 @@ button,input,select{ font-family:inherit }
 .sbtn{ border-radius:0 18px 18px 0; border:none; font-size:16px; font-weight:600; padding:0 30px; background:var(--primary); color:#fff; cursor:pointer; transition:background .2s }
 .sbtn:hover{ background:var(--primary-2) }
 /* hang phu duoi bar: gia muc tieu + zalo + prob */
-.subrow{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px; justify-content:center }
+.subrow{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px }
+.subrow .hint{ margin-left:auto }
 .mini-f{ display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.34); border-radius:16px; padding:13px 18px; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px) }
 .mini-f label{ font-size:14px; font-weight:600; color:rgba(255,255,255,.9); white-space:nowrap }
 .mini-f input{ border:none; background:none; font-size:16.5px; font-weight:700; color:#fff; width:150px; padding:0 }
@@ -112,7 +113,7 @@ button,input,select{ font-family:inherit }
 .mini-f input:focus{ outline:none }
 .hint{ font-size:12.5px; color:rgba(255,255,255,.8) }
 .hint b{ color:#fff; font-weight:700; cursor:pointer; text-decoration:underline; text-underline-offset:3px }
-.prob{ display:flex; align-items:center; gap:10px; min-width:min(300px,100%) }
+.prob{ display:none !important }
 .prob[hidden]{ display:none }
 .prob-bar{ flex:1; height:8px; border-radius:var(--pill); background:rgba(255,255,255,.25); overflow:hidden }
 .prob-bar i{ display:block; height:100%; width:0; border-radius:var(--pill); background:#fff; transition:width .35s var(--spring), background .35s }
@@ -120,7 +121,7 @@ button,input,select{ font-family:inherit }
 .prob.hi .prob-bar i{ background:#7ef0b2 }
 .prob.lo .prob-bar i{ background:#ffc36b }
 /* bieu do % khop theo gia muc tieu (bam/keo de chon gia) */
-.chartbox{ max-width:680px; margin:14px auto 0; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28); border-radius:18px; padding:14px 16px 10px; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); text-align:left }
+.chartbox{ width:100%; margin:14px 0 0; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28); border-radius:18px; padding:14px 16px 10px; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); text-align:left }
 .chartbox .cb-head{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px }
 .chartbox .cb-t{ font-size:12.5px; font-weight:700; color:#fff; letter-spacing:.02em }
 .chartbox .cb-v{ font-size:12.5px; color:rgba(255,255,255,.85) } .chartbox .cb-v b{ color:#fff }
@@ -667,7 +668,7 @@ button,input,select{ font-family:inherit }
   function renderChart(target){
     var svg=$("probChart"); if(!svg) return;
     var data=series(sel.from+"-"+sel.to);
-    var lo=Math.round(Math.min.apply(null,data)*0.92/1000)*1000;
+    var lo=Math.round(Math.min.apply(null,data)*0.88/1000)*1000;
     var hi=Math.round(Math.max.apply(null,data)*1.02/1000)*1000;
     chartRange={lo:lo,hi:hi};
     if(target==null) target=quantile(data,0.25);
