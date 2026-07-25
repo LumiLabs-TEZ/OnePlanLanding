@@ -444,8 +444,8 @@ select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
       close(); refresh();
     }
     function close(){ list.classList.remove("show"); idx=-1 }
-    var remoteTimer=null, lastQ="";
-    function fetchRemote(q){
+    var remoteTimer=null, lastQ="", loadingRemote=false;
+    function fetchRemote(q){ lastQ=q;
       // Autocomplete toan cau cua Travelpayouts (khong can key, ho tro tieng Viet)
       fetch("https://autocomplete.travelpayouts.com/places2?locale=vi&types[]=city&types[]=airport&term="+encodeURIComponent(q))
         .then(function(r){ return r.json() })
@@ -460,7 +460,7 @@ select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
           });
           paint(q);
         })
-        .catch(function(){});
+        .catch(function(){ loadingRemote=false; paint(lastQ) });
     }
     function render(q){
       var f=fold(q.trim());
@@ -469,9 +469,10 @@ select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
         return fold(a[1]).indexOf(f)>=0 || fold(a[2]).indexOf(f)>=0 || fold(a[0]).indexOf(f)>=0 || fold(a[3]).indexOf(f)>=0;
       });
       if(f.length>=2){
+        loadingRemote=true;
         clearTimeout(remoteTimer);
-        remoteTimer=setTimeout(function(){ fetchRemote(q.trim()) }, 250);
-      }
+        remoteTimer=setTimeout(function(){ fetchRemote(q.trim()) }, 200);
+      } else { loadingRemote=false; }
       paint(q);
     }
     function paint(q){
@@ -481,7 +482,9 @@ select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
               '<span class="ic">✈︎</span><span class="tt"><b>'+a[1]+'</b><span>Sân bay '+a[2]+' · '+a[3]+'</span></span>'+
               '<span class="cd">'+a[0]+'</span></button>';
           }).join("")
-        : '<div class="ac-empty">Không thấy sân bay nào khớp "'+q+'"</div>';
+        : (loadingRemote
+            ? '<div class="ac-empty">Đang tìm sân bay quốc tế khớp "'+q+'"…</div>'
+            : '<div class="ac-empty">Không thấy sân bay nào khớp "'+q+'"</div>');
       list.classList.add("show");
       [].forEach.call(list.querySelectorAll(".ac-item"), function(b){
         b.onmousedown=function(e){ e.preventDefault(); var it=items[+b.dataset.i]; commit(it[0], it[1]) };
