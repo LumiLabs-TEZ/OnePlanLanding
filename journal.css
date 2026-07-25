@@ -22,7 +22,12 @@ a{ color:inherit; text-decoration:none }
 
 /* ---------- top bar ---------- */
 .jbar{ position:sticky; top:0; z-index:50; background:rgba(255,255,255,.85); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid var(--hairline) }
-.jbar-in{ max-width:var(--maxw); margin:0 auto; height:62px; padding:0 22px; display:flex; align-items:center; justify-content:space-between; gap:16px }
+.jbar-in{ position:relative; max-width:var(--maxw); margin:0 auto; height:62px; padding:0 22px; display:flex; align-items:center; justify-content:space-between; gap:16px }
+.jbar-center{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; align-items:center; gap:26px }
+.jbar-center a{ font-size:15px; font-weight:500; color:var(--ink-48); transition:color .2s }
+.jbar-center a:hover{ color:var(--ink) }
+.jbar-center a.on{ color:var(--primary) }
+@media (max-width:560px){ .jbar-center{ display:none } }
 .jbar .brand{ display:flex; align-items:center } .jbar .brand img{ height:30px; width:30px; display:block; border-radius:8px }
 .jbar-right{ display:flex; align-items:center; gap:16px }
 .jbar .blink{ font-size:14px; font-weight:500; color:var(--ink-48); transition:color .2s } .jbar .blink:hover{ color:var(--ink) }
