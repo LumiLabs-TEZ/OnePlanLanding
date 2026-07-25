@@ -105,9 +105,9 @@ button,input,select{ font-family:inherit }
 .sbtn:hover{ background:var(--primary-2) }
 /* hang phu duoi bar: gia muc tieu + zalo + prob */
 .subrow{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px; justify-content:center }
-.mini-f{ display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.3); border-radius:14px; padding:9px 14px; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px) }
-.mini-f label{ font-size:12.5px; font-weight:600; color:rgba(255,255,255,.85); white-space:nowrap }
-.mini-f input{ border:none; background:none; font-size:14.5px; font-weight:600; color:#fff; width:110px; padding:0 }
+.mini-f{ display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.34); border-radius:16px; padding:13px 18px; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px) }
+.mini-f label{ font-size:14px; font-weight:600; color:rgba(255,255,255,.9); white-space:nowrap }
+.mini-f input{ border:none; background:none; font-size:16.5px; font-weight:700; color:#fff; width:150px; padding:0 }
 .mini-f input::placeholder{ color:rgba(255,255,255,.55) }
 .mini-f input:focus{ outline:none }
 .hint{ font-size:12.5px; color:rgba(255,255,255,.8) }
@@ -163,6 +163,8 @@ button,input,select{ font-family:inherit }
 .tb.link{ cursor:pointer } .tb.link:hover{ border-color:var(--primary); color:var(--primary) }
 .cols{ display:grid; grid-template-columns:1.6fr 1fr; gap:16px; align-items:start }
 .deals{ display:flex; flex-direction:column; gap:10px }
+.d-src{ font-size:12px; color:var(--ink-3); margin:0 2px }
+.d-src b{ color:#1c7c4b }
 .d-date{ font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin:8px 2px 0 }
 .deal{ display:grid; grid-template-columns:auto 1fr auto auto; gap:14px; align-items:center; background:#fff; border:1px solid var(--line); border-radius:18px; padding:14px 16px; transition:transform .2s var(--spring), box-shadow .2s }
 .deal:hover{ transform:translateY(-2px); box-shadow:0 14px 34px -16px rgba(23,53,102,.25) }
@@ -183,6 +185,7 @@ button,input,select{ font-family:inherit }
 .d-cta{ font-size:13px; padding:9px 16px }
 .d-view{ font-size:12.5px; font-weight:600; color:var(--primary); text-align:center }
 .d-view:hover{ text-decoration:underline; text-underline-offset:3px }
+.d-view.as-btn{ background:none; border:none; cursor:pointer; font-family:inherit }
 
 /* timeline phai */
 .live{ background:#fff; border:1px solid var(--line); border-radius:22px; padding:20px 20px 14px; position:sticky; top:96px }
@@ -273,7 +276,7 @@ button,input,select{ font-family:inherit }
   .dest:nth-child(n+3){ display:none }
   .deal{ grid-template-columns:1fr auto }
   .d-times,.d-dur{ display:none }
-  .mini-f input{ width:88px }
+  .mini-f input{ width:120px }
   .hero{ padding-bottom:130px }
 }
 </style>
@@ -378,7 +381,7 @@ button,input,select{ font-family:inherit }
     <a class="tb link" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">🤖 Lịch trình AI</a>
   </div>
   <div class="cols">
-    <div class="deals" id="deals"></div>
+    <div class="deals"><p class="d-src" id="dealsNote"></p><div id="deals" style="display:flex;flex-direction:column;gap:10px"></div></div>
     <aside class="live">
       <div class="manage" id="manage">
         <div class="manage-card">
@@ -662,41 +665,79 @@ button,input,select{ font-family:inherit }
     });
   }
 
-  // ---- keo gia tot: 4 chuyen re nhat 30 ngay toi + link xem ve that ----
+  // ---- keo gia tot ----
+  // Uu tien GIA THAT tu backend (GET /fare-watch/fares, nguon Travelpayouts).
+  // Backend chua live -> fallback trung thuc: khong bia ten hang / gio bay,
+  // gia hien thi ro la "uoc tinh", nut Xem ve dan sang gia that.
+  var AL_NAME={VJ:["Vietjet Air","#e0342c"],VU:["Vietravel Airlines","#f2a01e"],VN:["Vietnam Airlines","#0b3d91"],QH:["Bamboo Airways","#1c9e5a"]};
+  var faresCache={};
   function renderDeals(){
-    var route=sel.from+"-"+sel.to, data=series(route);
-    var r=seedRand(route.split("").reduce(function(a,c){return a+c.charCodeAt(0)},7));
-    var rows=[];
-    for(var i=0;i<30;i++){
-      var d=new Date(Date.now()+(i+3)*864e5);
-      var al=AIRLINES[Math.floor(r()*AIRLINES.length)];
-      var hh=5+Math.floor(r()*16), mm=[0,15,30,45][Math.floor(r()*4)];
-      var durM=(isVN(sel.from)&&isVN(sel.to))?(70+Math.floor(r()*50)):(120+Math.floor(r()*400));
-      rows.push({ date:d, price:data[60+Math.floor(i/2)] + Math.round(r()*80)*1000, al:al,
-                  dep:pad(hh)+":"+pad(mm), durM:durM });
-    }
-    rows.sort(function(a,b){ return a.price-b.price });
-    var top=rows.slice(0,4).sort(function(a,b){ return a.date-b.date });
+    var route=sel.from+"-"+sel.to;
+    var cached=faresCache[route];
+    if(cached){ paintDeals(route, cached); return }
+    paintDeals(route, null); // ve fallback ngay, co gia that thi ve de len
+    fetch(API+"/fares?origin="+sel.from+"&destination="+sel.to)
+      .then(function(r){ if(!r.ok) throw 0; return r.json() })
+      .then(function(d){
+        if(d && d.fares && d.fares.length){ faresCache[route]=d.fares;
+          if(sel.from+"-"+sel.to===route) paintDeals(route, d.fares); }
+      })
+      .catch(function(){});
+  }
+  function paintDeals(route, real){
     var el=$("deals");
-    el.innerHTML = top.map(function(x){
-      var depH=parseInt(x.dep.slice(0,2),10), depM=parseInt(x.dep.slice(3),10);
-      var t=depH*60+depM+x.durM, arrS=pad(Math.floor(t/60)%24)+":"+pad(t%60);
-      var dur=Math.floor(x.durM/60)+"h"+(x.durM%60? pad(x.durM%60):"");
-      return '<p class="d-date">'+DOW[x.date.getDay()]+", "+pad(x.date.getDate())+"/"+pad(x.date.getMonth()+1)+'</p>'+
-        '<div class="deal">'+
-          '<div class="d-air"><span class="d-logo" style="background:'+x.al[2]+'">'+x.al[0]+'</span>'+
-            '<span class="nm"><b>'+x.al[1]+'</b><span>'+sel.from+' → '+sel.to+'</span></span></div>'+
-          '<div class="d-times"><b>'+x.dep+'</b><span class="d-dur"><span>'+dur+'</span><span class="ln"></span><span>bay thẳng</span></span><b>'+arrS+'</b></div>'+
-          '<div class="d-price"><b>'+fmt(x.price)+'</b><span>giá tham khảo</span></div>'+
-          '<div class="d-actions">'+
-            '<button type="button" class="btn btn-primary d-cta" data-p="'+x.price+'" data-d="'+iso(x.date)+'">Săn giá này</button>'+
-            '<a class="d-view" href="'+avUrl(sel.from, sel.to, x.date)+'" target="_blank" rel="noopener">Xem vé đang bán →</a>'+
-          '</div>'+
-        '</div>';
-    }).join("");
-    [].forEach.call(el.querySelectorAll(".d-cta"), function(b){
+    if(real){
+      $("dealsNote").innerHTML='<b>● Giá thật</b> từ nền tảng bán vé, cập nhật ~30 phút. Bấm "Đặt vé" để mua với giá này.';
+      var top=real.slice().sort(function(a,b){return a.price-b.price}).slice(0,4)
+                 .sort(function(a,b){return a.departDate.localeCompare(b.departDate)});
+      el.innerHTML=top.map(function(x){
+        var d=new Date(x.departDate+"T00:00:00");
+        var al=AL_NAME[x.airline]||[x.airline+" Airlines","#5f5f57"];
+        var dep=x.departAt? x.departAt.slice(11,16) : "";
+        var dur=x.durationMin? Math.floor(x.durationMin/60)+"h"+(x.durationMin%60? pad(x.durationMin%60):"") : "";
+        var link=x.link || avUrl(sel.from, sel.to, d);
+        return '<p class="d-date">'+DOW[d.getDay()]+", "+pad(d.getDate())+"/"+pad(d.getMonth()+1)+'</p>'+
+          '<div class="deal">'+
+            '<div class="d-air"><span class="d-logo" style="background:'+al[1]+'">'+x.airline+'</span>'+
+              '<span class="nm"><b>'+al[0]+'</b><span>'+sel.from+' → '+sel.to+'</span></span></div>'+
+            '<div class="d-times">'+(dep?'<b>'+dep+'</b>':'')+(dur?'<span class="d-dur"><span>'+dur+'</span><span class="ln"></span><span>bay thẳng</span></span>':'<span class="d-dur"><span class="ln"></span></span>')+'</div>'+
+            '<div class="d-price"><b>'+fmt(x.price)+'</b><span>giá thật, gồm thuế phí</span></div>'+
+            '<div class="d-actions">'+
+              '<a class="btn btn-primary d-cta" href="'+link+'" target="_blank" rel="noopener">Đặt vé →</a>'+
+              '<button type="button" class="d-view as-btn" data-p="'+x.price+'" data-d="'+x.departDate+'">Săn giá rẻ hơn</button>'+
+            '</div>'+
+          '</div>';
+      }).join("");
+    } else {
+      $("dealsNote").textContent='Giá ước tính theo mùa để bạn đặt mục tiêu. Bấm "Xem vé đang bán" để thấy giá thật hôm nay.';
+      var data=series(route);
+      var r=seedRand(route.split("").reduce(function(a,c){return a+c.charCodeAt(0)},7));
+      var rows=[];
+      for(var i=0;i<30;i++){
+        var d2=new Date(Date.now()+(i+3)*864e5);
+        rows.push({ date:d2, price:data[60+Math.floor(i/2)] + Math.round(r()*80)*1000 });
+      }
+      rows.sort(function(a,b){ return a.price-b.price });
+      var top2=rows.slice(0,4).sort(function(a,b){ return a.date-b.date });
+      el.innerHTML=top2.map(function(x){
+        return '<p class="d-date">'+DOW[x.date.getDay()]+", "+pad(x.date.getDate())+"/"+pad(x.date.getMonth()+1)+'</p>'+
+          '<div class="deal">'+
+            '<div class="d-air"><span class="d-logo" style="background:var(--primary-tint);color:var(--primary)">✈</span>'+
+              '<span class="nm"><b>Nhiều hãng khai thác</b><span>'+sel.from+' → '+sel.to+'</span></span></div>'+
+            '<div class="d-times"><span class="d-dur"><span class="ln"></span><span>xem giờ bay thật →</span></span></div>'+
+            '<div class="d-price"><b>~'+fmt(x.price)+'</b><span>ước tính theo mùa</span></div>'+
+            '<div class="d-actions">'+
+              '<a class="btn btn-primary d-cta" href="'+avUrl(sel.from, sel.to, x.date)+'" target="_blank" rel="noopener">Xem vé đang bán →</a>'+
+              '<button type="button" class="d-view as-btn" data-p="'+x.price+'" data-d="'+iso(x.date)+'">Săn giá rẻ hơn</button>'+
+            '</div>'+
+          '</div>';
+      }).join("");
+    }
+    [].forEach.call(el.querySelectorAll(".d-view"), function(b){
       b.onclick=function(){
-        $("price").value=(+b.dataset.p).toLocaleString("vi-VN");
+        // muc tieu mac dinh = 90% gia dang thay: "san re hon" dung nghia
+        var target=Math.round((+b.dataset.p)*0.9/1000)*1000;
+        $("price").value=target.toLocaleString("vi-VN");
         var d=new Date(b.dataset.d);
         $("dateFrom").value=iso(new Date(Math.max(Date.now()+864e5, d.getTime()-2*864e5)));
         $("dateTo").value=iso(new Date(d.getTime()+2*864e5));
