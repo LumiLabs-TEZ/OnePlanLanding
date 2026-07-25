@@ -119,6 +119,13 @@ button,input,select{ font-family:inherit }
 .prob-label{ font-size:12.5px; font-weight:700; white-space:nowrap; color:#fff }
 .prob.hi .prob-bar i{ background:#7ef0b2 }
 .prob.lo .prob-bar i{ background:#ffc36b }
+/* bieu do % khop theo gia muc tieu (bam/keo de chon gia) */
+.chartbox{ max-width:680px; margin:14px auto 0; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28); border-radius:18px; padding:14px 16px 10px; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); text-align:left }
+.chartbox .cb-head{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px }
+.chartbox .cb-t{ font-size:12.5px; font-weight:700; color:#fff; letter-spacing:.02em }
+.chartbox .cb-v{ font-size:12.5px; color:rgba(255,255,255,.85) } .chartbox .cb-v b{ color:#fff }
+.chartbox svg{ width:100%; height:110px; cursor:crosshair; display:block; touch-action:none }
+.chartbox .cb-x{ display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,.65); margin-top:2px }
 
 /* dropdown san bay: floating panel */
 .acx{ position:relative }
@@ -216,8 +223,9 @@ button,input,select{ font-family:inherit }
 .spark-svg{ width:100%; height:56px; margin-top:4px }
 
 /* success */
-.success{ display:none; text-align:center; padding:26px 24px 8px; max-width:640px; margin:0 auto }
+.success{ display:none; text-align:center; padding:34px 24px 6px; max-width:640px; margin:0 auto }
 .success.show{ display:block }
+.success.show + .destwrap{ margin-top:28px }
 .success .big{ font-family:var(--f-display); font-size:clamp(24px,3vw,32px); margin:10px 0 8px }
 .ordercode{ display:inline-block; font-weight:700; font-size:14px; letter-spacing:.05em; color:var(--primary); background:var(--primary-tint); border-radius:var(--pill); padding:7px 16px; margin:4px 0 8px }
 .form-note{ font-size:13px; color:var(--ink-3) }
@@ -342,6 +350,14 @@ button,input,select{ font-family:inherit }
           <div class="prob-bar"><i id="probFill"></i></div>
           <span class="prob-label" id="probLabel"></span>
         </div>
+      </div>
+      <div class="chartbox" id="chartbox">
+        <div class="cb-head">
+          <span class="cb-t">% KHẢ NĂNG KHỚP THEO GIÁ MỤC TIÊU</span>
+          <span class="cb-v" id="cbVal"></span>
+        </div>
+        <svg id="probChart" viewBox="0 0 640 110" preserveAspectRatio="none" aria-label="Bấm để chọn giá mục tiêu"></svg>
+        <div class="cb-x"><span id="cbLo"></span><span style="color:rgba(255,255,255,.8)">← rẻ hơn · bấm vào biểu đồ để chọn giá · dễ khớp hơn →</span><span id="cbHi"></span></div>
       </div>
     </form>
   </div>
@@ -637,13 +653,70 @@ button,input,select{ font-family:inherit }
   function renderProb(){
     var target=parseInt(($("price").value||"").replace(/[^\d]/g,""),10);
     var box=$("prob");
-    if(!target || target<200000){ box.hidden=true; return }
+    if(!target || target<200000){ box.hidden=true; renderChart(null); return }
     var pct=hitChance(target);
     box.hidden=false;
     box.className="prob "+(pct>=70?"hi":pct>=30?"mid":"lo");
     $("probFill").style.width=pct+"%";
     $("probLabel").textContent="~"+pct+"% khả năng khớp"+(pct<30?" · thử nới ngày hoặc nâng giá":"");
+    renderChart(target);
   }
+
+  // ---- bieu do duong cong % khop theo gia: bam/keo tren bieu do de chon gia ----
+  var chartRange={lo:0,hi:1};
+  function renderChart(target){
+    var svg=$("probChart"); if(!svg) return;
+    var data=series(sel.from+"-"+sel.to);
+    var lo=Math.round(Math.min.apply(null,data)*0.92/1000)*1000;
+    var hi=Math.round(Math.max.apply(null,data)*1.02/1000)*1000;
+    chartRange={lo:lo,hi:hi};
+    if(target==null) target=quantile(data,0.25);
+    target=Math.max(lo,Math.min(hi,target));
+    var W=640,H=110,PL=6,PR=6,PT=10,PB=16,N=48;
+    var pts=[], tx=0, ty=0, tpct=0;
+    for(var i=0;i<=N;i++){
+      var p=lo+(hi-lo)*i/N;
+      var pct=hitChance(Math.round(p));
+      var x=PL+(W-PL-PR)*i/N;
+      var y=PT+(H-PT-PB)*(1-pct/100);
+      pts.push(x.toFixed(1)+","+y.toFixed(1));
+    }
+    var ti=(target-lo)/(hi-lo);
+    tx=PL+(W-PL-PR)*ti; tpct=hitChance(Math.round(target));
+    ty=PT+(H-PT-PB)*(1-tpct/100);
+    var good=quantile(data,0.25);
+    var gx=PL+(W-PL-PR)*Math.max(0,Math.min(1,(good-lo)/(hi-lo)));
+    svg.innerHTML =
+      '<polygon points="'+PL+','+(H-PB)+' '+pts.join(" ")+' '+(W-PR)+','+(H-PB)+'" fill="rgba(255,255,255,.14)"/>'+
+      '<polyline points="'+pts.join(" ")+'" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'+
+      '<line x1="'+gx+'" y1="'+PT+'" x2="'+gx+'" y2="'+(H-PB)+'" stroke="rgba(126,240,178,.85)" stroke-width="1.5" stroke-dasharray="4 4"/>'+
+      '<text x="'+Math.min(gx+5,W-90)+'" y="'+(PT+10)+'" fill="rgba(126,240,178,.95)" font-size="10.5" font-weight="700">giá tốt</text>'+
+      '<line x1="'+tx+'" y1="'+ty+'" x2="'+tx+'" y2="'+(H-PB)+'" stroke="rgba(255,255,255,.55)" stroke-width="1.2"/>'+
+      '<circle cx="'+tx+'" cy="'+ty+'" r="7" fill="#fff" opacity=".25"/>'+
+      '<circle cx="'+tx+'" cy="'+ty+'" r="4" fill="#fff"/>';
+    $("cbVal").innerHTML='Mục tiêu <b>'+fmt(Math.round(target))+'</b> → khớp <b>~'+tpct+'%</b>';
+    $("cbLo").textContent=fmt(lo); $("cbHi").textContent=fmt(hi);
+  }
+  (function(){
+    var svg=$("probChart"); if(!svg) return;
+    function pick(e){
+      var r=svg.getBoundingClientRect();
+      if(!r.width) return;
+      var cx=(e.touches && e.touches.length ? e.touches[0].clientX : e.clientX);
+      if(typeof cx!=="number" || !isFinite(cx)) return;
+      var t=Math.max(0,Math.min(1,(cx-r.left)/r.width));
+      var price=Math.round((chartRange.lo+(chartRange.hi-chartRange.lo)*t)/1000)*1000;
+      if(!isFinite(price) || price<=0) return;
+      $("price").value=price.toLocaleString("vi-VN");
+      renderProb();
+    }
+    var drag=false;
+    svg.addEventListener("mousedown",function(e){ drag=true; pick(e) });
+    window.addEventListener("mousemove",function(e){ if(drag) pick(e) });
+    window.addEventListener("mouseup",function(){ drag=false });
+    svg.addEventListener("touchstart",function(e){ pick(e) },{passive:true});
+    svg.addEventListener("touchmove",function(e){ pick(e) },{passive:true});
+  })();
 
   // ---- diem den hot theo noi di ----
   function renderDests(){
@@ -772,6 +845,7 @@ button,input,select{ font-family:inherit }
       '<polygon points="'+P+','+(H-P)+' '+pts.join(" ")+' '+(W-P)+','+(H-P)+'" fill="rgba(0,102,204,.08)" stroke="none"/>';
     renderDeals();
     renderDests();
+    renderChart(parseInt(($("price").value||"").replace(/[^\d]/g,""),10)||null);
   }
 
   setupCombo("from"); setupCombo("to");
