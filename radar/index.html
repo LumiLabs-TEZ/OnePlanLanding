@@ -95,6 +95,31 @@ select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
 .form-cta{ grid-column:1 / -1; display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:4px; flex-wrap:wrap }
 .form-note{ font-size:13px; color:var(--ink-3); max-width:46ch }
 
+/* airport combobox (kiểu Aviasales, tokens OnePlan) */
+.acx{ position:relative }
+.acx .in{ padding-right:64px }
+.acx .code{ position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; letter-spacing:.05em; color:var(--ink-3); background:var(--off); border:1px solid var(--line); border-radius:8px; padding:3px 8px; pointer-events:none }
+.acx .code.on{ color:var(--primary); background:var(--primary-tint); border-color:transparent }
+.ac-list{ position:absolute; z-index:40; top:calc(100% + 6px); left:0; right:0; background:#fff; border:1px solid var(--line); border-radius:18px; box-shadow:0 24px 60px -20px rgba(40,40,40,.25); padding:6px; max-height:320px; overflow:auto; display:none }
+.ac-list.show{ display:block }
+.ac-item{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:none; border:none; border-radius:12px; padding:10px 12px; cursor:pointer; font-size:15px; color:var(--ink) }
+.ac-item .ic{ width:34px; height:34px; flex:none; display:flex; align-items:center; justify-content:center; background:var(--primary-tint); color:var(--primary); border-radius:10px; font-size:15px }
+.ac-item .tt{ display:flex; flex-direction:column; min-width:0 }
+.ac-item .tt b{ font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.ac-item .tt span{ font-size:12.5px; color:var(--ink-3) }
+.ac-item .cd{ margin-left:auto; font-size:12px; font-weight:700; color:var(--ink-3); letter-spacing:.05em }
+.ac-item:hover, .ac-item.sel{ background:var(--off) }
+.ac-item.sel .cd{ color:var(--primary) }
+.ac-empty{ padding:14px; font-size:14px; color:var(--ink-3); text-align:center }
+
+/* manage order card (mở từ link Zalo ?o=...) */
+.manage{ display:none; margin-bottom:22px }
+.manage.show{ display:block }
+.manage-card{ background:#fff; border:1px solid var(--line); border-radius:var(--r-card); padding:22px 24px }
+.manage-card .m-route{ font-family:var(--f-display); font-size:24px; margin:2px 0 6px }
+.manage-card .m-meta{ font-size:14px; color:var(--ink-2) }
+.manage-card .m-row{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-top:14px }
+
 /* probability meter */
 .prob{ display:flex; align-items:center; gap:12px; margin-top:4px }
 .prob-bar{ flex:1; height:8px; border-radius:var(--pill); background:#e8e5d8; overflow:hidden }
@@ -209,17 +234,36 @@ select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
 
   <!-- FORM -->
   <section class="sec wrap" id="dat-lenh">
+    <div class="manage" id="manage">
+      <div class="manage-card">
+        <span class="chip" id="mStatus">LỆNH CỦA BẠN</span>
+        <p class="m-route" id="mRoute"></p>
+        <p class="m-meta" id="mMeta"></p>
+        <div class="m-row">
+          <span class="form-note" id="mNote">Radar đang canh giá cho lệnh này. Muốn dừng thì bấm huỷ, miễn phí và ngay lập tức.</span>
+          <button class="btn btn-ghost" id="mCancel" type="button">Huỷ lệnh này</button>
+        </div>
+      </div>
+    </div>
     <div class="panel">
       <form class="formgrid" id="radarForm" novalidate>
         <div class="route-row">
           <div class="field">
             <label for="from">Bay từ</label>
-            <select class="in" id="from" required></select>
+            <div class="acx" id="fromBox">
+              <input class="in" id="from" type="text" placeholder="Thành phố hoặc mã sân bay" autocomplete="off" required />
+              <span class="code" id="fromCode"></span>
+              <div class="ac-list" id="fromList" role="listbox"></div>
+            </div>
           </div>
           <button class="swap" type="button" id="swap" aria-label="Đảo chiều tuyến">⇅</button>
           <div class="field">
             <label for="to">Bay đến</label>
-            <select class="in" id="to" required></select>
+            <div class="acx" id="toBox">
+              <input class="in" id="to" type="text" placeholder="Đi đâu đó chill?" autocomplete="off" required />
+              <span class="code" id="toCode"></span>
+              <div class="ac-list" id="toList" role="listbox"></div>
+            </div>
           </div>
         </div>
 
@@ -350,10 +394,29 @@ select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
 </script>
 <script>
 (function(){
+  // {code, city, ten san bay, vung}: du 22 san bay VN co khai thac thuong mai
   var AIRPORTS = [
-    ["SGN","TP. Hồ Chí Minh (SGN)"], ["HAN","Hà Nội (HAN)"], ["DAD","Đà Nẵng (DAD)"],
-    ["PQC","Phú Quốc (PQC)"], ["CXR","Nha Trang (CXR)"], ["DLI","Đà Lạt (DLI)"],
-    ["HPH","Hải Phòng (HPH)"], ["HUI","Huế (HUI)"], ["VII","Vinh (VII)"], ["UIH","Quy Nhơn (UIH)"]
+    ["SGN","TP. Hồ Chí Minh","Tân Sơn Nhất","Miền Nam"],
+    ["HAN","Hà Nội","Nội Bài","Miền Bắc"],
+    ["DAD","Đà Nẵng","Đà Nẵng","Miền Trung"],
+    ["PQC","Phú Quốc","Phú Quốc","Miền Nam"],
+    ["CXR","Nha Trang","Cam Ranh","Miền Trung"],
+    ["DLI","Đà Lạt","Liên Khương","Tây Nguyên"],
+    ["HPH","Hải Phòng","Cát Bi","Miền Bắc"],
+    ["HUI","Huế","Phú Bài","Miền Trung"],
+    ["VII","Vinh","Vinh","Miền Trung"],
+    ["UIH","Quy Nhơn","Phù Cát","Miền Trung"],
+    ["VCA","Cần Thơ","Cần Thơ","Miền Tây"],
+    ["THD","Thanh Hóa","Thọ Xuân","Miền Bắc"],
+    ["VDO","Quảng Ninh","Vân Đồn","Miền Bắc"],
+    ["VDH","Đồng Hới","Đồng Hới","Miền Trung"],
+    ["TBB","Tuy Hòa","Tuy Hòa","Miền Trung"],
+    ["PXU","Pleiku","Pleiku","Tây Nguyên"],
+    ["BMV","Buôn Ma Thuột","Buôn Ma Thuột","Tây Nguyên"],
+    ["VCL","Tam Kỳ","Chu Lai","Miền Trung"],
+    ["CAH","Cà Mau","Cà Mau","Miền Tây"],
+    ["VKG","Rạch Giá","Rạch Giá","Miền Tây"],
+    ["DIN","Điện Biên","Điện Biên Phủ","Miền Bắc"]
   ];
   // Giá nền tham chiếu một chiều theo tuyến (đ) cho mock spark line + gợi ý "giá tốt".
   var BASE = { "SGN-HAN":1250000,"SGN-DAD":850000,"HAN-DAD":800000,"SGN-PQC":790000,"HAN-CXR":1150000,
@@ -361,10 +424,97 @@ select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
   var fmt = function(n){ return n.toLocaleString("vi-VN") + "đ" };
 
   var $ = function(id){ return document.getElementById(id) };
-  var from=$("from"), to=$("to");
-  AIRPORTS.forEach(function(a){ from.add(new Option(a[1],a[0])); to.add(new Option(a[1],a[0])); });
-  from.value="SGN"; to.value="HAN";
-  $("swap").onclick=function(){ var t=from.value; from.value=to.value; to.value=t; refresh(); };
+  function fold(s){ return (s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d") }
+
+  // ---- combobox chọn sân bay (kiểu Aviasales) ----
+  // Trạng thái thật nằm ở sel.from/sel.to (mã IATA); ô input chỉ là hiển thị.
+  var sel = { from:"SGN", to:"HAN" };
+  function airport(code){ return AIRPORTS.filter(function(a){return a[0]===code})[0] }
+  var EXTRA = {};  // san bay quoc te user da chon qua autocomplete: code -> ten
+  function labelOf(code){ var a=airport(code); return a ? a[1] : (EXTRA[code] || code) }
+  function isVN(code){ return Boolean(airport(code)) }
+
+  function setupCombo(key){
+    var input=$(key), codeEl=$(key+"Code"), list=$(key+"List"), box=$(key+"Box");
+    var idx=-1, items=[];
+    function commit(code, label){
+      if(label && !airport(code)) EXTRA[code]=label;
+      sel[key]=code; input.value=labelOf(code);
+      codeEl.textContent=code; codeEl.className="code on";
+      close(); refresh();
+    }
+    function close(){ list.classList.remove("show"); idx=-1 }
+    var remoteTimer=null, lastQ="";
+    function fetchRemote(q){
+      // Autocomplete toan cau cua Travelpayouts (khong can key, ho tro tieng Viet)
+      fetch("https://autocomplete.travelpayouts.com/places2?locale=vi&types[]=city&types[]=airport&term="+encodeURIComponent(q))
+        .then(function(r){ return r.json() })
+        .then(function(rows){
+          if(fold(input.value.trim())!==fold(q)) return; // user da go tiep
+          var have={}; items.forEach(function(a){ have[a[0]]=1 });
+          rows.slice(0,8).forEach(function(r){
+            if(!r.code || have[r.code]) return;
+            have[r.code]=1;
+            var city=r.city_name||r.name, country=r.country_name||"";
+            items.push([r.code, city, r.type==="airport" ? r.name : "mọi sân bay của thành phố", country]);
+          });
+          paint(q);
+        })
+        .catch(function(){});
+    }
+    function render(q){
+      var f=fold(q.trim());
+      items = AIRPORTS.filter(function(a){
+        if(!f) return true;
+        return fold(a[1]).indexOf(f)>=0 || fold(a[2]).indexOf(f)>=0 || fold(a[0]).indexOf(f)>=0 || fold(a[3]).indexOf(f)>=0;
+      });
+      if(f.length>=2){
+        clearTimeout(remoteTimer);
+        remoteTimer=setTimeout(function(){ fetchRemote(q.trim()) }, 250);
+      }
+      paint(q);
+    }
+    function paint(q){
+      list.innerHTML = items.length
+        ? items.map(function(a,i){
+            return '<button type="button" class="ac-item" data-i="'+i+'">'+
+              '<span class="ic">✈︎</span><span class="tt"><b>'+a[1]+'</b><span>Sân bay '+a[2]+' · '+a[3]+'</span></span>'+
+              '<span class="cd">'+a[0]+'</span></button>';
+          }).join("")
+        : '<div class="ac-empty">Không thấy sân bay nào khớp "'+q+'"</div>';
+      list.classList.add("show");
+      [].forEach.call(list.querySelectorAll(".ac-item"), function(b){
+        b.onmousedown=function(e){ e.preventDefault(); var it=items[+b.dataset.i]; commit(it[0], it[1]) };
+      });
+    }
+    input.addEventListener("focus", function(){ input.select(); render("") });
+    input.addEventListener("input", function(){ codeEl.className="code"; render(input.value) });
+    input.addEventListener("keydown", function(e){
+      var els=list.querySelectorAll(".ac-item");
+      if(e.key==="ArrowDown"||e.key==="ArrowUp"){
+        e.preventDefault();
+        idx=(idx+(e.key==="ArrowDown"?1:-1)+els.length)%Math.max(els.length,1);
+        [].forEach.call(els,function(el,i){ el.classList.toggle("sel", i===idx); if(i===idx) el.scrollIntoView({block:"nearest"}) });
+      } else if(e.key==="Enter"){
+        if(list.classList.contains("show")&&items.length){ e.preventDefault(); var it=items[Math.max(idx,0)]; commit(it[0], it[1]) }
+      } else if(e.key==="Escape"){ close() }
+    });
+    input.addEventListener("blur", function(){
+      setTimeout(function(){
+        // rời ô mà chưa chọn -> khôi phục lựa chọn cũ, không bao giờ để trạng thái mồ côi
+        input.value=labelOf(sel[key]); codeEl.textContent=sel[key]; codeEl.className="code on"; close();
+      }, 120);
+    });
+    document.addEventListener("click", function(e){ if(!box.contains(e.target)) close() });
+    commit(sel[key]);
+  }
+  setupCombo("from"); setupCombo("to");
+  $("swap").onclick=function(){
+    var t=sel.from; sel.from=sel.to; sel.to=t;
+    $("from").value=labelOf(sel.from); $("fromCode").textContent=sel.from;
+    $("to").value=labelOf(sel.to); $("toCode").textContent=sel.to;
+    refresh();
+  };
 
   // ngày mặc định: 2 tuần tới, khoảng 5 ngày
   function iso(d){ return d.toISOString().slice(0,10) }
@@ -375,7 +525,9 @@ select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
   // ---- spark line mock: sinh chuỗi giá 90 ngày ổn định theo tuyến (seed) ----
   function seedRand(seed){ return function(){ seed=(seed*9301+49297)%233280; return seed/233280 } }
   function series(route){
-    var base = BASE[route] || BASE[[route.split("-")[1],route.split("-")[0]].join("-")] || 950000;
+    var parts = route.split("-");
+    var base = BASE[route] || BASE[[parts[1],parts[0]].join("-")] ||
+               ((isVN(parts[0]) && isVN(parts[1])) ? 950000 : 4200000);
     var r = seedRand(route.split("").reduce(function(a,c){return a+c.charCodeAt(0)},0));
     var out=[], p=base;
     for(var i=0;i<90;i++){
@@ -393,7 +545,7 @@ select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
   // Radar canh N ngày (hôm nay -> hết khoảng ngày) => p(khớp) = 1-(1-p_ngày)^N.
   // Dữ liệu hiện là mock; khi backend live sẽ thay bằng lịch sử giá thật, công thức giữ nguyên.
   function hitChance(target){
-    var data=series(from.value+"-"+to.value);
+    var data=series(sel.from+"-"+sel.to);
     var pDay=data.filter(function(v){return v<=target}).length/data.length;
     var end=new Date($("dateTo").value||Date.now());
     var days=Math.max(1, Math.min(60, Math.round((end-Date.now())/864e5)));
@@ -417,10 +569,13 @@ select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
   $("dateTo").addEventListener("change", renderProb);
 
   function refresh(){
-    if(from.value===to.value){ to.value = (from.value==="HAN")?"SGN":"HAN"; }
-    var route=from.value+"-"+to.value, data=series(route);
+    if(sel.from===sel.to){
+      sel.to = (sel.from==="HAN") ? "SGN" : "HAN";
+      $("to").value=labelOf(sel.to); $("toCode").textContent=sel.to;
+    }
+    var route=sel.from+"-"+sel.to, data=series(route);
     var low=Math.min.apply(null,data), now=data[data.length-1], good=quantile(data,0.25);
-    $("sparkTitle").textContent="Giá 90 ngày · "+from.value+" → "+to.value;
+    $("sparkTitle").textContent="Giá 90 ngày · "+sel.from+" → "+sel.to;
     $("statLow").textContent=fmt(low); $("statNow").textContent=fmt(now);
     $("goodPriceHint").innerHTML='Giá tốt cho tuyến này: <b id="applyGood">'+fmt(good)+"</b> (bấm để dùng)";
     $("applyGood").onclick=function(){ $("price").value=good.toLocaleString("vi-VN"); renderProb() };
@@ -484,8 +639,8 @@ select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
     if(!/^(0|84)\d{8,10}$/.test(phone)){ alert("Số điện thoại chưa đúng định dạng Việt Nam."); return }
     if(!df || !dt || df>dt){ alert("Khoảng ngày chưa hợp lệ."); return }
     if(loadOrders().length>=5){ alert("Bạn đang có 5 lệnh hoạt động, huỷ bớt một lệnh trước nhé."); return }
-    pending={ from:from.value, to:to.value, dateFrom:df, dateTo:dt, price:price, phone:phone };
-    apiPost("/orders", { origin:from.value, destination:to.value, dateFrom:df, dateTo:dt,
+    pending={ from:sel.from, to:sel.to, dateFrom:df, dateTo:dt, price:price, phone:phone };
+    apiPost("/orders", { origin:sel.from, destination:sel.to, dateFrom:df, dateTo:dt,
                          targetPrice:price, phone:phone })
       .then(function(res){ live=true; pending.publicId=res.publicId; openOtp(phone, false); })
       .catch(function(){ live=false; pending.publicId=null; openOtp(phone, true); });
@@ -525,6 +680,52 @@ select.in{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
   };
   $("otpModal").addEventListener("click", function(e){ if(e.target===this) this.classList.remove("show") });
   $("newOrder").onclick=function(){ $("success").classList.remove("show"); $("radarForm").style.display="grid" };
+
+  // ---- quản lý lệnh không cần đăng nhập ----
+  // Chìa khóa là publicId (chuỗi không đoán được) gắn trong link "Quản lý lệnh"
+  // của tin Zalo: ai giữ link là chủ lệnh. Máy đã đặt lệnh thì còn thêm danh
+  // sách localStorage bên dưới. Không tài khoản, không mật khẩu.
+  function showManage(o){
+    $("manage").classList.add("show");
+    $("mRoute").textContent=(o.origin||o.from)+" → "+(o.destination||o.to);
+    var status=o.status||"ACTIVE";
+    $("mStatus").textContent = status==="ACTIVE" ? "ĐANG CANH GIÁ" : status;
+    var target=o.targetPrice||o.price;
+    $("mMeta").textContent=(o.code?o.code+" · ":"")+
+      (o.dateFrom||"").slice(0,10)+" đến "+(o.dateTo||"").slice(0,10)+
+      " · báo khi giá ≤ "+fmt(target)+
+      (o.notifyCount ? " · đã báo "+o.notifyCount+" lần" : "");
+    if(status!=="ACTIVE"&&status!=="PAUSED"){
+      $("mCancel").style.display="none";
+      $("mNote").textContent="Lệnh này đã kết thúc. Đặt lệnh mới ngay bên dưới nhé.";
+    }
+    $("manage").scrollIntoView({block:"start"});
+  }
+  var oid=new URLSearchParams(location.search).get("o");
+  if(oid){
+    fetch(API+"/orders/"+encodeURIComponent(oid))
+      .then(function(r){ if(!r.ok) throw 0; return r.json() })
+      .then(function(o){
+        o.code="RD-"+oid.slice(-5).toUpperCase();
+        showManage(o);
+        $("mCancel").onclick=function(){
+          if(!confirm("Huỷ lệnh này? Radar sẽ ngừng canh giá ngay.")) return;
+          fetch(API+"/orders/"+encodeURIComponent(oid),{method:"DELETE"})
+            .then(function(){ $("mStatus").textContent="ĐÃ HUỶ"; $("mCancel").style.display="none";
+              $("mNote").textContent="Đã huỷ xong. Đặt lệnh mới bất cứ lúc nào."; });
+        };
+      })
+      .catch(function(){
+        // API chưa live hoặc lệnh demo -> tìm trong máy này
+        var local=loadOrders().filter(function(x){ return x.publicId===oid || x.code===oid })[0];
+        if(local){ showManage(local);
+          $("mCancel").onclick=function(){
+            saveOrders(loadOrders().filter(function(x){ return x!==local && x.code!==local.code }));
+            renderOrders(); $("mStatus").textContent="ĐÃ HUỶ"; $("mCancel").style.display="none";
+          };
+        }
+      });
+  }
 })();
 </script>
 </body>
