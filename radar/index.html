@@ -606,6 +606,9 @@ button,input,select{ font-family:inherit }
     ["HUI","Huế","/assets/everyone-wants-to-go.jpg"]
   ];
   var MARKER="554837";
+  // API khai bao TRUOC lan refresh() dau tien: khai bao o cuoi file bi hoist
+  // thanh undefined -> fetch "undefined/fares" fail im lang, trang ke gia uoc tinh
+  var API="https://api.oneplan.space/fare-watch";
   var fmt = function(n){ return n.toLocaleString("vi-VN") + "đ" };
   var $ = function(id){ return document.getElementById(id) };
   function fold(s){ return (s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d") }
@@ -1034,7 +1037,6 @@ button,input,select{ font-family:inherit }
   renderOrders();
 
   // ---- dat lenh: API that, demo fallback ----
-  var API="https://api.oneplan.space/fare-watch";
   var live=null;
   function apiPost(path, body){
     return fetch(API+path, { method:"POST", headers:{ "Content-Type":"application/json" },
