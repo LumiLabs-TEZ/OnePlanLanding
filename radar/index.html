@@ -196,7 +196,8 @@ button,input,select{ font-family:inherit }
 .d-src b{ color:#1c7c4b }
 .drow{ display:flex; gap:12px; align-items:stretch }
 .dlist{ display:flex; flex-direction:column; gap:7px; flex:2.78 1 0; min-width:0 }
-.deal{ position:relative; display:grid; grid-template-columns:auto minmax(150px,1.2fr) minmax(150px,auto) minmax(150px,auto) auto; gap:14px; align-items:center; background:#fff; border:1px solid var(--line-2); border-radius:var(--r-deal); padding:16px 22px 16px 18px; min-height:81px; transition:transform .2s var(--spring), box-shadow .2s }
+.deal{ position:relative; display:grid; grid-template-columns:auto minmax(110px,1.2fr) minmax(0,auto) minmax(0,auto) auto; gap:clamp(8px,1.4vw,14px); align-items:center; background:#fff; border:1px solid var(--line-2); border-radius:var(--r-deal); padding:16px 20px 16px 18px; min-height:81px; transition:transform .2s var(--spring), box-shadow .2s }
+.deal > *{ min-width:0 }
 .deal:hover{ transform:translateY(-2px); box-shadow:0 14px 34px -18px rgba(23,53,102,.22) }
 .d-logo{ position:relative; width:48px; height:48px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; color:#fff; flex:none }
 .d-logo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#fff; border:1px solid var(--line-2); border-radius:inherit; padding:5px; box-sizing:border-box }
@@ -285,8 +286,14 @@ button,input,select{ font-family:inherit }
 .foot .fbrand{ font-family:var(--f-brand); font-size:20px; color:#fff }
 .foot-links{ display:flex; gap:22px; flex-wrap:wrap }
 
+@media (max-width:1180px){
+  .dtm{ display:none }
+  .deal{ grid-template-columns:auto minmax(110px,1fr) minmax(0,auto) auto }
+}
 @media (max-width:980px){
   .oc-row{ flex-wrap:wrap }
+  .dtm{ display:flex }
+  .deal{ grid-template-columns:auto minmax(110px,1.2fr) minmax(0,auto) minmax(0,auto) auto }
   .fpill{ flex:1 1 46% }
   .fpill.dates{ flex:1 1 100%; order:4 }
   .obtn{ flex:1 1 100%; order:5 }
