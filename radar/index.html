@@ -195,11 +195,14 @@ button,input,select{ font-family:inherit }
 .d-src{ font-size:12.5px; color:var(--mute); margin:0 2px }
 .d-src b{ color:#1c7c4b }
 .drow{ display:flex; gap:12px; align-items:stretch }
-.dlist{ display:flex; flex-direction:column; gap:7px; flex:1.55 1 0; min-width:0 }
-.deal{ position:relative; display:grid; grid-template-columns:auto minmax(126px,1.15fr) minmax(90px,auto) minmax(128px,auto) auto; gap:10px; align-items:center; background:#fff; border:1px solid var(--line-2); border-radius:var(--r-deal); padding:14px 16px; min-height:81px; transition:transform .2s var(--spring), box-shadow .2s }
+.dlist{ display:flex; flex-direction:column; gap:7px; flex:2.78 1 0; min-width:0 }
+.deal{ position:relative; display:grid; grid-template-columns:auto minmax(150px,1.2fr) minmax(150px,auto) minmax(150px,auto) auto; gap:14px; align-items:center; background:#fff; border:1px solid var(--line-2); border-radius:var(--r-deal); padding:16px 22px 16px 18px; min-height:81px; transition:transform .2s var(--spring), box-shadow .2s }
 .deal:hover{ transform:translateY(-2px); box-shadow:0 14px 34px -18px rgba(23,53,102,.22) }
 .d-logo{ position:relative; width:48px; height:48px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; color:#fff; flex:none }
 .d-logo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#fff; border:1px solid var(--line-2); border-radius:inherit; padding:5px; box-sizing:border-box }
+/* fallback "nhieu hang bay": cum logo 4 hang that */
+.d-logo.multi{ display:grid; grid-template-columns:1fr 1fr; gap:2px; padding:4px; background:#fff; border:1px solid var(--line-2) }
+.d-logo.multi img{ position:static; width:100%; height:100%; object-fit:contain; background:none; border:none; padding:0 }
 .dnm{ display:flex; flex-direction:column; gap:2px; min-width:0 }
 .dnm b{ font-size:15.5px; font-weight:500; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
 .dnm span{ font-size:14px; color:var(--ink-3); white-space:nowrap }
@@ -214,7 +217,7 @@ button,input,select{ font-family:inherit }
 .dbtn{ display:inline-flex; align-items:center; justify-content:center; height:40px; min-width:100px; padding:0 18px; border-radius:var(--r-btn); background:var(--primary); color:#fff; font-size:15.5px; font-weight:500; transition:background .2s, transform .12s }
 .dbtn:hover{ background:var(--primary-2) }
 .dbtn:active{ transform:scale(.97) }
-.dright{ flex:1 1 0; min-width:240px; display:flex; flex-direction:column; gap:12px }
+.dright{ flex:1 1 0; min-width:246px; display:flex; flex-direction:column; gap:12px }
 .promo{ position:relative; display:block; flex:1 1 auto; min-height:262px; border:1px solid #b3ddff; border-radius:16px; overflow:hidden; background:linear-gradient(180deg,var(--chart) 0%,#fff 78%) }
 .promo .pl{ position:absolute; top:-8px; right:-30px; width:78%; max-width:250px }
 .promo .ptx{ position:absolute; left:0; right:0; bottom:0; padding:14px 18px 26px; display:flex; flex-direction:column; gap:2px }
@@ -859,7 +862,9 @@ button,input,select{ font-family:inherit }
       var top2=rows.slice(0,4).sort(function(a,b){ return a.date-b.date });
       el.innerHTML=top2.map(function(x){
         return '<div class="deal">'+
-          '<span class="d-logo" style="background:var(--primary-tint);color:var(--primary)">✈</span>'+
+          '<span class="d-logo multi" aria-hidden="true">'+
+            ["VJ","VN","QH","VU"].map(function(c){ return '<img src="https://pics.avs.io/al_square/40/40/'+c+'@2x.png" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'" />' }).join("")+
+          '</span>'+
           '<span class="dnm"><b>Nhiều hãng bay</b><span>'+sel.from+' → '+sel.to+' · '+pad(x.date.getDate())+'/'+pad(x.date.getMonth()+1)+'</span></span>'+
           '<span class="dtm"><span class="ddur"><i>xem giờ thật</i><em></em></span></span>'+
           '<span class="dpr"><b>~'+fmt(x.price)+'</b><span>Ước tính theo mùa</span></span>'+
