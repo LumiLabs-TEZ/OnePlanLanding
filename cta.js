@@ -203,3 +203,20 @@
   st.appendChild(document.createTextNode(css));
   document.head.appendChild(st);
 })();
+
+/* mobile nav toggle (journal jbar hamburger) */
+(function () {
+  var bar = document.querySelector(".jbar");
+  var tog = document.getElementById("navtog");
+  if (!bar || !tog) return;
+  tog.addEventListener("click", function () {
+    var open = bar.classList.toggle("open");
+    tog.setAttribute("aria-expanded", String(open));
+  });
+  document.addEventListener("click", function (e) {
+    if (bar.classList.contains("open") && !bar.contains(e.target)) {
+      bar.classList.remove("open");
+      tog.setAttribute("aria-expanded", "false");
+    }
+  });
+})();

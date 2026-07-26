@@ -27,7 +27,26 @@ a{ color:inherit; text-decoration:none }
 .jbar-center a{ font-size:15px; font-weight:500; color:var(--ink-48); transition:color .2s }
 .jbar-center a:hover{ color:var(--ink) }
 .jbar-center a.on{ color:#335cff }
-@media (max-width:560px){ .jbar-center{ display:none } }
+/* hamburger (mobile) */
+.navtog{ display:none; position:relative; width:42px; height:42px; flex:none; border:1px solid var(--hairline); border-radius:12px; background:#fff; cursor:pointer; padding:0 }
+.navtog .nbar{ position:absolute; left:10px; right:10px; height:2px; background:var(--ink); border-radius:2px; transition:transform .28s cubic-bezier(.34,1.56,.64,1), opacity .18s }
+.navtog .nbar:nth-child(1){ top:14px } .navtog .nbar:nth-child(2){ top:20px } .navtog .nbar:nth-child(3){ top:26px }
+.jbar.open .navtog .nbar:nth-child(1){ transform:translateY(6px) rotate(45deg) }
+.jbar.open .navtog .nbar:nth-child(2){ opacity:0 }
+.jbar.open .navtog .nbar:nth-child(3){ transform:translateY(-6px) rotate(-45deg) }
+@media (max-width:640px){
+  .navtog{ display:inline-flex }
+  .jbar.open{ background:rgba(255,255,255,.97) }
+  .jbar-in{ flex-wrap:wrap; row-gap:0 }
+  .jbar-center{ position:static; transform:none; order:2; flex-basis:100%; flex-direction:column; align-items:stretch; gap:2px; margin-top:10px; display:none }
+  .jbar.open .jbar-center{ display:flex }
+  .jbar-center a{ padding:12px 14px; border-radius:12px; font-size:16px }
+  .jbar-center a:hover, .jbar-center a.on{ background:var(--panel) }
+  .jbar-right{ order:3; flex-basis:100%; flex-direction:column; align-items:stretch; gap:12px; margin:12px 0 14px; display:none }
+  .jbar.open .jbar-right{ display:flex }
+  .jbar .get{ justify-content:center }
+  .langtog{ align-self:flex-start }
+}
 .jbar .brand{ display:flex; align-items:center; gap:10px; font-family:var(--f-display); font-size:22px; color:var(--ink) }
 .jbar .brand img{ height:34px; width:34px; display:block; border-radius:9px }
 .jbar-right{ display:flex; align-items:center; gap:16px }

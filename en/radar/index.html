@@ -83,6 +83,13 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 .nav .btn-hero{ background:var(--primary); color:#fff }
 .nav .btn-hero:hover{ background:var(--primary-2) }
 .nav.solid{ background:rgba(255,255,255,.9); -webkit-backdrop-filter:saturate(180%) blur(20px); backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid var(--line-2) }
+/* hamburger (mobile) */
+.navtog{ display:none; position:relative; width:42px; height:42px; flex:none; border:1px solid var(--line-2); border-radius:12px; background:#fff; cursor:pointer; padding:0 }
+.navtog .nbar{ position:absolute; left:10px; right:10px; height:2px; background:var(--ink); border-radius:2px; transition:transform .28s var(--spring), opacity .18s }
+.navtog .nbar:nth-child(1){ top:14px } .navtog .nbar:nth-child(2){ top:20px } .navtog .nbar:nth-child(3){ top:26px }
+.nav.open .navtog .nbar:nth-child(1){ transform:translateY(6px) rotate(45deg) }
+.nav.open .navtog .nbar:nth-child(2){ opacity:0 }
+.nav.open .navtog .nbar:nth-child(3){ transform:translateY(-6px) rotate(-45deg) }
 
 /* ===== HERO: trang + world map mo ===== */
 .hero2{ position:relative; padding:150px 18px 0; text-align:center; overflow:hidden }
@@ -313,9 +320,18 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   .tile:nth-child(n+4){ display:none }
 }
 @media (max-width:640px){
-  .nav-center{ position:static; transform:none }
-  .nav-in{ flex-wrap:wrap }
-  .langtog{ display:none }
+  .navtog{ display:inline-flex }
+  .nav.open{ background:rgba(255,255,255,.96); -webkit-backdrop-filter:saturate(180%) blur(20px); backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid var(--line-2) }
+  .nav-in{ flex-wrap:wrap; row-gap:0 }
+  .nav-center{ position:static; transform:none; order:2; flex-basis:100%; flex-direction:column; align-items:stretch; gap:2px; margin-top:10px; display:none }
+  .nav.open .nav-center{ display:flex }
+  .nav-center .navlink{ padding:12px 14px; border-radius:12px; font-size:16px; opacity:1 }
+  .nav-center .navlink:hover{ background:var(--field) }
+  .nav-center .navlink.on{ color:var(--primary); background:var(--field) }
+  .nav-right{ order:3; flex-basis:100%; flex-direction:column; align-items:stretch; gap:12px; margin:12px 0 14px; display:none }
+  .nav.open .nav-right{ display:flex }
+  .langtog{ display:inline-flex; align-self:flex-start }
+  .nav .btn-hero{ justify-content:center }
   .faq{ grid-template-columns:1fr }
   .hero2{ padding-top:130px }
   .htab{ font-size:14px; padding:10px 13px }
@@ -344,6 +360,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
       <div class="langtog" role="group" aria-label="Language"><a class="on" href="/en/radar">EN</a><a href="/radar">VI</a></div>
       <a class="btn btn-hero" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Get the app <span class="ar">→</span></a>
     </div>
+    <button class="navtog" id="navtog" type="button" aria-label="Menu" aria-expanded="false"><span class="nbar"></span><span class="nbar"></span><span class="nbar"></span></button>
   </div>
 </header>
 
@@ -609,6 +626,21 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   var nav=$("nav");
   function onScroll(){ if(window.scrollY>40) nav.classList.add("solid"); else nav.classList.remove("solid") }
   window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+  // menu mobile (hamburger)
+  var navtog=$("navtog");
+  if(navtog){
+    navtog.addEventListener("click", function(){
+      var open=nav.classList.toggle("open");
+      navtog.setAttribute("aria-expanded", String(open));
+    });
+    // dong menu khi bam ra ngoai
+    document.addEventListener("click", function(e){
+      if(nav.classList.contains("open") && !nav.contains(e.target)){
+        nav.classList.remove("open"); navtog.setAttribute("aria-expanded","false");
+      }
+    });
+  }
 
   // link tim ve that tren Aviasales (kem marker affiliate)
   function avUrl(o,d,date){
