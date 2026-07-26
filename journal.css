@@ -28,12 +28,14 @@ a{ color:inherit; text-decoration:none }
 .jbar-center a:hover{ color:var(--ink) }
 .jbar-center a.on{ color:var(--primary) }
 @media (max-width:560px){ .jbar-center{ display:none } }
-.jbar .brand{ display:flex; align-items:center } .jbar .brand img{ height:30px; width:30px; display:block; border-radius:8px }
+.jbar .brand{ display:flex; align-items:center; gap:10px; font-family:var(--f-display); font-size:22px; color:var(--ink) }
+.jbar .brand img{ height:34px; width:34px; display:block; border-radius:9px }
 .jbar-right{ display:flex; align-items:center; gap:16px }
 .jbar .blink{ font-size:14px; font-weight:500; color:var(--ink-48); transition:color .2s } .jbar .blink:hover{ color:var(--ink) }
 .langtog{ display:inline-flex; align-items:center; background:rgba(20,28,40,.05); border:1px solid var(--hairline); border-radius:9999px; padding:2px; gap:2px }
 .langtog a{ font-size:11px; font-weight:600; color:var(--ink-48); border-radius:9999px; padding:4px 10px; transition:color .2s, background .2s } .langtog a.on{ background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(20,28,40,.10) }
-.jbar .get{ color:var(--ink); font-size:15px; font-weight:400; transition:color .2s } .jbar .get:hover{ color:var(--primary) }
+.jbar .get{ display:inline-flex; align-items:center; background:var(--primary); color:#fff; font-size:14.5px; font-weight:500; padding:10px 18px; border-radius:var(--pill); transition:background .2s, transform .12s }
+.jbar .get:hover{ background:#005ab3 } .jbar .get:active{ transform:scale(.97) }
 
 /* ---------- index, pool.day/research grid (3-up cards, thiings 3D icons) ---------- */
 .jwrap{ max-width:1200px; margin:0 auto; padding:0 24px }

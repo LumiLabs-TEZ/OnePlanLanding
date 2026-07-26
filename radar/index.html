@@ -81,7 +81,7 @@ button,input,select{ font-family:inherit }
 .hero2{ position:relative; padding:150px 18px 0; text-align:center; overflow:hidden }
 .mapbg{ position:absolute; top:0; left:50%; transform:translateX(-50%); width:min(1512px,120vw); opacity:.3; pointer-events:none; -webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 95%); mask-image:linear-gradient(180deg,#000 55%,transparent 95%) }
 .hero2-in{ position:relative; z-index:1; max-width:820px; margin:0 auto }
-.hero2 h1{ font-family:var(--f-display); font-weight:500; font-size:clamp(42px,6.4vw,92px); line-height:.95; letter-spacing:-.025em; margin:0 0 22px; color:#000 }
+.hero2 h1{ font-family:var(--f-brand); font-weight:400; font-size:clamp(40px,5.8vw,78px); line-height:1.02; letter-spacing:-.02em; margin:0 0 22px; color:#000 }
 .hero2 .hsub{ font-size:clamp(16px,1.8vw,22px); line-height:1.35; color:var(--ink-2); margin:0 auto 42px; max-width:48ch }
 
 /* tab dich vu: container trang vien dam, pill active den */
@@ -99,7 +99,7 @@ button,input,select{ font-family:inherit }
 /* Card A: dat lenh */
 .ordercard{ background:var(--field); border:1px solid var(--line); border-radius:var(--r-card); position:relative }
 .oc-top{ background:#fff; border:1px solid var(--line); border-radius:var(--r-card); margin:-1px -1px 0; padding:22px 26px 11px 11px }
-.oc-price{ display:flex; align-items:center; gap:8px; padding:0 0 18px 16px }
+.oc-price{ display:flex; align-items:center; gap:8px; padding:4px 0 58px 16px }
 .oc-price img{ width:32px; height:32px }
 .oc-price input{ border:none; background:none; flex:1; min-width:0; font-size:clamp(20px,2.6vw,30px); font-weight:500; color:var(--ink); padding:0 }
 .oc-price input::placeholder{ color:var(--ghost); font-weight:400 }
@@ -110,11 +110,30 @@ button,input,select{ font-family:inherit }
 .fpill label{ font-size:15px; color:var(--ink-3); white-space:nowrap; flex:none }
 .fpill .in{ border:none; background:none; text-align:right; font-size:15px; font-weight:500; color:var(--ink); width:100%; min-width:0; padding:0 }
 .fpill .in:focus{ outline:none }
-.fpill.dates{ flex:1.7 1 0 }
+.fpill.dates{ flex:1.4 1 0 }
 .fpill.dates .dwrap{ display:flex; align-items:center; gap:2px; min-width:0 }
-.fpill.dates input{ flex:none; border:none; background:none; font-size:12.5px; font-weight:500; color:var(--ink); padding:0; width:108px; text-align:right; font-variant-numeric:tabular-nums }
-.fpill.dates input:focus{ outline:none }
+.fpill.dates input[type="date"]{ flex:none; border:none; background:none; font-size:12.5px; font-weight:500; color:var(--ink); padding:0; width:108px; text-align:right; font-variant-numeric:tabular-nums }
+.fpill.dates input[type="date"]:focus{ outline:none }
 .fpill.dates i{ font-style:normal; color:var(--ghost) }
+.dlab{ border:none; background:none; font-size:15px; font-weight:500; color:var(--ink); padding:0; cursor:pointer; white-space:nowrap; font-variant-numeric:tabular-nums }
+/* calendar chon khoang ngay (ref: lich co gia theo ngay) */
+.ac-list.cal{ left:auto; right:0; min-width:352px; max-height:460px; padding:14px 14px 12px; cursor:default }
+.cal-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px }
+.cal-head b{ font-size:16px; font-weight:600; color:var(--ink) }
+.cal-nav{ width:32px; height:32px; border:none; border-radius:10px; background:var(--field); color:var(--ink); font-size:16px; cursor:pointer }
+.cal-nav:disabled{ opacity:.35; cursor:default }
+.cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:2px }
+.cal-dow{ font-size:11.5px; font-weight:600; color:var(--mute); text-align:center; padding:6px 0 }
+.cal-d{ position:relative; border:none; background:none; border-radius:12px; padding:6px 0 5px; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:1px; min-height:46px }
+.cal-d b{ font-size:14.5px; font-weight:500; color:var(--ink) }
+.cal-d span{ font-size:10px; color:var(--mute) }
+.cal-d span.good{ color:var(--primary); font-weight:600 }
+.cal-d:hover{ background:var(--field) }
+.cal-d.dis{ opacity:.3; cursor:default } .cal-d.dis:hover{ background:none }
+.cal-d.inr{ background:var(--primary-tint); border-radius:0 }
+.cal-d.sel{ background:var(--primary) }
+.cal-d.sel b, .cal-d.sel span, .cal-d.sel span.good{ color:#fff }
+.cal-hint{ font-size:11.5px; color:var(--mute); margin:8px 2px 0 }
 .swap2{ flex:none; width:44px; height:44px; border-radius:50%; border:none; background:var(--primary); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:transform .25s var(--spring), background .2s }
 .swap2:hover{ background:var(--primary-2); transform:rotate(180deg) }
 .swap2 img{ width:22px; height:22px }
@@ -158,8 +177,7 @@ button,input,select{ font-family:inherit }
 .gpill2{ position:absolute; right:24px; display:inline-flex; gap:8px; align-items:center; background:var(--chipg); border-radius:61px; padding:9px 18px; font-size:14.5px; color:#000; white-space:nowrap; pointer-events:none }
 .gpill2 b{ font-weight:600 }
 .gpill2.ceil{ top:8px } .gpill2.floor{ bottom:10px }
-.tpill{ position:absolute; z-index:3; display:inline-flex; gap:6px; align-items:center; background:var(--primary); color:#fff; border-radius:61px; padding:7px 13px; font-size:12.5px; font-weight:500; white-space:nowrap; pointer-events:none; transform:translate(10px,-50%); box-shadow:0 8px 20px -8px rgba(51,92,255,.5) }
-.tpill.flip{ transform:translate(calc(-100% - 10px),-50%) }
+.tpill{ position:absolute; z-index:3; display:inline-flex; gap:6px; align-items:center; background:var(--primary); color:#fff; border-radius:61px; padding:7px 13px; font-size:12.5px; font-weight:500; white-space:nowrap; pointer-events:none; transform:translateY(-50%); box-shadow:0 8px 20px -8px rgba(51,92,255,.5) }
 .tpill i{ font-style:normal; opacity:.55 }
 
 /* thinh hanh */
@@ -350,11 +368,11 @@ button,input,select{ font-family:inherit }
             <input class="in" id="to" type="text" autocomplete="off" required />
             <div class="ac-list" id="toList" role="listbox"></div>
           </div>
-          <div class="fpill dates">
+          <div class="fpill dates acx" id="dateBox">
             <label>Ngày bay</label>
-            <span class="dwrap">
-              <input type="date" id="dateFrom" required /><i>–</i><input type="date" id="dateTo" required />
-            </span>
+            <button type="button" class="dlab" id="dateLabel" aria-haspopup="dialog"></button>
+            <input type="hidden" id="dateFrom" /><input type="hidden" id="dateTo" />
+            <div class="ac-list cal" id="calPanel" role="dialog" aria-label="Chọn khoảng ngày bay"></div>
           </div>
           <button class="obtn" type="submit" id="submitBtn">Đặt lệnh</button>
         </div>
@@ -712,10 +730,11 @@ button,input,select{ font-family:inherit }
     if(!hasTarget) target=quantile(data,0.25);
     var tShow=Math.max(lo,Math.min(hi,target));
     var pct=hitChance(Math.round(target));
-    // diem gan muc tieu nhat de dat cham tren duong gia
-    var ti=0, best=1e15;
-    for(var i=0;i<data.length;i++){ var d=Math.abs(data[i]-tShow); if(d<best){ best=d; ti=i } }
     var pts=data.map(function(v,i){ return X(i).toFixed(1)+","+Y(v).toFixed(1) }).join(" ");
+    // marker theo MUC GIA: duong ngang kieu dat lenh limit + cham nhung ngay gia <= muc tieu
+    var dots=data.map(function(v,i){
+      return v<=tShow ? '<circle cx="'+X(i).toFixed(1)+'" cy="'+Y(v).toFixed(1)+'" r="3.5" fill="#335cff"/>' : '';
+    }).join("");
     svg.innerHTML =
       '<defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">'+
         '<stop offset="0%" stop-color="#008cff" stop-opacity=".5"/>'+
@@ -725,18 +744,17 @@ button,input,select{ font-family:inherit }
       '<line x1="0" y1="'+(H-PB)+'" x2="'+W+'" y2="'+(H-PB)+'" stroke="#d9d9d9" stroke-width="1.5" stroke-dasharray="6 6"/>'+
       '<polygon points="0,'+(H-PB)+' '+pts+' '+W+','+(H-PB)+'" fill="url(#ag)"/>'+
       '<polyline points="'+pts+'" fill="none" stroke="#008cff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'+
-      '<line x1="'+X(ti)+'" y1="'+PT+'" x2="'+X(ti)+'" y2="'+(H-PB)+'" stroke="#9c9c9c" stroke-width="1.2" stroke-dasharray="5 5"/>'+
-      '<circle cx="'+X(ti)+'" cy="'+Y(data[ti])+'" r="4.5" fill="#fff" stroke="#008cff" stroke-width="2.5"/>';
+      '<line x1="0" y1="'+Y(tShow)+'" x2="'+W+'" y2="'+Y(tShow)+'" stroke="#335cff" stroke-width="1.6" stroke-dasharray="7 5"/>'+
+      dots;
     $("cbHi").textContent=fmt(hi); $("cbLo").textContent=fmt(lo);
-    // pill muc tieu
+    // pill muc tieu nam tren duong gia
     var pill=$("tpill");
     pill.hidden=false;
     $("tpPrice").textContent=fmt(Math.round(target));
     $("tpPct").textContent = hasTarget ? "~"+pct+"% khớp" : "giá tốt · ~"+pct+"% khớp";
     var box=$("ccChart").getBoundingClientRect();
-    var xPct=X(ti)/W;
-    pill.classList.toggle("flip", xPct>0.68);
-    pill.style.left=(xPct*100)+"%";
+    pill.classList.remove("flip");
+    pill.style.left="18px";
     pill.style.top=(box.height? (Y(tShow)/H*box.height) : Y(tShow))+"px";
   }
   (function(){
@@ -870,10 +888,66 @@ button,input,select{ font-family:inherit }
     $("to").value=shown(sel.to);
     refresh();
   };
-  $("dateFrom").value=iso(d1); $("dateTo").value=iso(d2);
-  $("dateFrom").min=iso(new Date()); $("dateTo").min=iso(new Date());
+  // ---- lich chon khoang ngay bay (ref: calendar co gia theo ngay) ----
+  var calSel={ a:iso(d1), b:iso(d2) };
+  var calMonth=new Date(); calMonth.setDate(1);
+  var CAL_MAX_MONTHS=3;
+  function dmy(s){ return s.slice(8,10)+"/"+s.slice(5,7) }
+  function calLabel(){ $("dateLabel").textContent = calSel.b ? dmy(calSel.a)+" – "+dmy(calSel.b) : dmy(calSel.a)+" – ?" }
+  function calApply(){
+    if(!calSel.b) return;
+    $("dateFrom").value=calSel.a; $("dateTo").value=calSel.b;
+    calLabel(); renderProb();
+  }
+  function monthsFromNow(d){ var n=new Date(); return (d.getFullYear()-n.getFullYear())*12+(d.getMonth()-n.getMonth()) }
+  function renderCal(){
+    var panel=$("calPanel");
+    var data=series(sel.from+"-"+sel.to);
+    var good=quantile(data,0.25);
+    var pm={}; for(var i=0;i<data.length;i++){ pm[iso(new Date(Date.now()+i*864e5))]=data[i] }
+    var y=calMonth.getFullYear(), mo=calMonth.getMonth();
+    var startDow=(new Date(y,mo,1).getDay()+6)%7;
+    var dim=new Date(y,mo+1,0).getDate();
+    var todayIso=iso(new Date());
+    var idx=monthsFromNow(calMonth);
+    var html='<div class="cal-head">'+
+      '<button type="button" class="cal-nav" id="calPrev"'+(idx<=0?" disabled":"")+'>‹</button>'+
+      '<b>Tháng '+(mo+1)+', '+y+'</b>'+
+      '<button type="button" class="cal-nav" id="calNext"'+(idx>=CAL_MAX_MONTHS?" disabled":"")+'>›</button></div>'+
+      '<div class="cal-grid">'+["T2","T3","T4","T5","T6","T7","CN"].map(function(d){return '<span class="cal-dow">'+d+'</span>'}).join("");
+    for(var e=0;e<startDow;e++) html+='<span></span>';
+    for(var day=1; day<=dim; day++){
+      var dISO=iso(new Date(y,mo,day,12));
+      var past=dISO<todayIso;
+      var p=pm[dISO];
+      var cls="cal-d"+(past?" dis":"");
+      if(!past && calSel.a && calSel.b && dISO>calSel.a && dISO<calSel.b) cls+=" inr";
+      if(dISO===calSel.a || dISO===calSel.b) cls+=" sel";
+      html+='<button type="button" class="'+cls+'" data-d="'+dISO+'"'+(past?" disabled":"")+'><b>'+day+'</b>'+
+        (p && !past ? '<span'+(p<=good?' class="good"':'')+'>'+Math.round(p/1000)+'k</span>' : '<span>&nbsp;</span>')+'</button>';
+    }
+    html+='</div><p class="cal-hint">Giá ước tính theo mùa cho '+sel.from+' → '+sel.to+' · xanh = giá tốt. Chọn ngày đi, rồi chọn ngày cuối.</p>';
+    panel.innerHTML=html;
+    $("calPrev").onclick=function(ev){ ev.stopPropagation(); calMonth=new Date(y,mo-1,1); renderCal() };
+    $("calNext").onclick=function(ev){ ev.stopPropagation(); calMonth=new Date(y,mo+1,1); renderCal() };
+    [].forEach.call(panel.querySelectorAll(".cal-d:not(.dis)"), function(b){
+      b.onclick=function(ev){
+        ev.stopPropagation();
+        var dd=b.dataset.d;
+        if(!calSel.a || calSel.b){ calSel={a:dd,b:null}; calLabel(); renderCal(); return }
+        if(dd<calSel.a){ calSel={a:dd,b:null}; calLabel(); renderCal(); return }
+        calSel.b=dd; calApply(); renderCal();
+        setTimeout(function(){ $("calPanel").classList.remove("show") }, 220);
+      };
+    });
+  }
+  $("dateBox").addEventListener("click", function(e){
+    if(e.target.closest(".cal")) return;
+    renderCal(); $("calPanel").classList.add("show");
+  });
+  document.addEventListener("click", function(e){ if(!$("dateBox").contains(e.target)) $("calPanel").classList.remove("show") });
+  $("dateFrom").value=iso(d1); $("dateTo").value=iso(d2); calLabel();
   $("price").addEventListener("input", renderProb);
-  $("dateTo").addEventListener("change", renderProb);
   window.addEventListener("resize", function(){ renderProb() });
   refresh();
 
