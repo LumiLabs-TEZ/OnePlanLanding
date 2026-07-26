@@ -204,11 +204,12 @@
   document.head.appendChild(st);
 })();
 
-/* mobile nav toggle (journal jbar hamburger) */
+/* mobile nav toggle (hamburger) - works for landing .nav and journal .jbar */
 (function () {
-  var bar = document.querySelector(".jbar");
   var tog = document.getElementById("navtog");
-  if (!bar || !tog) return;
+  if (!tog) return;
+  var bar = tog.closest(".nav, .jbar");
+  if (!bar) return;
   tog.addEventListener("click", function () {
     var open = bar.classList.toggle("open");
     tog.setAttribute("aria-expanded", String(open));
