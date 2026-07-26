@@ -44,6 +44,11 @@ body{ margin:0; background:var(--canvas); color:var(--ink); font-family:var(--f-
 img{ max-width:100%; display:block }
 a{ color:inherit; text-decoration:none }
 button,input,select{ font-family:inherit }
+/* autofill: giu nguyen nen goc, khong de trinh duyet to xanh */
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus{
+  -webkit-text-fill-color:var(--ink); caret-color:var(--ink);
+  transition:background-color 9999999s ease-in-out 0s;
+}
 :focus-visible{ outline:2px solid var(--primary); outline-offset:3px; border-radius:8px }
 .wrap{ max-width:1200px; margin:0 auto; padding:0 24px }
 .h2{ font-family:var(--f-display); font-weight:600; font-size:clamp(26px,3.2vw,38px); line-height:1.15; letter-spacing:-.02em; margin:0; color:var(--ink) }
@@ -397,13 +402,16 @@ button,input,select{ font-family:inherit }
   <!-- HOTEL (tab Khach San) -->
   <form class="hotelcard" id="hotelForm" hidden novalidate>
     <div class="oc-row">
-      <div class="fpill">
+      <div class="fpill acx" id="hCityBox">
         <label for="hCity">Điểm đến</label>
         <input class="in" id="hCity" type="text" autocomplete="off" required />
+        <div class="ac-list" id="hCityList" role="listbox"></div>
       </div>
-      <div class="fpill dates">
-        <label>Nhận – trả phòng</label>
-        <span class="dwrap"><input type="date" id="hIn" required /><i>–</i><input type="date" id="hOut" required /></span>
+      <div class="fpill dates acx" id="hDateBox">
+        <label>Nhận – trả</label>
+        <button type="button" class="dlab" id="hDateLabel" aria-haspopup="dialog"></button>
+        <input type="hidden" id="hIn" /><input type="hidden" id="hOut" />
+        <div class="ac-list cal" id="hCalPanel" role="dialog" aria-label="Chọn ngày nhận và trả phòng"></div>
       </div>
       <div class="fpill" style="flex:.7 1 0">
         <label for="hGuests">Khách</label>
@@ -900,65 +908,80 @@ button,input,select{ font-family:inherit }
     $("to").value=shown(sel.to);
     refresh();
   };
-  // ---- lich chon khoang ngay bay (ref: calendar co gia theo ngay) ----
-  var calSel={ a:iso(d1), b:iso(d2) };
-  var calMonth=new Date(); calMonth.setDate(1);
+  // ---- lich chon khoang ngay: component dung chung (flight co gia/ngay; hotel khong bia gia phong) ----
   var CAL_MAX_MONTHS=3;
   function dmy(s){ return s.slice(8,10)+"/"+s.slice(5,7) }
-  function calLabel(){ $("dateLabel").textContent = calSel.b ? dmy(calSel.a)+" – "+dmy(calSel.b) : dmy(calSel.a)+" – ?" }
-  function calApply(){
-    if(!calSel.b) return;
-    $("dateFrom").value=calSel.a; $("dateTo").value=calSel.b;
-    calLabel(); renderProb();
-  }
   function monthsFromNow(d){ var n=new Date(); return (d.getFullYear()-n.getFullYear())*12+(d.getMonth()-n.getMonth()) }
-  function renderCal(){
-    var panel=$("calPanel");
-    var data=series(sel.from+"-"+sel.to);
-    var good=quantile(data,0.25);
-    var pm={}; for(var i=0;i<data.length;i++){ pm[iso(new Date(Date.now()+i*864e5))]=data[i] }
-    var y=calMonth.getFullYear(), mo=calMonth.getMonth();
-    var startDow=(new Date(y,mo,1).getDay()+6)%7;
-    var dim=new Date(y,mo+1,0).getDate();
-    var todayIso=iso(new Date());
-    var idx=monthsFromNow(calMonth);
-    var html='<div class="cal-head">'+
-      '<button type="button" class="cal-nav" id="calPrev"'+(idx<=0?" disabled":"")+'>‹</button>'+
-      '<b>Tháng '+(mo+1)+', '+y+'</b>'+
-      '<button type="button" class="cal-nav" id="calNext"'+(idx>=CAL_MAX_MONTHS?" disabled":"")+'>›</button></div>'+
-      '<div class="cal-grid">'+["T2","T3","T4","T5","T6","T7","CN"].map(function(d){return '<span class="cal-dow">'+d+'</span>'}).join("");
-    for(var e=0;e<startDow;e++) html+='<span></span>';
-    for(var day=1; day<=dim; day++){
-      var dISO=iso(new Date(y,mo,day,12));
-      var past=dISO<todayIso;
-      var p=pm[dISO];
-      var cls="cal-d"+(past?" dis":"");
-      if(!past && calSel.a && calSel.b && dISO>calSel.a && dISO<calSel.b) cls+=" inr";
-      if(dISO===calSel.a || dISO===calSel.b) cls+=" sel";
-      html+='<button type="button" class="'+cls+'" data-d="'+dISO+'"'+(past?" disabled":"")+'><b>'+day+'</b>'+
-        (p && !past ? '<span'+(p<=good?' class="good"':'')+'>'+Math.round(p/1000)+'k</span>' : '<span>&nbsp;</span>')+'</button>';
+  function makeRangeCal(cfg){
+    var st={ a:cfg.a, b:cfg.b };
+    var month=new Date(); month.setDate(1);
+    function label(){ $(cfg.label).textContent = st.b ? dmy(st.a)+" – "+dmy(st.b) : dmy(st.a)+" – ?" }
+    function apply(){ if(!st.b) return; $(cfg.inFrom).value=st.a; $(cfg.inTo).value=st.b; label(); if(cfg.onApply) cfg.onApply() }
+    function render(){
+      var panel=$(cfg.panel);
+      var pr=cfg.prices ? cfg.prices() : null;
+      var y=month.getFullYear(), mo=month.getMonth();
+      var startDow=(new Date(y,mo,1).getDay()+6)%7;
+      var dim=new Date(y,mo+1,0).getDate();
+      var todayIso=iso(new Date());
+      var idx=monthsFromNow(month);
+      var html='<div class="cal-head">'+
+        '<button type="button" class="cal-nav" data-nav="-1"'+(idx<=0?" disabled":"")+'>‹</button>'+
+        '<b>Tháng '+(mo+1)+', '+y+'</b>'+
+        '<button type="button" class="cal-nav" data-nav="1"'+(idx>=CAL_MAX_MONTHS?" disabled":"")+'>›</button></div>'+
+        '<div class="cal-grid">'+["T2","T3","T4","T5","T6","T7","CN"].map(function(d){return '<span class="cal-dow">'+d+'</span>'}).join("");
+      for(var e=0;e<startDow;e++) html+='<span></span>';
+      for(var day=1; day<=dim; day++){
+        var dISO=iso(new Date(y,mo,day,12));
+        var past=dISO<todayIso;
+        var p=pr ? pr.map[dISO] : null;
+        var cls="cal-d"+(past?" dis":"");
+        if(!past && st.a && st.b && dISO>st.a && dISO<st.b) cls+=" inr";
+        if(dISO===st.a || dISO===st.b) cls+=" sel";
+        html+='<button type="button" class="'+cls+'" data-d="'+dISO+'"'+(past?" disabled":"")+'><b>'+day+'</b>'+
+          (p && !past ? '<span'+(p<=pr.good?' class="good"':'')+'>'+Math.round(p/1000)+'k</span>' : (pr?'<span>&nbsp;</span>':''))+'</button>';
+      }
+      html+='</div><p class="cal-hint">'+cfg.hint()+'</p>';
+      panel.innerHTML=html;
+      [].forEach.call(panel.querySelectorAll(".cal-nav"), function(b){
+        b.onclick=function(ev){ ev.stopPropagation(); if(b.disabled) return; month=new Date(y, mo+(+b.dataset.nav), 1); render() };
+      });
+      [].forEach.call(panel.querySelectorAll(".cal-d:not(.dis)"), function(b){
+        b.onclick=function(ev){
+          ev.stopPropagation();
+          var dd=b.dataset.d;
+          if(!st.a || st.b){ st={a:dd,b:null}; label(); render(); return }
+          if(dd<st.a){ st={a:dd,b:null}; label(); render(); return }
+          st.b=dd; apply(); render();
+          setTimeout(function(){ panel.classList.remove("show") }, 220);
+        };
+      });
     }
-    html+='</div><p class="cal-hint">Giá ước tính theo mùa cho '+sel.from+' → '+sel.to+' · xanh = giá tốt. Chọn ngày đi, rồi chọn ngày cuối.</p>';
-    panel.innerHTML=html;
-    $("calPrev").onclick=function(ev){ ev.stopPropagation(); calMonth=new Date(y,mo-1,1); renderCal() };
-    $("calNext").onclick=function(ev){ ev.stopPropagation(); calMonth=new Date(y,mo+1,1); renderCal() };
-    [].forEach.call(panel.querySelectorAll(".cal-d:not(.dis)"), function(b){
-      b.onclick=function(ev){
-        ev.stopPropagation();
-        var dd=b.dataset.d;
-        if(!calSel.a || calSel.b){ calSel={a:dd,b:null}; calLabel(); renderCal(); return }
-        if(dd<calSel.a){ calSel={a:dd,b:null}; calLabel(); renderCal(); return }
-        calSel.b=dd; calApply(); renderCal();
-        setTimeout(function(){ $("calPanel").classList.remove("show") }, 220);
-      };
+    $(cfg.box).addEventListener("click", function(e){
+      if(e.target.closest(".cal")) return;
+      render(); $(cfg.panel).classList.add("show");
     });
+    document.addEventListener("click", function(e){ if(!$(cfg.box).contains(e.target)) $(cfg.panel).classList.remove("show") });
+    $(cfg.inFrom).value=st.a; $(cfg.inTo).value=st.b; label();
+    return { set:function(a,b){ st={a:a,b:b}; $(cfg.inFrom).value=a; $(cfg.inTo).value=b; label() } };
   }
-  $("dateBox").addEventListener("click", function(e){
-    if(e.target.closest(".cal")) return;
-    renderCal(); $("calPanel").classList.add("show");
+  makeRangeCal({
+    box:"dateBox", panel:"calPanel", label:"dateLabel", inFrom:"dateFrom", inTo:"dateTo",
+    a:iso(d1), b:iso(d2),
+    prices:function(){
+      var data=series(sel.from+"-"+sel.to), m={};
+      for(var i=0;i<data.length;i++){ m[iso(new Date(Date.now()+i*864e5))]=data[i] }
+      return { map:m, good:quantile(data,0.25) };
+    },
+    hint:function(){ return "Giá ước tính theo mùa cho "+sel.from+" → "+sel.to+" · xanh = giá tốt. Chọn ngày đi, rồi chọn ngày cuối." },
+    onApply:renderProb
   });
-  document.addEventListener("click", function(e){ if(!$("dateBox").contains(e.target)) $("calPanel").classList.remove("show") });
-  $("dateFrom").value=iso(d1); $("dateTo").value=iso(d2); calLabel();
+  var hotelCal=makeRangeCal({
+    box:"hDateBox", panel:"hCalPanel", label:"hDateLabel", inFrom:"hIn", inTo:"hOut",
+    a:iso(d1), b:iso(d2),
+    prices:null,
+    hint:function(){ return "Chọn ngày nhận phòng, rồi ngày trả phòng." }
+  });
   $("price").addEventListener("input", renderProb);
   window.addEventListener("resize", function(){ renderProb() });
   refresh();
@@ -976,13 +999,65 @@ button,input,select{ font-family:inherit }
     $("radarForm").hidden=hotel; $("chartcard").hidden=hotel; $("hotelForm").hidden=!hotel;
     if(hotel){
       $("hCity").value=labelOf(sel.to);
-      $("hIn").value=$("dateFrom").value; $("hOut").value=$("dateTo").value;
+      hotelCal.set($("dateFrom").value, $("dateTo").value);
       $("hCity").focus();
     }
   }
   tabF.onclick=function(){ setTab(false) };
   tabH.onclick=function(){ setTab(true) };
-  $("hIn").min=iso(new Date()); $("hOut").min=iso(new Date());
+  // dropdown diem den khach san: thanh pho VN + tim quoc te (places2)
+  (function(){
+    var input=$("hCity"), list=$("hCityList"), box=$("hCityBox");
+    if(!input || !list) return;
+    var items=[], remoteTimer=null, loading=false;
+    var seenLocal={};
+    var LOCAL=AIRPORTS.map(function(a){ return [a[1], a[3]] }).filter(function(c){
+      if(seenLocal[c[0]]) return false; seenLocal[c[0]]=1; return true;
+    });
+    function paint(q){
+      var head='<div class="fp-head">'+(fold(q).length? 'Kết quả cho "'+q+'"' : 'Điểm đến phổ biến')+'</div>';
+      list.innerHTML = head + (items.length
+        ? items.map(function(c,i){
+            return '<button type="button" class="ac-item" style="animation-delay:'+Math.min(i*22,160)+'ms" data-i="'+i+'">'+
+              '<span class="ic">⌂</span><span class="tt"><b>'+c[0]+'</b><span>'+(c[1]||"")+'</span></span></button>';
+          }).join("")
+        : (loading
+            ? '<div class="ac-empty">Đang tìm điểm đến khớp "'+q+'"…</div>'
+            : '<div class="ac-empty">Không thấy điểm đến nào khớp "'+q+'"</div>'));
+      list.classList.add("show");
+      [].forEach.call(list.querySelectorAll(".ac-item"), function(b){
+        b.onmousedown=function(e){ e.preventDefault(); input.value=items[+b.dataset.i][0]; list.classList.remove("show") };
+      });
+    }
+    function render(q){
+      var f=fold(q.trim());
+      items=LOCAL.filter(function(c){ return !f || fold(c[0]).indexOf(f)>=0 || fold(c[1]).indexOf(f)>=0 });
+      if(f.length>=2){
+        loading=true; clearTimeout(remoteTimer);
+        remoteTimer=setTimeout(function(){
+          fetch("https://autocomplete.travelpayouts.com/places2?locale=vi&types[]=city&term="+encodeURIComponent(q.trim()))
+            .then(function(r){ return r.json() })
+            .then(function(rows){
+              if(fold(input.value.trim())!==f) return;
+              loading=false;
+              var have={}; items.forEach(function(c){ have[fold(c[0])]=1 });
+              rows.slice(0,8).forEach(function(r){
+                var city=r.city_name||r.name; if(!city || have[fold(city)]) return;
+                have[fold(city)]=1;
+                items.push([city, r.country_name||""]);
+              });
+              paint(q);
+            })
+            .catch(function(){ loading=false; paint(q) });
+        }, 200);
+      } else { loading=false; }
+      paint(q);
+    }
+    input.addEventListener("focus", function(){ input.select(); render("") });
+    input.addEventListener("input", function(){ render(input.value) });
+    input.addEventListener("blur", function(){ setTimeout(function(){ list.classList.remove("show") }, 120) });
+    document.addEventListener("click", function(e){ if(!box.contains(e.target)) list.classList.remove("show") });
+  })();
   $("hotelForm").addEventListener("submit", function(e){
     e.preventDefault();
     var city=($("hCity").value||"").trim(), ci=$("hIn").value, co=$("hOut").value;
