@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>OnePlan Radar · Săn vé máy bay giá rẻ, so giá khách sạn, rẻ là báo qua Zalo</title>
-<meta name="description" content="Đặt lệnh để Radar canh giá vé 24/7 và nhắn Zalo khi giá chạm mức bạn muốn. So sánh giá khách sạn từ 50+ trang. Miễn phí, không cần tài khoản." />
+<title>OnePlan Radar · Hunt cheap flights, compare hotels, get Zalo alerts</title>
+<meta name="description" content="Set a fare alert and Radar watches prices 24/7, pinging your Zalo when fares hit your target. Compare hotel prices across 50+ sites. Free, no account needed." />
 <meta name="theme-color" content="#335cff" />
-<link rel="canonical" href="https://www.oneplan.space/radar" />
+<link rel="canonical" href="https://www.oneplan.space/en/radar" />
 <link rel="alternate" hreflang="vi" href="https://www.oneplan.space/radar" />
 <link rel="alternate" hreflang="en" href="https://www.oneplan.space/en/radar" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
 <meta name="apple-itunes-app" content="app-id=6761648165" />
-<meta property="og:title" content="OnePlan Radar · Vé rẻ tự tìm đến bạn" />
-<meta property="og:description" content="Đặt lệnh săn vé, Radar canh giá 24/7, rẻ là báo qua Zalo. Miễn phí." />
+<meta property="og:title" content="OnePlan Radar · Cheap flights find you" />
+<meta property="og:description" content="Set a fare alert, Radar watches 24/7, you get a Zalo ping when prices drop. Free." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.oneplan.space/radar" />
+<meta property="og:url" content="https://www.oneplan.space/en/radar" />
 <meta property="og:image" content="https://www.oneplan.space/assets/Thumbnail.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -336,13 +336,13 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 <header class="nav" id="nav">
   <div class="nav-in">
     <a class="brand" href="/"><img src="/assets/logo-icon.png" width="34" height="34" alt="" />OnePlan</a>
-    <nav class="nav-center" aria-label="Chính">
-      <a class="navlink on" href="/radar">Radar</a>
-      <a class="navlink" href="/vi/journal">Journal</a>
+    <nav class="nav-center" aria-label="Primary">
+      <a class="navlink on" href="/en/radar">Radar</a>
+      <a class="navlink" href="/journal">Journal</a>
     </nav>
     <div class="nav-right">
-      <div class="langtog" role="group" aria-label="Ngôn ngữ"><a href="/en/radar">EN</a><a class="on" href="/radar">VI</a></div>
-      <a class="btn btn-hero" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Tải app <span class="ar">→</span></a>
+      <div class="langtog" role="group" aria-label="Language"><a class="on" href="/en/radar">EN</a><a href="/radar">VI</a></div>
+      <a class="btn btn-hero" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Get the app <span class="ar">→</span></a>
     </div>
   </div>
 </header>
@@ -352,12 +352,12 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 <section class="hero2">
   <img class="mapbg" src="/radar/img/map.jpg" alt="" aria-hidden="true" />
   <div class="hero2-in">
-    <h1>Vé rẻ tự tìm đến bạn.</h1>
-    <p class="hsub">Đặt lệnh với mức giá bạn muốn, Radar canh 24/7 và nhắn Zalo ngay khi vé chạm giá. Miễn phí, không cần tài khoản.</p>
-    <div class="htabs" role="tablist" aria-label="Dịch vụ Radar">
-      <button type="button" class="htab on" id="tabFlight" role="tab" aria-selected="true">Vé Máy Bay</button>
-      <button type="button" class="htab" id="tabHotel" role="tab" aria-selected="false">Khách Sạn</button>
-      <a class="htab" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Plan Du Lịch</a>
+    <h1>Cheap flights find you.</h1>
+    <p class="hsub">Tell Radar your price. It watches 24/7 and pings your Zalo the moment a fare hits it. Free, no account needed.</p>
+    <div class="htabs" role="tablist" aria-label="Radar services">
+      <button type="button" class="htab on" id="tabFlight" role="tab" aria-selected="true">Flights</button>
+      <button type="button" class="htab" id="tabHotel" role="tab" aria-selected="false">Hotels</button>
+      <a class="htab" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Trip Planner</a>
     </div>
   </div>
 </section>
@@ -370,33 +370,33 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
       <div class="oc-top">
         <div class="oc-price">
           <img src="/radar/img/ic-dollar.svg" alt="" aria-hidden="true" />
-          <input id="price" type="text" inputmode="numeric" placeholder="Nhập giá mục tiêu" autocomplete="off" required />
-          <span class="dong">đ</span>
+          <input id="price" type="text" inputmode="numeric" placeholder="Enter your target price" autocomplete="off" required />
+          <span class="dong">₫</span>
         </div>
         <div class="oc-row">
           <div class="fpill acx" id="fromBox">
-            <label for="from">Bay từ</label>
+            <label for="from">From</label>
             <input class="in" id="from" type="text" autocomplete="off" required />
             <div class="ac-list" id="fromList" role="listbox"></div>
           </div>
-          <button class="swap2" type="button" id="swap" aria-label="Đảo chiều tuyến"><img src="/radar/img/ic-sort.svg" alt="" /></button>
+          <button class="swap2" type="button" id="swap" aria-label="Swap route"><img src="/radar/img/ic-sort.svg" alt="" /></button>
           <div class="fpill acx" id="toBox">
-            <label for="to">Đến</label>
+            <label for="to">To</label>
             <input class="in" id="to" type="text" autocomplete="off" required />
             <div class="ac-list" id="toList" role="listbox"></div>
           </div>
           <div class="fpill dates acx" id="dateBox">
-            <label>Ngày bay</label>
+            <label>Dates</label>
             <button type="button" class="dlab" id="dateLabel" aria-haspopup="dialog"></button>
             <input type="hidden" id="dateFrom" /><input type="hidden" id="dateTo" />
-            <div class="ac-list cal" id="calPanel" role="dialog" aria-label="Chọn khoảng ngày bay"></div>
+            <div class="ac-list cal" id="calPanel" role="dialog" aria-label="Pick travel dates"></div>
           </div>
-          <button class="obtn" type="submit" id="submitBtn">Đặt lệnh</button>
+          <button class="obtn" type="submit" id="submitBtn">Set alert</button>
         </div>
       </div>
       <div class="oc-zalo">
         <img src="/radar/img/ic-phone.svg" alt="" aria-hidden="true" />
-        <input id="phone" type="tel" inputmode="tel" placeholder="Zalo nhận thông báo" required />
+        <input id="phone" type="tel" inputmode="tel" placeholder="Zalo number for alerts" required />
       </div>
     </div>
   </form>
@@ -405,25 +405,25 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   <form class="hotelcard" id="hotelForm" hidden novalidate>
     <div class="oc-row">
       <div class="fpill acx" id="hCityBox">
-        <label for="hCity">Điểm đến</label>
+        <label for="hCity">Destination</label>
         <input class="in" id="hCity" type="text" autocomplete="off" required />
         <div class="ac-list" id="hCityList" role="listbox"></div>
       </div>
       <div class="fpill dates acx" id="hDateBox">
-        <label>Nhận – trả</label>
+        <label>Check-in – out</label>
         <button type="button" class="dlab" id="hDateLabel" aria-haspopup="dialog"></button>
         <input type="hidden" id="hIn" /><input type="hidden" id="hOut" />
-        <div class="ac-list cal" id="hCalPanel" role="dialog" aria-label="Chọn ngày nhận và trả phòng"></div>
+        <div class="ac-list cal" id="hCalPanel" role="dialog" aria-label="Pick check-in and check-out dates"></div>
       </div>
       <div class="fpill" style="flex:.7 1 0">
-        <label for="hGuests">Khách</label>
+        <label for="hGuests">Guests</label>
         <select class="in" id="hGuests" style="appearance:none">
           <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option>
         </select>
       </div>
-      <button class="obtn" type="submit">Tìm khách sạn</button>
+      <button class="obtn" type="submit">Find hotels</button>
     </div>
-    <p class="hnote">So sánh giá phòng từ Agoda, Booking.com và 50+ trang đặt phòng, tự đồng bộ với tuyến bay và ngày bạn đang xem. Canh giá phòng qua Zalo sẽ có sau.</p>
+    <p class="hnote">Compares room prices from Agoda, Booking.com and 50+ booking sites, synced with the route and dates you are viewing. Zalo price alerts for hotels are coming.</p>
   </form>
 
   <!-- CARD B: bieu do gia -->
@@ -431,14 +431,14 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     <div class="cc-head">
       <svg viewBox="0 0 24 24" fill="none" stroke="#252525" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 15v-3"/><path d="M12 15V9"/><path d="M16 15v-2"/></svg>
       <div>
-        <p class="cc-t">Biểu đồ giá 30 ngày qua</p>
-        <p class="cc-s">Bạn có thể <b>chọn giá mục tiêu</b> bằng cách nhấn vào vùng giá trong biểu đồ · số liệu ước tính theo mùa</p>
+        <p class="cc-t">Price chart · last 30 days</p>
+        <p class="cc-s">You can <b>pick a target price</b> by tapping the price area · seasonal estimates</p>
       </div>
     </div>
     <div class="cc-chart" id="ccChart">
-      <svg id="probChart" viewBox="0 0 972 260" preserveAspectRatio="none" aria-label="Bấm để chọn giá mục tiêu"></svg>
-      <span class="gpill2 ceil">Giá trần <b id="cbHi"></b></span>
-      <span class="gpill2 floor">Giá sàn <b id="cbLo"></b></span>
+      <svg id="probChart" viewBox="0 0 972 260" preserveAspectRatio="none" aria-label="Tap to pick a target price"></svg>
+      <span class="gpill2 ceil">Highest <b id="cbHi"></b></span>
+      <span class="gpill2 floor">Lowest <b id="cbLo"></b></span>
       <span class="tpill" id="tpill" hidden><b id="tpPrice"></b><i>·</i><span id="tpPct"></span></span>
     </div>
   </div>
@@ -447,28 +447,28 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   <div class="card30">
     <div class="cc-head" style="padding-bottom:14px">
       <img src="/radar/img/ic-fire.svg" alt="" aria-hidden="true" />
-      <p class="cc-t">Thịnh hành từ <span id="destTitle">TP. Hồ Chí Minh</span></p>
+      <p class="cc-t">Trending from <span id="destTitle">Ho Chi Minh City</span></p>
     </div>
     <div class="dests2" id="dests"></div>
   </div>
 
   <!-- SUCCESS -->
   <div class="success" id="success">
-    <span class="chip">Lệnh đã kích hoạt</span>
-    <p class="big">Radar bắt đầu canh giá cho bạn</p>
+    <span class="chip">Alert activated</span>
+    <p class="big">Radar is now watching prices for you</p>
     <div class="ordercode" id="orderCode"></div>
     <p class="sub" style="font-size:15px" id="successSum"></p>
-    <p class="form-note" style="margin:12px auto 16px">Giá chạm mục tiêu là Zalo của bạn reng. Trong lúc chờ, lo luôn chỗ ở và lịch trình nhé?</p>
-    <a class="btn btn-ghost" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Lên lịch trình trên OnePlan <span class="ar">→</span></a>
-    <button class="btn btn-primary" id="newOrder" type="button" style="margin-left:10px">Đặt lệnh khác</button>
-    <p style="margin:14px 0 0"><a id="hotelCta" href="#" target="_blank" rel="noopener" style="font-size:14px;font-weight:600;color:var(--primary)">Tìm luôn khách sạn cho chuyến này →</a></p>
+    <p class="form-note" style="margin:12px auto 16px">The moment prices hit your target, your Zalo rings. Meanwhile, sort out your stay and itinerary?</p>
+    <a class="btn btn-ghost" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Plan the trip on OnePlan <span class="ar">→</span></a>
+    <button class="btn btn-primary" id="newOrder" type="button" style="margin-left:10px">Set another alert</button>
+    <p style="margin:14px 0 0"><a id="hotelCta" href="#" target="_blank" rel="noopener" style="font-size:14px;font-weight:600;color:var(--primary)">Find a hotel for this trip →</a></p>
   </div>
 
   <!-- DEALS -->
   <div class="dealsec" id="board">
-    <div class="htabs small" role="tablist" aria-label="Bảng kèo">
-      <span class="htab on">Vé tham khảo</span>
-      <a class="htab" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Lịch trình AI</a>
+    <div class="htabs small" role="tablist" aria-label="Deals board">
+      <span class="htab on">Reference fares</span>
+      <a class="htab" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">AI itinerary</a>
     </div>
     <div class="drow">
       <div class="dlist" id="deals"></div>
@@ -476,24 +476,24 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
         <a class="promo" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">
           <img class="pl" src="/radar/img/plane.png" alt="" />
           <span class="ptx">
-            <b>Đặt vé thành công, nhận ngay 1 tháng sử dụng Miễn Phí</b>
-            <span>Tiết kiệm 99.000đ</span>
+            <b>Book a flight, get 1 month of OnePlan free</b>
+            <span>Save 99,000₫</span>
           </span>
         </a>
         <div class="live2">
           <div class="manage" id="manage">
             <div class="manage-card">
-              <span class="chip" id="mStatus">LỆNH CỦA BẠN</span>
+              <span class="chip" id="mStatus">YOUR ALERT</span>
               <p class="m-route" id="mRoute"></p>
               <p class="m-meta" id="mMeta"></p>
               <div class="m-row">
-                <span class="form-note" id="mNote">Radar đang canh giá cho lệnh này.</span>
-                <button class="btn btn-ghost" id="mCancel" type="button" style="padding:9px 16px;font-size:13px">Huỷ lệnh</button>
+                <span class="form-note" id="mNote">Radar is watching prices for this alert.</span>
+                <button class="btn btn-ghost" id="mCancel" type="button" style="padding:9px 16px;font-size:13px">Cancel alert</button>
               </div>
             </div>
           </div>
-          <h3><span class="dotlive"></span> Radar trực tiếp</h3>
-          <p class="l-sub" id="liveSub">Lệnh của bạn trên máy này, cập nhật theo thời gian thực.</p>
+          <h3><span class="dotlive"></span> Radar live</h3>
+          <p class="l-sub" id="liveSub">Your alerts on this device, updated in real time.</p>
           <ul class="tl" id="orderList"></ul>
         </div>
       </div>
@@ -504,23 +504,23 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 
 <!-- FAQ -->
 <section class="sec wrap">
-  <h2 class="h2 center">Hỏi nhanh đáp gọn</h2>
+  <h2 class="h2 center">Quick questions</h2>
   <div class="faq">
-    <div class="qa"><h4>Radar có bán vé không?</h4><p>Không. Radar chỉ canh giá và báo cho bạn kèm link đặt trực tiếp trên nền tảng bán vé. Tiền của bạn không bao giờ đi qua Radar.</p></div>
-    <div class="qa"><h4>Miễn phí thật không?</h4><p>Thật. Bạn đặt tối đa 5 lệnh cùng lúc, không mất phí, không cần tài khoản.</p></div>
-    <div class="qa"><h4>Vì sao cần số điện thoại?</h4><p>Để nhắn Zalo khi giá chạm mục tiêu, và chỉ để làm việc đó. Không spam, tối đa 2 tin mỗi ngày cho một lệnh, dừng lệnh là hết tin.</p></div>
-    <div class="qa"><h4>Giá báo có chính xác không?</h4><p>Trước khi nhắn, Radar kiểm tra lại giá theo thời gian thực. Lệch quá 10% so với giá công bố là tin đó không được gửi.</p></div>
-    <div class="qa"><h4>Radar có canh giá khách sạn không?</h4><p>Chưa. Tab Khách sạn hiện giúp bạn so sánh giá phòng từ Agoda, Booking.com và 50+ trang trong một cú bấm, đồng bộ với tuyến bay đang xem. Canh giá phòng qua Zalo đang được phát triển.</p></div>
-    <div class="qa"><h4>Săn vé xong thì sao?</h4><p>Mở OnePlan để lo phần còn lại: thả link TikTok ra lịch trình AI, rủ hội bạn cùng plan, đi về chia tiền rõ ràng.</p></div>
+    <div class="qa"><h4>Does Radar sell tickets?</h4><p>No. Radar only watches prices and pings you with a direct booking link on the ticketing platform. Your money never passes through Radar.</p></div>
+    <div class="qa"><h4>Really free?</h4><p>Really. Up to 5 active alerts at once, no fees, no account.</p></div>
+    <div class="qa"><h4>Why the phone number?</h4><p>To ping you on Zalo when prices hit your target, and only for that. No spam, at most 2 messages a day per alert, cancel and they stop.</p></div>
+    <div class="qa"><h4>Are alerts accurate?</h4><p>Before pinging you, Radar re-checks the price in real time. If it drifts more than 10% from the published fare, the alert is not sent.</p></div>
+    <div class="qa"><h4>Does Radar watch hotel prices?</h4><p>Not yet. The Hotels tab compares room prices from Agoda, Booking.com and 50+ sites in one tap, synced with the route you are viewing. Zalo alerts for hotels are in the works.</p></div>
+    <div class="qa"><h4>Got the ticket, now what?</h4><p>Open OnePlan for the rest: turn TikTok links into an AI itinerary, plan with friends, split costs cleanly.</p></div>
   </div>
 </section>
 
 <!-- CTA APP -->
 <section class="sec wrap">
   <div class="panel center">
-    <h2 class="h2">Săn được vé rồi thì đi đâu, ăn gì?</h2>
-    <p class="sub" style="max-width:52ch; margin:12px auto 22px">OnePlan lo nốt phần còn lại: thả link TikTok ra lịch trình, rủ hội bạn vào cùng plan, đi về chia tiền không sứt mẻ tình cảm.</p>
-    <a class="btn btn-primary btn-lg" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Tải OnePlan miễn phí <span class="ar">→</span></a>
+    <h2 class="h2">Got the flight. Now where to, what to eat?</h2>
+    <p class="sub" style="max-width:52ch; margin:12px auto 22px">OnePlan handles the rest: turn TikTok links into itineraries, plan together with friends, split costs with zero drama.</p>
+    <a class="btn btn-primary btn-lg" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Get OnePlan free <span class="ar">→</span></a>
   </div>
 </section>
 </main>
@@ -528,11 +528,11 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 <!-- OTP MODAL -->
 <div class="modal" id="otpModal" role="dialog" aria-modal="true" aria-labelledby="otpTitle">
   <div class="modal-card">
-    <h3 id="otpTitle">Xác nhận số điện thoại</h3>
-    <p>Nhập mã 4 số vừa gửi tới Zalo <b id="otpPhone"></b></p>
+    <h3 id="otpTitle">Verify your phone number</h3>
+    <p>Enter the 4-digit code just sent to Zalo <b id="otpPhone"></b></p>
     <input class="otp-in" id="otpInput" inputmode="numeric" maxlength="4" placeholder="••••" />
-    <button class="btn btn-primary" id="otpConfirm" type="button">Kích hoạt lệnh</button>
-    <p class="otp-demo">Bản beta: nhập mã demo <b>2468</b></p>
+    <button class="btn btn-primary" id="otpConfirm" type="button">Activate alert</button>
+    <p class="otp-demo">Beta: use demo code <b>2468</b></p>
   </div>
 </div>
 
@@ -545,11 +545,11 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
       <a href="/privacy-policy">Privacy</a>
       <a href="/termandconditions">Terms</a>
     </nav>
-    <a href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Tải app iOS →</a>
+    <a href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Get the iOS app →</a>
   </div>
 </footer>
 
-<!-- Travelpayouts Drive: xác minh sở hữu site + auto-affiliate link. Chỉ gắn ở /radar. -->
+<!-- Travelpayouts Drive: site ownership + auto-affiliate links. Radar pages only. -->
 <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
   (function () {
       var script = document.createElement("script");
@@ -561,28 +561,28 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 <script>
 (function(){
   var AIRPORTS = [
-    ["SGN","TP. Hồ Chí Minh","Tân Sơn Nhất","Miền Nam"],
-    ["HAN","Hà Nội","Nội Bài","Miền Bắc"],
-    ["DAD","Đà Nẵng","Đà Nẵng","Miền Trung"],
-    ["PQC","Phú Quốc","Phú Quốc","Miền Nam"],
-    ["CXR","Nha Trang","Cam Ranh","Miền Trung"],
-    ["DLI","Đà Lạt","Liên Khương","Tây Nguyên"],
-    ["VCS","Côn Đảo","Côn Đảo","Miền Nam"],
-    ["HPH","Hải Phòng","Cát Bi","Miền Bắc"],
-    ["HUI","Huế","Phú Bài","Miền Trung"],
-    ["VII","Vinh","Vinh","Miền Trung"],
-    ["UIH","Quy Nhơn","Phù Cát","Miền Trung"],
-    ["VCA","Cần Thơ","Cần Thơ","Miền Tây"],
-    ["THD","Thanh Hóa","Thọ Xuân","Miền Bắc"],
-    ["VDO","Quảng Ninh","Vân Đồn","Miền Bắc"],
-    ["VDH","Đồng Hới","Đồng Hới","Miền Trung"],
-    ["TBB","Tuy Hòa","Tuy Hòa","Miền Trung"],
-    ["PXU","Pleiku","Pleiku","Tây Nguyên"],
-    ["BMV","Buôn Ma Thuột","Buôn Ma Thuột","Tây Nguyên"],
-    ["VCL","Tam Kỳ","Chu Lai","Miền Trung"],
-    ["CAH","Cà Mau","Cà Mau","Miền Tây"],
-    ["VKG","Rạch Giá","Rạch Giá","Miền Tây"],
-    ["DIN","Điện Biên","Điện Biên Phủ","Miền Bắc"]
+    ["SGN","Ho Chi Minh City","Tan Son Nhat","South"],
+    ["HAN","Hanoi","Noi Bai","North"],
+    ["DAD","Da Nang","Da Nang","Central"],
+    ["PQC","Phu Quoc","Phu Quoc","South"],
+    ["CXR","Nha Trang","Cam Ranh","Central"],
+    ["DLI","Da Lat","Lien Khuong","Highlands"],
+    ["VCS","Con Dao","Con Dao","South"],
+    ["HPH","Hai Phong","Cat Bi","North"],
+    ["HUI","Hue","Phu Bai","Central"],
+    ["VII","Vinh","Vinh","Central"],
+    ["UIH","Quy Nhon","Phu Cat","Central"],
+    ["VCA","Can Tho","Can Tho","Mekong Delta"],
+    ["THD","Thanh Hoa","Tho Xuan","North"],
+    ["VDO","Quang Ninh","Van Don","North"],
+    ["VDH","Dong Hoi","Dong Hoi","Central"],
+    ["TBB","Tuy Hoa","Tuy Hoa","Central"],
+    ["PXU","Pleiku","Pleiku","Highlands"],
+    ["BMV","Buon Ma Thuot","Buon Ma Thuot","Highlands"],
+    ["VCL","Tam Ky","Chu Lai","Central"],
+    ["CAH","Ca Mau","Ca Mau","Mekong Delta"],
+    ["VKG","Rach Gia","Rach Gia","Mekong Delta"],
+    ["DIN","Dien Bien","Dien Bien Phu","North"]
   ];
   var BASE = { "SGN-HAN":1250000,"SGN-DAD":850000,"HAN-DAD":800000,"SGN-PQC":790000,"HAN-CXR":1150000,
                "SGN-CXR":690000,"SGN-DLI":650000,"HAN-PQC":1450000,"HAN-DLI":1200000,"SGN-HPH":1180000,
@@ -590,17 +590,17 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   var AL_NAME={VJ:["Vietjet Air","#e0342c"],VU:["Vietravel Airlines","#f2a01e"],VN:["Vietnam Airlines","#0b3d91"],QH:["Bamboo Airways","#1c9e5a"]};
   // Diem den goi cam hung: anh chon trong file Figma Oneplan-UI (asset that)
   var DEST_POOL = [
-    ["DAD","Đà Nẵng","/radar/img/dest-danang.jpg"],
-    ["PQC","Phú Quốc","/radar/img/dest-phuquoc.jpg"],
-    ["HAN","Hà Nội","/radar/img/dest-hanoi.jpg"],
-    ["VCS","Côn Đảo","/radar/img/dest-condao.jpg"],
-    ["DLI","Đà Lạt","/radar/img/dest-dalat.jpg"],
-    ["SGN","TP. Hồ Chí Minh","/assets/every-place.jpg"]
+    ["DAD","Da Nang","/radar/img/dest-danang.jpg"],
+    ["PQC","Phu Quoc","/radar/img/dest-phuquoc.jpg"],
+    ["HAN","Hanoi","/radar/img/dest-hanoi.jpg"],
+    ["VCS","Con Dao","/radar/img/dest-condao.jpg"],
+    ["DLI","Da Lat","/radar/img/dest-dalat.jpg"],
+    ["SGN","Ho Chi Minh City","/assets/every-place.jpg"]
   ];
   var MARKER="554837";
   // API khai bao TRUOC lan refresh() dau tien (hoisting -> undefined neu khai bao cuoi file)
   var API="https://api.oneplan.space/fare-watch";
-  var fmt = function(n){ return n.toLocaleString("vi-VN") + "đ" };
+  var fmt = function(n){ return n.toLocaleString("en-US") + "\u20ab" };
   var $ = function(id){ return document.getElementById(id) };
   function fold(s){ return (s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d") }
   function pad(n){ return ("0"+n).slice(-2) }
@@ -621,7 +621,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   var EXTRA = {};
   function labelOf(code){ var a=airport(code); return a ? a[1] : (EXTRA[code] || code) }
   function isVN(code){ return Boolean(airport(code)) }
-  var SHORT={ "TP. Hồ Chí Minh":"TP.HCM", "Buôn Ma Thuột":"BMT" };
+  var SHORT={ "Ho Chi Minh City":"HCMC", "Buon Ma Thuot":"BMT" };
   function shown(code){ var n=labelOf(code); return (SHORT[n]||n)+" ("+code+")" }
 
   function setupCombo(key){
@@ -635,7 +635,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     function close(){ list.classList.remove("show"); idx=-1 }
     var remoteTimer=null, lastQ="", loadingRemote=false;
     function fetchRemote(q){ lastQ=q;
-      fetch("https://autocomplete.travelpayouts.com/places2?locale=vi&types[]=city&types[]=airport&term="+encodeURIComponent(q))
+      fetch("https://autocomplete.travelpayouts.com/places2?locale=en&types[]=city&types[]=airport&term="+encodeURIComponent(q))
         .then(function(r){ return r.json() })
         .then(function(rows){
           if(fold(input.value.trim())!==fold(q)) return;
@@ -645,7 +645,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
             if(!r.code || have[r.code]) return;
             have[r.code]=1;
             var city=r.city_name||r.name, country=r.country_name||"";
-            items.push([r.code, city, r.type==="airport" ? r.name : "mọi sân bay của thành phố", country]);
+            items.push([r.code, city, r.type==="airport" ? r.name : "all city airports", country]);
           });
           paint(q);
         })
@@ -665,16 +665,16 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
       paint(q);
     }
     function paint(q){
-      var head='<div class="fp-head">'+(fold(q).length? 'Kết quả cho "'+q+'"' : 'Sân bay phổ biến')+'</div>';
+      var head='<div class="fp-head">'+(fold(q).length? 'Results for "'+q+'"' : 'Popular airports')+'</div>';
       list.innerHTML = head + (items.length
         ? items.map(function(a,i){
             return '<button type="button" class="ac-item" style="animation-delay:'+Math.min(i*22,160)+'ms" data-i="'+i+'">'+
-              '<span class="ic">✈︎</span><span class="tt"><b>'+a[1]+'</b><span>Sân bay '+a[2]+' · '+a[3]+'</span></span>'+
+              '<span class="ic">✈︎</span><span class="tt"><b>'+a[1]+'</b><span>'+a[2]+' Airport · '+a[3]+'</span></span>'+
               '<span class="cd">'+a[0]+'</span></button>';
           }).join("")
         : (loadingRemote
-            ? '<div class="ac-empty">Đang tìm sân bay quốc tế khớp "'+q+'"…</div>'
-            : '<div class="ac-empty">Không thấy sân bay nào khớp "'+q+'"</div>'));
+            ? '<div class="ac-empty">Searching international airports for "'+q+'"…</div>'
+            : '<div class="ac-empty">No airports match "'+q+'"</div>'));
       list.classList.add("show");
       [].forEach.call(list.querySelectorAll(".ac-item"), function(b){
         b.onmousedown=function(e){ e.preventDefault(); var it=items[+b.dataset.i]; commit(it[0], it[1]) };
@@ -771,7 +771,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     var pill=$("tpill");
     pill.hidden=false;
     $("tpPrice").textContent=fmt(Math.round(target));
-    $("tpPct").textContent = hasTarget ? "~"+pct+"% khớp" : "giá tốt · ~"+pct+"% khớp";
+    $("tpPct").textContent = hasTarget ? "~"+pct+"% match" : "good price · ~"+pct+"% match";
     var box=$("ccChart").getBoundingClientRect();
     pill.classList.remove("flip");
     pill.style.left="18px";
@@ -807,7 +807,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
       var low=Math.min.apply(null, series(sel.from+"-"+d[0]));
       return '<button type="button" class="tile" data-c="'+d[0]+'" data-n="'+d[1]+'">'+
         '<span class="ph"><img src="'+d[2]+'" alt="'+d[1]+'" loading="lazy" /></span>'+
-        '<span class="cap"><b>'+d[1]+'</b><span>Từ '+fmt(low)+'</span></span></button>';
+        '<span class="cap"><b>'+d[1]+'</b><span>From '+fmt(low)+'</span></span></button>';
     }).join("");
     [].forEach.call(document.querySelectorAll("#dests .tile"), function(b){
       b.onclick=function(){
@@ -847,7 +847,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   function paintDeals(route, real){
     var el=$("deals");
     if(real){
-      $("dealsNote").innerHTML='<b>● Giá thật</b> từ nền tảng bán vé, cập nhật ~30 phút, đã gồm thuế phí. Bấm "Đặt vé" để mua với giá này.';
+      $("dealsNote").innerHTML='<b>● Real fares</b> from the booking platform, refreshed every ~30 min, taxes included. Hit "Book" to buy at this price.';
       var top=real.slice().sort(function(a,b){return a.price-b.price}).slice(0,4)
                  .sort(function(a,b){return a.departDate.localeCompare(b.departDate)});
       el.innerHTML=top.map(function(x){
@@ -861,13 +861,13 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
           logoHtml(x.airline, al[1])+
           '<span class="dnm"><b>'+al[0]+'</b><span>'+sel.from+' → '+sel.to+' · '+pad(d.getDate())+'/'+pad(d.getMonth()+1)+'</span></span>'+
           '<span class="dtm">'+(dep? '<b>'+dep+'</b><span class="ddur"><i>'+dur+'</i><em></em></span>'+(arr?'<b>'+arr+'</b>':'') :
-            '<span class="ddur"><i>bay thẳng</i><em></em></span>')+'</span>'+
-          '<span class="dpr"><b>'+fmt(x.price)+'</b><span>Đã bao gồm thuế phí</span></span>'+
-          '<a class="dbtn" href="'+link+'" target="_blank" rel="noopener">Đặt vé</a>'+
+            '<span class="ddur"><i>non-stop</i><em></em></span>')+'</span>'+
+          '<span class="dpr"><b>'+fmt(x.price)+'</b><span>Taxes &amp; fees included</span></span>'+
+          '<a class="dbtn" href="'+link+'" target="_blank" rel="noopener">Book</a>'+
         '</div>';
       }).join("");
     } else {
-      $("dealsNote").textContent='Giá ước tính theo mùa để bạn đặt mục tiêu. Bấm "Xem vé" để thấy giá thật hôm nay.';
+      $("dealsNote").textContent='Seasonal estimates to help you set a target. Hit "See fares" for today\'s real prices.';
       var data=series(route);
       var r=seedRand(route.split("").reduce(function(a,c){return a+c.charCodeAt(0)},7));
       var rows=[];
@@ -882,10 +882,10 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
           '<span class="d-logo multi" aria-hidden="true">'+
             ["VJ","VN","QH","VU"].map(function(c){ return '<img src="https://pics.avs.io/al_square/40/40/'+c+'@2x.png" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'" />' }).join("")+
           '</span>'+
-          '<span class="dnm"><b>Nhiều hãng bay</b><span>'+sel.from+' → '+sel.to+' · '+pad(x.date.getDate())+'/'+pad(x.date.getMonth()+1)+'</span></span>'+
-          '<span class="dtm"><span class="ddur"><i>xem giờ thật</i><em></em></span></span>'+
-          '<span class="dpr"><b>~'+fmt(x.price)+'</b><span>Ước tính theo mùa</span></span>'+
-          '<a class="dbtn" href="'+avUrl(sel.from, sel.to, x.date)+'" target="_blank" rel="noopener">Xem vé</a>'+
+          '<span class="dnm"><b>Multiple airlines</b><span>'+sel.from+' → '+sel.to+' · '+pad(x.date.getDate())+'/'+pad(x.date.getMonth()+1)+'</span></span>'+
+          '<span class="dtm"><span class="ddur"><i>see real times</i><em></em></span></span>'+
+          '<span class="dpr"><b>~'+fmt(x.price)+'</b><span>Seasonal estimate</span></span>'+
+          '<a class="dbtn" href="'+avUrl(sel.from, sel.to, x.date)+'" target="_blank" rel="noopener">See fares</a>'+
         '</div>';
       }).join("");
     }
@@ -929,9 +929,9 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
       var idx=monthsFromNow(month);
       var html='<div class="cal-head">'+
         '<button type="button" class="cal-nav" data-nav="-1"'+(idx<=0?" disabled":"")+'>‹</button>'+
-        '<b>Tháng '+(mo+1)+', '+y+'</b>'+
+        '<b>'+["January","February","March","April","May","June","July","August","September","October","November","December"][mo]+' '+y+'</b>'+
         '<button type="button" class="cal-nav" data-nav="1"'+(idx>=CAL_MAX_MONTHS?" disabled":"")+'>›</button></div>'+
-        '<div class="cal-grid">'+["T2","T3","T4","T5","T6","T7","CN"].map(function(d){return '<span class="cal-dow">'+d+'</span>'}).join("");
+        '<div class="cal-grid">'+["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map(function(d){return '<span class="cal-dow">'+d+'</span>'}).join("");
       for(var e=0;e<startDow;e++) html+='<span></span>';
       for(var day=1; day<=dim; day++){
         var dISO=iso(new Date(y,mo,day,12));
@@ -975,14 +975,14 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
       for(var i=0;i<data.length;i++){ m[iso(new Date(Date.now()+i*864e5))]=data[i] }
       return { map:m, good:quantile(data,0.25) };
     },
-    hint:function(){ return "Giá ước tính theo mùa cho "+sel.from+" → "+sel.to+" · xanh = giá tốt. Chọn ngày đi, rồi chọn ngày cuối." },
+    hint:function(){ return "Seasonal price estimates for "+sel.from+" → "+sel.to+" · blue = good price. Pick a start date, then an end date." },
     onApply:renderProb
   });
   var hotelCal=makeRangeCal({
     box:"hDateBox", panel:"hCalPanel", label:"hDateLabel", inFrom:"hIn", inTo:"hOut",
     a:iso(d1), b:iso(d2),
     prices:null,
-    hint:function(){ return "Chọn ngày nhận phòng, rồi ngày trả phòng." }
+    hint:function(){ return "Pick check-in, then check-out." }
   });
   $("price").addEventListener("input", renderProb);
   window.addEventListener("resize", function(){ renderProb() });
@@ -992,7 +992,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   function hotellookUrl(city, ci, co, adults){
     return "https://search.hotellook.com/?destination="+encodeURIComponent(city)+
       "&checkIn="+ci+"&checkOut="+co+"&adults="+(adults||2)+
-      "&language=vi&currency=vnd&marker="+MARKER;
+      "&language=en&currency=vnd&marker="+MARKER;
   }
   var tabF=$("tabFlight"), tabH=$("tabHotel");
   function setTab(hotel){
@@ -1017,15 +1017,15 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
       if(seenLocal[c[0]]) return false; seenLocal[c[0]]=1; return true;
     });
     function paint(q){
-      var head='<div class="fp-head">'+(fold(q).length? 'Kết quả cho "'+q+'"' : 'Điểm đến phổ biến')+'</div>';
+      var head='<div class="fp-head">'+(fold(q).length? 'Results for "'+q+'"' : 'Popular destinations')+'</div>';
       list.innerHTML = head + (items.length
         ? items.map(function(c,i){
             return '<button type="button" class="ac-item" style="animation-delay:'+Math.min(i*22,160)+'ms" data-i="'+i+'">'+
               '<span class="ic">⌂</span><span class="tt"><b>'+c[0]+'</b><span>'+(c[1]||"")+'</span></span></button>';
           }).join("")
         : (loading
-            ? '<div class="ac-empty">Đang tìm điểm đến khớp "'+q+'"…</div>'
-            : '<div class="ac-empty">Không thấy điểm đến nào khớp "'+q+'"</div>'));
+            ? '<div class="ac-empty">Searching destinations for "'+q+'"…</div>'
+            : '<div class="ac-empty">No destinations match "'+q+'"</div>'));
       list.classList.add("show");
       [].forEach.call(list.querySelectorAll(".ac-item"), function(b){
         b.onmousedown=function(e){ e.preventDefault(); input.value=items[+b.dataset.i][0]; list.classList.remove("show") };
@@ -1037,7 +1037,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
       if(f.length>=2){
         loading=true; clearTimeout(remoteTimer);
         remoteTimer=setTimeout(function(){
-          fetch("https://autocomplete.travelpayouts.com/places2?locale=vi&types[]=city&term="+encodeURIComponent(q.trim()))
+          fetch("https://autocomplete.travelpayouts.com/places2?locale=en&types[]=city&term="+encodeURIComponent(q.trim()))
             .then(function(r){ return r.json() })
             .then(function(rows){
               if(fold(input.value.trim())!==f) return;
@@ -1064,7 +1064,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     e.preventDefault();
     var city=($("hCity").value||"").trim(), ci=$("hIn").value, co=$("hOut").value;
     if(!city){ $("hCity").focus(); return }
-    if(!ci || !co || ci>=co){ alert("Ngày nhận / trả phòng chưa hợp lệ."); return }
+    if(!ci || !co || ci>=co){ alert("Check-in / check-out dates are not valid."); return }
     window.open(hotellookUrl(city, ci, co, $("hGuests").value), "_blank", "noopener");
   });
 
@@ -1075,20 +1075,20 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   function renderOrders(){
     var os=loadOrders(), list=$("orderList");
     if(!os.length){
-      $("liveSub").textContent="Chưa có lệnh nào trên máy này. Ba bước để bắt đầu:";
+      $("liveSub").textContent="No alerts on this device yet. Three steps to start:";
       list.innerHTML =
-        '<li><span class="t1">Đặt lệnh</span><span class="t2">Tuyến + khoảng ngày + giá bạn chịu chi. 30 giây.</span></li>'+
-        '<li><span class="t1">Radar quét 24/7</span><span class="t2">So giá liên tục, kể cả khung giờ flash sale.</span></li>'+
-        '<li><span class="t1">Zalo reng là chốt</span><span class="t2">Tin nhắn kèm link đặt thẳng. Chậm tay là hết kèo.</span></li>';
+        '<li><span class="t1">Set an alert</span><span class="t2">Route + date range + the price you would pay. 30 seconds.</span></li>'+
+        '<li><span class="t1">Radar scans 24/7</span><span class="t2">Compares prices non-stop, flash-sale hours included.</span></li>'+
+        '<li><span class="t1">Zalo rings, you book</span><span class="t2">The message carries a direct booking link. Snooze and you lose.</span></li>';
       return;
     }
-    $("liveSub").textContent="Lệnh của bạn trên máy này, Radar đang canh.";
+    $("liveSub").textContent="Your alerts on this device, Radar is watching.";
     list.innerHTML="";
     os.forEach(function(o){
       var li=document.createElement("li"); li.className="done";
-      li.innerHTML='<span class="t1">'+o.from+" → "+o.to+' <span class="o-status">ĐANG CANH</span></span>'+
-        '<span class="t2">'+o.code+" · "+o.dateFrom+" đến "+o.dateTo+" · mục tiêu "+fmt(o.price)+"</span>"+
-        '<button class="o-x" data-code="'+o.code+'" type="button">Huỷ lệnh</button>';
+      li.innerHTML='<span class="t1">'+o.from+" → "+o.to+' <span class="o-status">WATCHING</span></span>'+
+        '<span class="t2">'+o.code+" · "+o.dateFrom+" to "+o.dateTo+" · target "+fmt(o.price)+"</span>"+
+        '<button class="o-x" data-code="'+o.code+'" type="button">Cancel</button>';
       list.appendChild(li);
     });
     list.querySelectorAll(".o-x").forEach(function(b){
@@ -1112,10 +1112,10 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     var price=parseInt(($("price").value||"").replace(/[^\d]/g,""),10);
     var phone=($("phone").value||"").replace(/[^\d]/g,"");
     var df=$("dateFrom").value, dt=$("dateTo").value;
-    if(!price || price<200000){ alert("Nhập giá mục tiêu hợp lệ (từ 200.000đ)."); $("price").focus(); return }
-    if(!/^(0|84)\d{8,10}$/.test(phone)){ alert("Số điện thoại chưa đúng định dạng Việt Nam."); $("phone").focus(); return }
-    if(!df || !dt || df>dt){ alert("Khoảng ngày chưa hợp lệ."); return }
-    if(loadOrders().length>=5){ alert("Bạn đang có 5 lệnh hoạt động, huỷ bớt một lệnh trước nhé."); return }
+    if(!price || price<200000){ alert("Enter a valid target price (from 200,000\u20ab)."); $("price").focus(); return }
+    if(!/^(0|84)\d{8,10}$/.test(phone)){ alert("Please enter a valid Vietnamese phone number."); $("phone").focus(); return }
+    if(!df || !dt || df>dt){ alert("That date range is not valid."); return }
+    if(loadOrders().length>=5){ alert("You already have 5 active alerts; cancel one first."); return }
     pending={ from:sel.from, to:sel.to, dateFrom:df, dateTo:dt, price:price, phone:phone };
     apiPost("/orders", { origin:sel.from, destination:sel.to, dateFrom:df, dateTo:dt,
                          targetPrice:price, phone:phone })
@@ -1148,24 +1148,24 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     pending.code=code;
     var os=loadOrders(); os.unshift(pending); saveOrders(os); renderOrders();
     $("orderCode").textContent=code;
-    $("successSum").textContent=pending.from+" → "+pending.to+" · "+pending.dateFrom+" đến "+pending.dateTo+
-      " · báo khi giá ≤ "+fmt(pending.price);
+    $("successSum").textContent=pending.from+" → "+pending.to+" · "+pending.dateFrom+" to "+pending.dateTo+
+      " · alert when price ≤ "+fmt(pending.price);
     $("hotelCta").href=hotellookUrl(labelOf(pending.to), pending.dateFrom, pending.dateTo, 2);
-    $("hotelCta").textContent="Tìm luôn khách sạn ở "+labelOf(pending.to)+" →";
+    $("hotelCta").textContent="Find a hotel in "+labelOf(pending.to)+" →";
     $("success").classList.add("show");
     $("success").scrollIntoView({block:"center"});
     pending=null;
   }
   $("otpConfirm").onclick=function(){
     var v=$("otpInput").value.trim();
-    if(!/^\d{4}$/.test(v)){ $("otpInput").value=""; $("otpInput").placeholder="Nhập đủ 4 số"; return }
+    if(!/^\d{4}$/.test(v)){ $("otpInput").value=""; $("otpInput").placeholder="Enter all 4 digits"; return }
     if(live && pending.publicId){
       apiPost("/orders/verify", { publicId:pending.publicId, otp:v })
         .then(function(res){ finishSuccess(res.code || ("RD-"+pending.publicId.slice(-5).toUpperCase())) })
-        .catch(function(){ $("otpInput").value=""; $("otpInput").placeholder="Sai mã, thử lại" });
+        .catch(function(){ $("otpInput").value=""; $("otpInput").placeholder="Wrong code, try again" });
       return;
     }
-    if(v!=="2468"){ $("otpInput").value=""; $("otpInput").placeholder="Sai mã, thử lại"; return }
+    if(v!=="2468"){ $("otpInput").value=""; $("otpInput").placeholder="Wrong code, try again"; return }
     finishSuccess("RD-"+Math.random().toString(36).slice(2,7).toUpperCase());
   };
   $("otpModal").addEventListener("click", function(e){ if(e.target===this) this.classList.remove("show") });
@@ -1176,15 +1176,15 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     $("manage").classList.add("show");
     $("mRoute").textContent=(o.origin||o.from)+" → "+(o.destination||o.to);
     var status=o.status||"ACTIVE";
-    $("mStatus").textContent = status==="ACTIVE" ? "ĐANG CANH GIÁ" : status;
+    $("mStatus").textContent = status==="ACTIVE" ? "WATCHING PRICES" : status;
     var target=o.targetPrice||o.price;
     $("mMeta").textContent=(o.code?o.code+" · ":"")+
-      (o.dateFrom||"").slice(0,10)+" đến "+(o.dateTo||"").slice(0,10)+
-      " · báo khi giá ≤ "+fmt(target)+
-      (o.notifyCount ? " · đã báo "+o.notifyCount+" lần" : "");
+      (o.dateFrom||"").slice(0,10)+" to "+(o.dateTo||"").slice(0,10)+
+      " · alert when price ≤ "+fmt(target)+
+      (o.notifyCount ? " · alerted "+o.notifyCount+" times" : "");
     if(status!=="ACTIVE"&&status!=="PAUSED"){
       $("mCancel").style.display="none";
-      $("mNote").textContent="Lệnh này đã kết thúc. Đặt lệnh mới ngay bên cạnh nhé.";
+      $("mNote").textContent="This alert has ended. Set a new one right here.";
     }
     $("board").scrollIntoView({block:"start"});
   }
@@ -1196,10 +1196,10 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
         o.code="RD-"+oid.slice(-5).toUpperCase();
         showManage(o);
         $("mCancel").onclick=function(){
-          if(!confirm("Huỷ lệnh này? Radar sẽ ngừng canh giá ngay.")) return;
+          if(!confirm("Cancel this alert? Radar stops watching immediately.")) return;
           fetch(API+"/orders/"+encodeURIComponent(oid),{method:"DELETE"})
-            .then(function(){ $("mStatus").textContent="ĐÃ HUỶ"; $("mCancel").style.display="none";
-              $("mNote").textContent="Đã huỷ xong. Đặt lệnh mới bất cứ lúc nào."; });
+            .then(function(){ $("mStatus").textContent="CANCELLED"; $("mCancel").style.display="none";
+              $("mNote").textContent="Cancelled. Set a new alert any time."; });
         };
       })
       .catch(function(){
@@ -1207,7 +1207,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
         if(local){ showManage(local);
           $("mCancel").onclick=function(){
             saveOrders(loadOrders().filter(function(x){ return x!==local && x.code!==local.code }));
-            renderOrders(); $("mStatus").textContent="ĐÃ HUỶ"; $("mCancel").style.display="none";
+            renderOrders(); $("mStatus").textContent="CANCELLED"; $("mCancel").style.display="none";
           };
         }
       });
