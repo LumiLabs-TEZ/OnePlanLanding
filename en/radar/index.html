@@ -558,7 +558,6 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     <p>Enter the 4-digit code just sent to Zalo <b id="otpPhone"></b></p>
     <input class="otp-in" id="otpInput" inputmode="numeric" maxlength="4" placeholder="••••" />
     <button class="btn btn-primary" id="otpConfirm" type="button">Activate alert</button>
-    <p class="otp-demo">Beta: use demo code <b>2468</b></p>
   </div>
 </div>
 
@@ -1139,7 +1138,6 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   renderOrders();
 
   // ---- dat lenh: API that, demo fallback ----
-  var live=null;
   function apiPost(path, body){
     return fetch(API+path, { method:"POST", headers:{ "Content-Type":"application/json" },
       body:JSON.stringify(body) }).then(function(r){
@@ -1162,15 +1160,14 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     pending={ from:sel.from, to:sel.to, dateFrom:df, dateTo:dt, price:price, phone:phone, name:nameV };
     apiPost("/orders", { origin:sel.from, destination:sel.to, dateFrom:df, dateTo:dt,
                          targetPrice:price, phone:phone, name:nameV })
-      .then(function(res){ live=true; pending.publicId=res.publicId; openOtp(phone, false); })
-      .catch(function(){ live=false; pending.publicId=null; openOtp(phone, true); });
+      .then(function(res){ pending.publicId=res.publicId; openOtp(phone); })
+      .catch(function(){ pending=null; alert("Could not send the verification code via Zalo right now. Please try again in a few minutes."); });
   });
 
   // OTP modal morph tu nut submit
-  function openOtp(phone, demo){
+  function openOtp(phone){
     $("otpPhone").textContent=phone.replace(/^84/,"0").replace(/(\d{3})(\d{3})(\d+)/,"$1 $2 $3");
     $("otpInput").value="";
-    document.querySelector(".otp-demo").style.display = demo ? "block" : "none";
     var m=$("otpModal"), card=m.querySelector(".modal-card"), btn=$("submitBtn");
     m.classList.add("show");
     var b=btn.getBoundingClientRect(), c=card.getBoundingClientRect();
@@ -1202,14 +1199,14 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   $("otpConfirm").onclick=function(){
     var v=$("otpInput").value.trim();
     if(!/^\d{4}$/.test(v)){ $("otpInput").value=""; $("otpInput").placeholder="Enter all 4 digits"; return }
-    if(live && pending.publicId){
+    if(!pending || !pending.publicId){ $("otpModal").classList.remove("show"); return }
+    if(pending.publicId){
       apiPost("/orders/verify", { publicId:pending.publicId, otp:v })
         .then(function(res){ finishSuccess(res.code || ("RD-"+pending.publicId.slice(-5).toUpperCase())) })
         .catch(function(){ $("otpInput").value=""; $("otpInput").placeholder="Wrong code, try again" });
       return;
     }
-    if(v!=="2468"){ $("otpInput").value=""; $("otpInput").placeholder="Wrong code, try again"; return }
-    finishSuccess("RD-"+Math.random().toString(36).slice(2,7).toUpperCase());
+    $("otpModal").classList.remove("show");
   };
   $("otpModal").addEventListener("click", function(e){ if(e.target===this) this.classList.remove("show") });
   $("newOrder").onclick=function(){ $("success").classList.remove("show"); window.scrollTo({top:0,behavior:"smooth"}) };
