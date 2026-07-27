@@ -159,6 +159,13 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 .oc-zalo input{ border:none; background:none; flex:1; min-width:0; font-size:clamp(17px,2.2vw,24px); font-weight:400; color:var(--ink); padding:0 }
 .oc-zalo input::placeholder{ color:var(--ghost) }
 .oc-zalo input:focus{ outline:none }
+.oc-zalo #name{ flex:.55 1 0 }
+.zdiv{ width:1px; align-self:stretch; background:var(--line); margin:4px 10px; flex:none }
+@media (max-width:640px){
+  .oc-zalo{ flex-wrap:wrap }
+  .oc-zalo #name{ flex:1 1 100% }
+  .zdiv{ display:none }
+}
 
 /* dropdown san bay */
 .acx{ }
@@ -412,6 +419,8 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
         </div>
       </div>
       <div class="oc-zalo">
+        <input id="name" type="text" autocomplete="name" placeholder="Your name" required />
+        <i class="zdiv"></i>
         <img src="/radar/img/ic-phone.svg" alt="" aria-hidden="true" />
         <input id="phone" type="tel" inputmode="tel" placeholder="Zalo number for alerts" required />
       </div>
@@ -1142,15 +1151,17 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   $("radarForm").addEventListener("submit", function(e){
     e.preventDefault();
     var price=parseInt(($("price").value||"").replace(/[^\d]/g,""),10);
+    var nameV=($("name").value||"").trim().slice(0,60);
     var phone=($("phone").value||"").replace(/[^\d]/g,"");
     var df=$("dateFrom").value, dt=$("dateTo").value;
     if(!price || price<200000){ alert("Enter a valid target price (from 200,000\u20ab)."); $("price").focus(); return }
+    if(nameV.length<2){ alert("Tell Radar your name so the Zalo alerts can address you."); $("name").focus(); return }
     if(!/^(0|84)\d{8,10}$/.test(phone)){ alert("Please enter a valid Vietnamese phone number."); $("phone").focus(); return }
     if(!df || !dt || df>dt){ alert("That date range is not valid."); return }
     if(loadOrders().length>=5){ alert("You already have 5 active alerts; cancel one first."); return }
-    pending={ from:sel.from, to:sel.to, dateFrom:df, dateTo:dt, price:price, phone:phone };
+    pending={ from:sel.from, to:sel.to, dateFrom:df, dateTo:dt, price:price, phone:phone, name:nameV };
     apiPost("/orders", { origin:sel.from, destination:sel.to, dateFrom:df, dateTo:dt,
-                         targetPrice:price, phone:phone })
+                         targetPrice:price, phone:phone, name:nameV })
       .then(function(res){ live=true; pending.publicId=res.publicId; openOtp(phone, false); })
       .catch(function(){ live=false; pending.publicId=null; openOtp(phone, true); });
   });

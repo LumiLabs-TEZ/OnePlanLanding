@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>OnePlan Radar · Đang mở trang đặt vé</title>
+<title>OnePlan Radar · Vé của bạn đang chờ</title>
 <meta name="robots" content="noindex" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,55 +12,65 @@
 <style>
 *{ box-sizing:border-box }
 body{ margin:0; min-height:100svh; display:flex; align-items:center; justify-content:center; background:#fff; color:#252525; font-family:"Inter",system-ui,sans-serif; text-align:center; padding:24px }
-.box{ max-width:420px }
+.box{ max-width:440px; width:100% }
 .brand{ display:inline-flex; align-items:center; gap:10px; font-family:"Averia Serif Libre",Georgia,serif; font-size:22px; margin-bottom:26px }
 .brand img{ width:34px; height:34px; border-radius:9px }
-.spin{ width:34px; height:34px; margin:0 auto 18px; border-radius:50%; border:3px solid #ededed; border-top-color:#335cff; animation:r .8s linear infinite }
-@keyframes r{ to{ transform:rotate(360deg) } }
-h1{ font-size:19px; font-weight:500; margin:0 0 8px }
-p{ font-size:14.5px; color:#636363; line-height:1.55; margin:0 }
-a.manual{ display:inline-block; margin-top:18px; font-size:14.5px; font-weight:500; color:#335cff }
-@media (prefers-reduced-motion:reduce){ .spin{ animation:none } }
+.card{ background:#fff; border:1px solid #d4d4d4; border-radius:24px; padding:28px 26px 26px }
+h1{ font-size:20px; font-weight:500; margin:0 0 6px }
+.route{ font-size:26px; font-weight:600; letter-spacing:-.01em; margin:10px 0 2px }
+.meta{ font-size:14px; color:#636363; margin:0 0 18px }
+p.note{ font-size:13px; color:#636363; line-height:1.55; margin:14px 0 0 }
+.go{ display:block; width:100%; background:#335cff; color:#fff; font-size:16px; font-weight:500; border-radius:9999px; padding:15px 20px; text-decoration:none; transition:background .2s }
+.go:hover{ background:#2749d6 }
+.manage{ display:inline-block; margin-top:14px; font-size:14px; font-weight:500; color:#335cff; text-decoration:none }
 </style>
 </head>
 <body>
 <div class="box">
   <div class="brand"><img src="/assets/logo-icon.png" alt="" />OnePlan</div>
-  <div class="spin" aria-hidden="true"></div>
-  <h1>Đang mở trang đặt vé…</h1>
-  <p>OnePlan Radar đang chuyển bạn tới nền tảng bán vé với mức giá vừa được báo. Giá do nền tảng bán vé cung cấp và có thể thay đổi theo thời gian thực.</p>
-  <a class="manual" id="manual" href="/radar">Nếu không tự chuyển, bấm vào đây →</a>
+  <div class="card">
+    <h1>Vé của bạn đang chờ</h1>
+    <p class="route" id="route">Chuyến bay của bạn</p>
+    <p class="meta" id="meta">Radar tìm được mức giá bạn theo dõi.</p>
+    <a class="go" id="go" href="/radar">Mở trang đặt vé →</a>
+    <a class="manage" id="manage" href="/radar" hidden>Quản lý lệnh của tôi</a>
+    <p class="note">Nút trên mở nền tảng bán vé (đối tác của OnePlan) trong trình duyệt của bạn. Giá do nền tảng bán vé cung cấp và có thể thay đổi theo thời gian thực. OnePlan không thu tiền của bạn.</p>
+  </div>
 </div>
 <script>
 (function(){
-  // /book: CTA "Dat ve ngay" trong tin ZNS.
-  // ?a=<alertLogId>  -> di qua API /f/<id> (dong dau click + 302 toi deeplink chinh xac cua keo)
-  // ?o&d&dd          -> fallback: mo trang tim ve Aviasales dung tuyen/ngay (kem marker)
-  // khong co gi hop le -> ve /radar
+  // /book: trang trung gian tren domain OnePlan cho nut "Dat ve ngay" trong tin ZNS.
+  // KHONG tu redirect: nguoi dung tu bam de sang nen tang ban ve (yeu cau duyet ZNS:
+  // link CTA phai o lai domain doanh nghiep).
+  // ?a=<alertLogId>  -> nut di qua API /f/<id> (dong dau click + 302 toi deeplink dung keo)
+  // ?o&d&dd          -> fallback: trang tim ve Aviasales dung tuyen/ngay (kem marker)
+  // ?m=<publicId>    -> link "Quan ly lenh"
   var API="https://api.oneplan.space";
   var MARKER="554837";
   var q=new URLSearchParams(location.search);
-  var a=q.get("a"), o=(q.get("o")||"").toUpperCase(), d=(q.get("d")||"").toUpperCase(), dd=q.get("dd")||"";
+  var a=q.get("a"), o=(q.get("o")||"").toUpperCase(), d=(q.get("d")||"").toUpperCase(), dd=q.get("dd")||"", m=q.get("m");
   function pad(n){ return ("0"+n).slice(-2) }
-  function avUrl(){
-    if(!/^[A-Z]{3}$/.test(o) || !/^[A-Z]{3}$/.test(d)) return null;
-    var dt=/^\d{4}-\d{2}-\d{2}$/.test(dd) ? new Date(dd+"T12:00:00") : new Date(Date.now()+14*864e5);
-    return "https://www.aviasales.com/search/"+o+pad(dt.getDate())+pad(dt.getMonth()+1)+d+"1?marker="+MARKER+"&currency=vnd";
+  var okRoute=/^[A-Z]{3}$/.test(o) && /^[A-Z]{3}$/.test(d);
+  var dt=/^\d{4}-\d{2}-\d{2}$/.test(dd) ? new Date(dd+"T12:00:00") : null;
+  if(okRoute){
+    document.getElementById("route").textContent=o+" → "+d;
+    if(dt) document.getElementById("meta").textContent="Ngày bay "+pad(dt.getDate())+"/"+pad(dt.getMonth()+1)+"/"+dt.getFullYear()+" · giá vừa chạm mức bạn theo dõi.";
   }
-  var fallback = avUrl() || "/radar";
-  document.getElementById("manual").href = fallback;
-  var target = (a && /^\d+$/.test(a)) ? API+"/f/"+encodeURIComponent(a) : fallback;
-  // neu /f loi (alert khong ton tai), trinh duyet se hien 404 JSON — tranh bang cach
-  // kiem tra truoc bang fetch (manual redirect => type:"opaqueredirect" nghia la 302 OK)
-  if(target.indexOf(API)===0){
-    fetch(target, { method:"GET", redirect:"manual" })
-      .then(function(r){
-        if(r.type==="opaqueredirect" || (r.status>=300 && r.status<400)) location.replace(target);
-        else location.replace(fallback);
-      })
-      .catch(function(){ location.replace(target) });
-  } else {
-    setTimeout(function(){ location.replace(target) }, 350);
+  var fallback = okRoute
+    ? "https://www.aviasales.com/search/"+o+pad((dt||new Date(Date.now()+14*864e5)).getDate())+pad((dt||new Date(Date.now()+14*864e5)).getMonth()+1)+d+"1?marker="+MARKER+"&currency=vnd"
+    : "/radar";
+  var go=document.getElementById("go");
+  go.href = (a && /^\d+$/.test(a)) ? API+"/f/"+encodeURIComponent(a) : fallback;
+  // neu alert khong con (hiem), roi ve fallback thay vi trang 404 JSON
+  if(a && /^\d+$/.test(a)){
+    fetch(API+"/f/"+encodeURIComponent(a), { method:"GET", redirect:"manual" })
+      .then(function(r){ if(!(r.type==="opaqueredirect" || (r.status>=300 && r.status<400))) go.href=fallback })
+      .catch(function(){});
+  }
+  if(m && /^[A-Za-z0-9]{6,64}$/.test(m)){
+    var mg=document.getElementById("manage");
+    mg.href="/radar?o="+encodeURIComponent(m);
+    mg.hidden=false;
   }
 })();
 </script>
