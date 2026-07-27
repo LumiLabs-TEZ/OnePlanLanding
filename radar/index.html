@@ -1220,6 +1220,9 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     }
     $("board").scrollIntoView({block:"start"});
   }
+  // click tu tin ZNS: ?a=<alertLogId> -> ping /f de dong dau clickedAt (fire-and-forget)
+  var aid=new URLSearchParams(location.search).get("a");
+  if(aid && /^\d+$/.test(aid)){ fetch(API+"/f/"+aid).catch(function(){}); }
   var oid=new URLSearchParams(location.search).get("o");
   if(oid){
     fetch(API+"/orders/"+encodeURIComponent(oid))
