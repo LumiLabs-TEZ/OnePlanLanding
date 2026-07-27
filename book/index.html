@@ -49,6 +49,12 @@ p.note{ font-size:13px; color:#636363; line-height:1.55; margin:14px 0 0 }
   var MARKER="554837";
   var q=new URLSearchParams(location.search);
   var a=q.get("a"), o=(q.get("o")||"").toUpperCase(), d=(q.get("d")||"").toUpperCase(), dd=q.get("dd")||"", m=q.get("m");
+  // dang gon cho nut ZNS: ?r=<logId>.<origin>.<dest>.<yyyy-mm-dd>.<publicId>
+  var r=q.get("r");
+  if(r){
+    var p=r.split(".");
+    if(p.length>=5){ a=a||p[0]; o=o||(p[1]||"").toUpperCase(); d=d||(p[2]||"").toUpperCase(); dd=dd||p[3]; m=m||p[4]; }
+  }
   function pad(n){ return ("0"+n).slice(-2) }
   var okRoute=/^[A-Z]{3}$/.test(o) && /^[A-Z]{3}$/.test(d);
   var dt=/^\d{4}-\d{2}-\d{2}$/.test(dd) ? new Date(dd+"T12:00:00") : null;
