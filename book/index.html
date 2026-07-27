@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OnePlan Radar · Đang mở trang đặt vé</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*{ box-sizing:border-box }
+body{ margin:0; min-height:100svh; display:flex; align-items:center; justify-content:center; background:#fff; color:#252525; font-family:"Inter",system-ui,sans-serif; text-align:center; padding:24px }
+.box{ max-width:420px }
+.brand{ display:inline-flex; align-items:center; gap:10px; font-family:"Averia Serif Libre",Georgia,serif; font-size:22px; margin-bottom:26px }
+.brand img{ width:34px; height:34px; border-radius:9px }
+.spin{ width:34px; height:34px; margin:0 auto 18px; border-radius:50%; border:3px solid #ededed; border-top-color:#335cff; animation:r .8s linear infinite }
+@keyframes r{ to{ transform:rotate(360deg) } }
+h1{ font-size:19px; font-weight:500; margin:0 0 8px }
+p{ font-size:14.5px; color:#636363; line-height:1.55; margin:0 }
+a.manual{ display:inline-block; margin-top:18px; font-size:14.5px; font-weight:500; color:#335cff }
+@media (prefers-reduced-motion:reduce){ .spin{ animation:none } }
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="brand"><img src="/assets/logo-icon.png" alt="" />OnePlan</div>
+  <div class="spin" aria-hidden="true"></div>
+  <h1>Đang mở trang đặt vé…</h1>
+  <p>OnePlan Radar đang chuyển bạn tới nền tảng bán vé với mức giá vừa được báo. Giá do nền tảng bán vé cung cấp và có thể thay đổi theo thời gian thực.</p>
+  <a class="manual" id="manual" href="/radar">Nếu không tự chuyển, bấm vào đây →</a>
+</div>
+<script>
+(function(){
+  // /book: CTA "Dat ve ngay" trong tin ZNS.
+  // ?a=<alertLogId>  -> di qua API /f/<id> (dong dau click + 302 toi deeplink chinh xac cua keo)
+  // ?o&d&dd          -> fallback: mo trang tim ve Aviasales dung tuyen/ngay (kem marker)
+  // khong co gi hop le -> ve /radar
+  var API="https://api.oneplan.space";
+  var MARKER="554837";
+  var q=new URLSearchParams(location.search);
+  var a=q.get("a"), o=(q.get("o")||"").toUpperCase(), d=(q.get("d")||"").toUpperCase(), dd=q.get("dd")||"";
+  function pad(n){ return ("0"+n).slice(-2) }
+  function avUrl(){
+    if(!/^[A-Z]{3}$/.test(o) || !/^[A-Z]{3}$/.test(d)) return null;
+    var dt=/^\d{4}-\d{2}-\d{2}$/.test(dd) ? new Date(dd+"T12:00:00") : new Date(Date.now()+14*864e5);
+    return "https://www.aviasales.com/search/"+o+pad(dt.getDate())+pad(dt.getMonth()+1)+d+"1?marker="+MARKER+"&currency=vnd";
+  }
+  var fallback = avUrl() || "/radar";
+  document.getElementById("manual").href = fallback;
+  var target = (a && /^\d+$/.test(a)) ? API+"/f/"+encodeURIComponent(a) : fallback;
+  // neu /f loi (alert khong ton tai), trinh duyet se hien 404 JSON — tranh bang cach
+  // kiem tra truoc bang fetch (manual redirect => type:"opaqueredirect" nghia la 302 OK)
+  if(target.indexOf(API)===0){
+    fetch(target, { method:"GET", redirect:"manual" })
+      .then(function(r){
+        if(r.type==="opaqueredirect" || (r.status>=300 && r.status<400)) location.replace(target);
+        else location.replace(fallback);
+      })
+      .catch(function(){ location.replace(target) });
+  } else {
+    setTimeout(function(){ location.replace(target) }, 350);
+  }
+})();
+</script>
+</body>
+</html>
