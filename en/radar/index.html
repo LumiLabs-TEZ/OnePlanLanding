@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-cta-ui="off">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -415,7 +415,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     <div class="htabs" role="tablist" aria-label="Radar services">
       <button type="button" class="htab on" id="tabFlight" role="tab" aria-selected="true">Flights</button>
       <button type="button" class="htab" id="tabHotel" role="tab" aria-selected="false">Hotels</button>
-      <a class="htab" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Trip Planner</a>
+      <a data-loc="radar_hero_tab" class="htab" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Trip Planner</a>
     </div>
   </div>
 </section>
@@ -519,7 +519,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     <div class="ordercode" id="orderCode"></div>
     <p class="sub" style="font-size:15px" id="successSum"></p>
     <p class="form-note" style="margin:12px auto 16px">The moment prices hit your target, your Zalo rings. Meanwhile, sort out your stay and itinerary?</p>
-    <a class="btn btn-ghost" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Plan the trip on OnePlan <span class="ar">→</span></a>
+    <a data-loc="radar_order_success" class="btn btn-ghost" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Plan the trip on OnePlan <span class="ar">→</span></a>
     <button class="btn btn-primary" id="newOrder" type="button" style="margin-left:10px">Set another alert</button>
     <p style="margin:14px 0 0"><a id="hotelCta" href="#" target="_blank" rel="noopener" style="font-size:14px;font-weight:600;color:var(--primary)">Find a hotel for this trip →</a></p>
   </div>
@@ -528,12 +528,12 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   <div class="dealsec" id="board">
     <div class="htabs small" role="tablist" aria-label="Deals board">
       <span class="htab on">Reference fares</span>
-      <a class="htab" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">AI itinerary</a>
+      <a data-loc="radar_board_tab" class="htab" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">AI itinerary</a>
     </div>
     <div class="drow">
       <div class="dlist" id="deals"></div>
       <div class="dright">
-        <a class="promo" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">
+        <a data-loc="radar_deals_promo" class="promo" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">
           <img class="pl" src="/radar/img/plane.png" alt="" />
           <span class="ptx">
             <b>Book a flight, get 1 month of OnePlan free</b>
@@ -580,7 +580,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   <div class="panel center">
     <h2 class="h2">Got the flight. Now where to, what to eat?</h2>
     <p class="sub" style="max-width:52ch; margin:12px auto 22px">OnePlan handles the rest: turn TikTok links into itineraries, plan together with friends, split costs with zero drama.</p>
-    <a class="btn btn-primary btn-lg" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Get OnePlan free <span class="ar">→</span></a>
+    <a data-loc="radar_bottom_cta" class="btn btn-primary btn-lg" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Get OnePlan free <span class="ar">→</span></a>
   </div>
 </section>
 </main>
@@ -1291,5 +1291,6 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   }
 })();
 </script>
+<script defer src="/cta.js"></script>
 </body>
 </html>

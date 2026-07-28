@@ -13,6 +13,10 @@
   var isAndroid = /Android/.test(ua);
   var isMobile = isIOS || isAndroid || window.matchMedia("(max-width:820px)").matches;
   de.classList.add(isIOS ? "is-ios" : isAndroid ? "is-android" : "is-desktop");
+  // Pages that carry their own CTAs can opt out of the two injected surfaces
+  // (sticky mobile bar + desktop float card) with data-cta-ui="off" on <html>,
+  // and still get tracking, campaign tokens and Zalo gating.
+  var uiOff = de.getAttribute("data-cta-ui") === "off";
 
   function track(name, props) {
     props = props || {};
@@ -70,7 +74,7 @@
 
   // Injected sticky mobile CTA, so it works site-wide without editing every file
   (function () {
-    if (!isMobile) return;
+    if (uiOff || !isMobile) return;
     try { if (localStorage.getItem("op_sticky") === "0") return; } catch (e) {}
     var inner;
     if (isIOS) {
@@ -98,7 +102,7 @@
   // Injected floating promo card (desktop only): Unikorn Product of the Day + App Store.
   // Mobile keeps the sticky bar above, so this never overlaps it.
   (function () {
-    if (isMobile) return;
+    if (uiOff || isMobile) return;
     var state;
     try { state = localStorage.getItem("op_float"); } catch (e) {}
     if (state === "closed") return;
@@ -201,9 +205,12 @@
     "@keyframes opFadeIn{from{opacity:0}to{opacity:1}}" +
     "@media (max-width:820px){.op-float-wrap{display:none}}" +
     "@media (prefers-reduced-motion:reduce){.op-float,.op-float-launch{animation:none}}";
-  var st = document.createElement("style");
-  st.appendChild(document.createTextNode(css));
-  document.head.appendChild(st);
+  // Every rule above styles the sticky bar or the float card, so skip it when both are off
+  if (!uiOff) {
+    var st = document.createElement("style");
+    st.appendChild(document.createTextNode(css));
+    document.head.appendChild(st);
+  }
 })();
 
 /* mobile nav toggle (hamburger) - works for landing .nav and journal .jbar */
