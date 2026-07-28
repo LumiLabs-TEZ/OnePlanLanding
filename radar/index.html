@@ -44,6 +44,7 @@
   --line:#d4d4d4; --line-2:#e5e5e5; --field:#ededed; --chipg:#e6e6e6;
   --canvas:#fff; --off:#f8f8f1;
   --primary:#335cff; --primary-2:#2749d6; --primary-tint:#eef1ff;
+  --nav-accent:#0066cc; --nav-accent-2:#005ab3;
   --chart:#008cff;
   --foot:#2a2a26;
   --pill:9999px; --r-card:30px; --r-tile:24px; --r-deal:23px; --r-btn:10px;
@@ -87,12 +88,13 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 .nav-right{ display:flex; align-items:center; gap:14px }
 .navlink{ font-size:15px; font-weight:500; color:var(--ink); opacity:.72; transition:opacity .2s, color .2s }
 .navlink:hover{ opacity:1 }
-.navlink.on{ color:var(--primary); opacity:1 }
+.navlink.on{ color:var(--nav-accent); opacity:1 }
 .langtog{ display:inline-flex; align-items:center; background:rgba(40,40,40,.05); border:1px solid var(--line-2); border-radius:var(--pill); padding:2px; gap:2px }
 .langtog a{ font-size:11px; font-weight:600; color:var(--mute); border-radius:var(--pill); padding:4px 10px }
 .langtog a.on{ background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,.1) }
-.nav .btn-hero{ background:var(--primary); color:#fff }
-.nav .btn-hero:hover{ background:var(--primary-2) }
+.nav .btn-hero{ background:var(--nav-accent); color:#fff }
+.nav .btn-hero:hover{ background:var(--nav-accent-2) }
+.nav .btn-hero:active{ transform:scale(.97) }
 .nav.solid{ background:rgba(255,255,255,.9); -webkit-backdrop-filter:saturate(180%) blur(20px); backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid var(--line-2) }
 /* hamburger (mobile) */
 .navtog{ display:none; position:relative; width:42px; height:42px; flex:none; border:1px solid var(--line-2); border-radius:12px; background:#fff; cursor:pointer; padding:0 }
@@ -345,7 +347,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   .nav.open .nav-center{ display:flex }
   .nav-center .navlink{ padding:12px 14px; border-radius:12px; font-size:16px; opacity:1 }
   .nav-center .navlink:hover{ background:var(--field) }
-  .nav-center .navlink.on{ color:var(--primary); background:var(--field) }
+  .nav-center .navlink.on{ color:var(--nav-accent); background:var(--field) }
   .nav-right{ order:3; flex-basis:100%; flex-direction:column; align-items:stretch; gap:12px; margin:12px 0 14px; display:none }
   .nav.open .nav-right{ display:flex }
   .langtog{ display:inline-flex; align-self:flex-start }
@@ -390,14 +392,14 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 
 <header class="nav" id="nav">
   <div class="nav-in">
-    <a class="brand" href="/"><img src="/assets/logo-icon.png" width="34" height="34" alt="" />OnePlan</a>
+    <a class="brand" href="/vi"><img src="/assets/logo-icon.png" width="34" height="34" alt="" />OnePlan</a>
     <nav class="nav-center" aria-label="Chính">
       <a class="navlink on" href="/radar">Radar</a>
-      <a class="navlink" href="/vi/journal">Journal</a>
+      <a class="navlink" href="/vi/journal">Nhật ký</a>
     </nav>
     <div class="nav-right">
       <div class="langtog" role="group" aria-label="Ngôn ngữ"><a href="/en/radar">EN</a><a class="on" href="/radar">VI</a></div>
-      <a class="btn btn-hero" href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Tải app <span class="ar">→</span></a>
+      <a class="btn btn-hero" href="/vi#download">Tải ứng dụng <span class="ar">→</span></a>
     </div>
     <button class="navtog" id="navtog" type="button" aria-label="Menu" aria-expanded="false"><span class="nbar"></span><span class="nbar"></span><span class="nbar"></span></button>
   </div>
@@ -598,9 +600,9 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     <span class="fbrand">OnePlan</span>
     <nav class="foot-links">
       <a href="/radar">Radar</a>
-      <a href="/journal">Journal</a>
-      <a href="/privacy-policy">Privacy</a>
-      <a href="/termandconditions">Terms</a>
+      <a href="/vi/journal">Nhật ký</a>
+      <a href="/vi/privacy-policy">Quyền riêng tư</a>
+      <a href="/vi/termandconditions">Điều khoản</a>
     </nav>
     <a href="https://apps.apple.com/us/app/oneplan-travel/id6761648165">Tải app iOS →</a>
   </div>

@@ -6,7 +6,7 @@
 :root{
   --f-display:"Averia Serif Libre", Georgia, "Times New Roman", serif;
   --f-text:"Inter", "SF Pro Text", Helvetica, Arial, sans-serif;
-  --primary:#0066cc;
+  --primary:#0066cc; --primary-2:#005ab3;
   --ink:#334558; --ink-80:#516375; --ink-48:#8694a3;
   --canvas:#fff; --pearl:#f4f6f9; --panel:#eef1f5;
   --hairline:#e6e9ee; --black:#000; --pill:9999px;
@@ -26,7 +26,7 @@ a{ color:inherit; text-decoration:none }
 .jbar-center{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; align-items:center; gap:26px }
 .jbar-center a{ font-size:15px; font-weight:500; color:var(--ink-48); transition:color .2s }
 .jbar-center a:hover{ color:var(--ink) }
-.jbar-center a.on{ color:#335cff }
+.jbar-center a.on{ color:var(--primary) }
 /* hamburger (mobile) */
 .navtog{ display:none; position:relative; width:42px; height:42px; flex:none; border:1px solid var(--hairline); border-radius:12px; background:#fff; cursor:pointer; padding:0 }
 .navtog .nbar{ position:absolute; left:10px; right:10px; height:2px; background:var(--ink); border-radius:2px; transition:transform .28s cubic-bezier(.34,1.56,.64,1), opacity .18s }
@@ -53,9 +53,9 @@ a{ color:inherit; text-decoration:none }
 .jbar .blink{ font-size:14px; font-weight:500; color:var(--ink-48); transition:color .2s } .jbar .blink:hover{ color:var(--ink) }
 .langtog{ display:inline-flex; align-items:center; background:rgba(20,28,40,.05); border:1px solid var(--hairline); border-radius:9999px; padding:2px; gap:2px }
 .langtog a{ font-size:11px; font-weight:600; color:var(--ink-48); border-radius:9999px; padding:4px 10px; transition:color .2s, background .2s } .langtog a.on{ background:#fff; color:var(--ink); box-shadow:0 1px 3px rgba(20,28,40,.10) }
-.jbar .get{ display:inline-flex; align-items:center; background:#335cff; color:#fff; font-size:15px; font-weight:500; line-height:1; padding:13px 22px; border-radius:var(--pill); transition:background .2s, transform .12s }
+.jbar .get{ display:inline-flex; align-items:center; background:var(--primary); color:#fff; font-size:15px; font-weight:500; line-height:1; padding:13px 22px; border-radius:var(--pill); transition:background .2s, transform .12s }
 .jbar .get::after{ content:"→"; font-size:16px; margin-left:8px; display:inline-block; transition:transform .18s }
-.jbar .get:hover{ background:#2749d6 } .jbar .get:hover::after{ transform:translateX(3px) }
+.jbar .get:hover{ background:var(--primary-2) } .jbar .get:hover::after{ transform:translateX(3px) }
 .jbar .get:active{ transform:scale(.97) }
 
 /* ---------- index, pool.day/research grid (3-up cards, thiings 3D icons) ---------- */
