@@ -24,6 +24,7 @@
     var d = el.getAttribute && el.getAttribute("data-loc");
     if (d) return d;
     if (el.closest(".op-sticky")) return "sticky";
+    if (el.closest(".nav, .jbar")) return "nav";
     if (el.closest(".art-cta")) return "article_end";
     if (el.closest(".cta-panel")) return "cta_panel";
     if (el.closest(".hero")) return "hero";
@@ -43,7 +44,8 @@
   });
   // "Get the app" links that scroll to #download
   [].forEach.call(document.querySelectorAll('a[href$="#download"]'), function (a) {
-    a.addEventListener("click", function () { track("download_cta_scroll", { lang: lang }); });
+    var loc = locOf(a);
+    a.addEventListener("click", function () { track("download_cta_scroll", { location: loc, lang: lang }); });
   });
 
   // Zalo gating: show the Android capture only when a Zalo URL is configured
