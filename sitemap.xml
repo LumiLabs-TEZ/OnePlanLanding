@@ -476,18 +476,4 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/journal/du-lich-phu-quoc-nhom"/>
     <lastmod>2026-06-21</lastmod>
   </url>
-  <url>
-    <loc>https://www.oneplan.space/radar</loc>
-    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/radar"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/en/radar"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/radar"/>
-    <lastmod>2026-07-28</lastmod>
-  </url>
-  <url>
-    <loc>https://www.oneplan.space/en/radar</loc>
-    <xhtml:link rel="alternate" hreflang="vi" href="https://www.oneplan.space/radar"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.oneplan.space/en/radar"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oneplan.space/radar"/>
-    <lastmod>2026-07-28</lastmod>
-  </url>
 </urlset>
